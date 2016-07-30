@@ -1,0 +1,41 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    padding-top: 50px;
+}
+
+* { box-sizing: border-box; }
+
+
+.flex-row {
+    display: flex;
+}
+
+.flex-row [class^="col-"] {
+    padding: 0;
+}
+
+.half-background {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 33vh;
+    width: 100%;
+    background-color: #F0F3F5;
+}
+.holder {
+    position: relative;
+    border: 1px solid #ddd;
+    z-index: 1;
+}
+.list {
+    background-color: #fff;
+}
+
+.box--shadow {
+    box-shadow: 0 4px 12px rgba(70,70,70,.1);
+}
+
+.p-0 {
+    padding: 0 !important;
+}
