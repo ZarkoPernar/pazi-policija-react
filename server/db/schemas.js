@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
-var spell = mongoose.Schema({
-    name: String,
-    school: String,
-    range: String,
-    description: String,
-}, { collection: 'spells'});
+var location = mongoose.Schema({
+    timestamp: Date,
+    lat: Number,
+    lng: Number,
+    user: String,
+});
 
-module.exports = { spell }
+module.exports = { location }

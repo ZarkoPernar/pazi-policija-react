@@ -9,21 +9,23 @@ app.use(bodyParser.json());
 
 app.listen(3000, function () {});
 
-app.post('/api/spells', function getSpell(req, res) {
-    console.log(req.body);
-    if (!req.body.name) {
-        res.json({error: 'Epic Fail!', req: req.body})
+app.post('/api/locations', function getSpell(req, res) {
+    if (!req.body) {
+        res.json({error: 'Epic Fail!'})
     } else {
-        findSpellByName(req.body)
-            .then(spells => {
-                res.json(spells)
+        getAll()
+            .then(list => {
+                res.json(list)
             })
     }
 })
 
+function getAll() {
+    return models.locations
+        .find({})
+}
 
-
-function findSpellByName(params) {
-    return models.spells
+function findByName(params) {
+    return models.locations
         .find({$text: {$search: params.name}})
 }
