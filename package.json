@@ -1,11 +1,11 @@
 {
-  "name": "pazi-policija-react",
+  "name": "pazi-policija",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "start": "npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha app/**/*.spec.js",
     "serve": "node server",
     "build": "node_modules/.bin/webpack-dev-server --progress --inline --hot"
   },
@@ -34,6 +34,7 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "flexboxgrid": "^6.3.0",
+    "node-fetch": "^1.6.0",
     "normalize.css": "^4.2.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",

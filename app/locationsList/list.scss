@@ -1,0 +1,106 @@
+.list {
+    background-color: #e1e1e1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.location-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.location-list__item {
+	padding: 12px 18px;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+	background-color: #fff;
+
+	&:hover {
+		background-color: #f1f1f1;
+	}
+}
+
+.tickets {
+    padding-right: 20px;
+}
+.ticket {
+    position: relative;
+    display: flex;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.ticket__left {
+    background-color: #fff;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(70,70,70,.3);
+    flex-grow: 1;
+    z-index: 1;
+
+    &:after {
+	    content: '';
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 90%;
+	    border-radius: 4px 0 0 0;
+	    height: 30%;
+	    background-color: blue;
+	    z-index: -1;
+	}
+
+}
+.ticket__right {
+    width: 25%;
+    position: relative;
+    background-color: #fff;
+    border-radius: 4px;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(70,70,70,.3);
+}
+
+.ticket__dots {
+    display: block;
+    width: 12px;
+    position: relative;
+    top: 5px;
+    height: 90px;
+    overflow: hidden;
+    z-index: 5;
+
+    &:after {
+	    content: '';
+	    position: absolute;
+	    top: 5px;
+	    bottom: 5px;
+	    width: 100%;
+	    background-color: #fff;
+	    z-index: -1;
+	}
+}
+
+.ticket__dots__dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: relative;
+    margin-bottom: 8px;
+    box-shadow: inset 0 2px 4px rgba(70,70,70,.3);
+    background-color: #e1e1e1;
+    border-radius: 50%;
+
+    &:first-child {
+	    position: relative;
+	    top: -5px;
+	}
+}
+
+
+.ticket__title {
+    color: #fff;
+    margin: 4px 0 0 0;
+    padding: 0 15px;
+    font-weight: 300;
+    font-family: "Roboto Mono", sans-serif;
+}

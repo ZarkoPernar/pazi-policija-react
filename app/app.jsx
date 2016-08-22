@@ -28,9 +28,8 @@ class App extends Component {
     render() {
         return (
             <div>
-                <div className="half-background"></div>
                 <div className="container">
-                    <div className="row box--shadow holder" ref="list">                        
+                    <div className="row holder" ref="list">
                         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 p-0 list">
                             <LocationsList list={this.state.listData} lheight={this.state.lheight}/>
                         </div>
@@ -40,7 +39,7 @@ class App extends Component {
                     </div>
                 </div>
             </div>
-            
+
         )
     }
 }

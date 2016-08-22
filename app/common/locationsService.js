@@ -1,4 +1,3 @@
-
 const service = {
 	/**
 	 * listAll	returns all locations
@@ -7,7 +6,10 @@ const service = {
 	listAll() {
 		return fetch('/api/locations', {
 			method: 'POST',
-			body: JSON.stringify({})
+			body: JSON.stringify({
+				lat: 45.78667904136372,
+				lng: 15.9796142578125,
+			})
 		})
 	}
 }
