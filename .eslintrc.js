@@ -19,10 +19,10 @@ module.exports = {
         // "eslint-plugin-import"
     ],
     "rules": {
-        "indent": [
-            "error",
-            // "tab"
-        ],
+        // "indent": [
+        //     "error",
+        //     "tab"
+        // ],
         "linebreak-style": [
             "error",
             "windows"

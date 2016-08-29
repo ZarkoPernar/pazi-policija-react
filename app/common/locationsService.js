@@ -1,17 +1,23 @@
-const service = {
-	/**
-	 * listAll	returns all locations
-	 * @return {[location]}
-	 */
-	listAll() {
-		return fetch('/api/locations', {
-			method: 'POST',
-			body: JSON.stringify({
-				lat: 45.78667904136372,
-				lng: 15.9796142578125,
-			})
-		})
-	}
-}
+module.exports = service()
 
-module.exports = service
+function service() {
+    return {
+        /**
+         * listAll	returns all locations
+         * @return {[location]}
+         */
+        listAll(params) {
+            return fetch('/api/locations/near', {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                }),
+                body: JSON.stringify({
+                    lat: params.lat,
+                    lng: params.lng,
+                    rad: params.rad,
+                })
+            })
+        }
+    }
+}

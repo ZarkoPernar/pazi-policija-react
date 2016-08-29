@@ -9,9 +9,9 @@ function getNear(coords) {
                 $near: {
                     $geometry: {
                         type: 'Point',
-                        coordinates:[coords.lng, coords.lat]
+                        coordinates: [coords.lng, coords.lat]
                     },
-                    $maxDistance : coords.rad,
+                    $maxDistance : coords.rad || 30000,
                     spherical: true,
                 }
             }

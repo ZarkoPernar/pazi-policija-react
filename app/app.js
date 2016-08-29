@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
-import Map from './map/index.jsx'
-import LocationsList from './locationsList/list.jsx';
-import service from './common/locationsService';
-import store from './common/mapStore';
+import Map from './map/index'
+import LocationsList from './locationsList/list'
 
 
 class App extends Component {
@@ -18,12 +16,6 @@ class App extends Component {
 
     componentDidMount() {
         this.setState({lheight: this.refs.list.scrollHeight})
-
-        service.listAll().then(res => res.json())
-            .then(data => {
-                store.dispatch(data)
-                this.setState({listData: data})
-            })
     }
     render() {
         return (
