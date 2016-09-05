@@ -1,8 +1,8 @@
 import React from 'react'
 import TicketItem from './ticket'
 import store from '../common/mapStore'
-import dropdownStore from '../dropdown/dropdownStore'
-import Filter from './filters'
+
+import Filters from './filters'
 import GoogleAutocomplete from '../google-places/googleAutocomplete'
 
 var scss = require('./list.scss')
@@ -18,8 +18,8 @@ class LocationsList extends React.Component {
         super(props)
 
         this.state = {
-            active: {},
             list: [],
+            active: {},
         }
         this.itemSelect = this.itemSelect.bind(this)
     }
@@ -29,11 +29,8 @@ class LocationsList extends React.Component {
         }
     }
     componentDidMount() {
-        store.subscribe((data) => {
+        store.subscribe('list_loaded', (data) => {
             this.setState({list: data})
-        })
-        dropdownStore.subscribe(() => {
-            console.log(dropdownStore.getState());
         })
     }
 
@@ -42,9 +39,9 @@ class LocationsList extends React.Component {
             <div>
                 <GoogleAutocomplete key="autoComplete" />
                 <div key="list">
-                    {renderFilters()}
+                    {/*<Filters key="filters" />*/}
                     <div className="tickets" key="tickets" style={{
-                        height: this.props.lheight
+                            height: this.props.lheight
                         }}>
                         {this.state.list.map(loc => {
                             return <TicketItem activeStyle={this.state.active._id === loc._id
@@ -56,16 +53,6 @@ class LocationsList extends React.Component {
             </div>
         )
     }
-}
-
-function renderFilters() {
-    return (
-        <div className="filters" key="filters">
-            <Filter options={['distance', 'upvotes']}
-                active={dropdownStore.getState().active}
-                isOpen={dropdownStore.getState().isOpen} />
-        </div>
-    )
 }
 
 export default LocationsList

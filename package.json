@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run serve",
     "test": "mocha app/**/*.spec.js",
-    "serve": "node server",
+    "serve": "node server/index",
     "build": "node_modules/.bin/webpack-dev-server --progress --inline --hot"
   },
   "keywords": [],

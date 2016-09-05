@@ -9,6 +9,6 @@ const API = require('./api')
 app.use(express.static('build'))
 app.use(bodyParser.json())
 
-app.listen(3000, function () {})
+app.listen(4000, function () {})
 
 app.post(ROUTES.NEAR, API.NEAR)
