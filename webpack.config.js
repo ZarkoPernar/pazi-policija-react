@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
 
 module.exports = {
   devtool: 'eval',
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: 'http://localhost:3000/static/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
@@ -21,6 +21,12 @@ module.exports = {
       test: /\.js$/,
       loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
+    }, {
+      test: /\.scss$/,
+      loaders: ['style', 'css', 'sass'],
+    }, {
+      test: /\.css$/,
+      loaders: ['style', 'css'],
     }]
   }
-};
+}
