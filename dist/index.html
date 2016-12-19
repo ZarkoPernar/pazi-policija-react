@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pazi Policija React</title>
+    </head>
+
+    <body>
+        <div id="app"></div>
+
+        <script>
+            (function() {
+                'use strict'
+
+                let listeners = []
+
+                let initMap = {
+                    initialized: false,
+                    init() {
+                        this.initialized = true
+
+                        listeners.forEach(listener => listener.initMap())
+                    },
+                    listeners: [],
+                    addListener(listener) {
+                        if (this.initialized) {
+                            listener.initMap()
+                            return function() {}
+                        }
+
+                        let index = (listeners.push(listener) - 1)
+
+                        return function unreg() {
+                            listeners.splice(index, 1)
+                        }
+                    }
+                }
+
+                window.initMap = initMap
+            })();
+        </script>
+        <script src="bundle.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Vxg0KuWymrqutiyBdXcqEIOLm0GZf40&libraries=places&callback=initMap.init" async defer></script>
+    </body>
+</html>

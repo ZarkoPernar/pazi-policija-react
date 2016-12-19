@@ -1,5 +1,9 @@
-const NEAR = require('./near')
+const getNearbyLocations = require('./near')
+const addLocation = require('./addLocation')
+const geocode = require('./geocode')
 
 module.exports = {
-    NEAR
+    getNearbyLocations,
+    addLocation,
+    geocode,
 }

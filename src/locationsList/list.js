@@ -3,6 +3,7 @@ import TicketItem from './ticket'
 import store from '../common/mapStore'
 
 import Filters from './filters'
+import ListOptions from './ListOptions'
 import GoogleAutocomplete from '../google-places/googleAutocomplete'
 
 var scss = require('./list.scss')
@@ -18,36 +19,33 @@ class LocationsList extends React.Component {
         super(props)
 
         this.state = {
-            list: [],
             active: {},
         }
         this.itemSelect = this.itemSelect.bind(this)
     }
     itemSelect(location) {
-        return () => {
+        return function() {
             this.setState({active: location})
-        }
-    }
-    componentDidMount() {
-        store.subscribe('list_loaded', (data) => {
-            this.setState({list: data})
-        })
+        }.bind(this)
     }
 
     render() {
         return (
             <div>
                 <GoogleAutocomplete key="autoComplete" />
+                <ListOptions key="listOptions" />
                 <div key="list">
                     {/*<Filters key="filters" />*/}
                     <div className="tickets" key="tickets" style={{
                             height: this.props.lheight
                         }}>
-                        {this.state.list.map(loc => {
-                            return <TicketItem activeStyle={this.state.active._id === loc._id
-                                ? activeStyle
-                                : null} key={loc._id} item={loc} onClick={this.itemSelect(loc)}/>
-                        })}
+                        {
+                            this.props.list.map(loc => {
+                                return <TicketItem activeStyle={this.state.active._id === loc._id
+                                    ? activeStyle
+                                    : null} key={loc._id} item={loc} onClick={this.itemSelect(loc)}/>
+                            })
+                        }
                     </div>
                 </div>
             </div>

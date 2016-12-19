@@ -10,7 +10,7 @@ const listItem = (props) => {
 		<li 
 			onClick={props.onClick}
 			className="location-list__item" style={props.activeStyle}>
-			{props.item.google_address}
+			{props.item.description}
 		</li>
 	)
 }

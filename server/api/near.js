@@ -1,12 +1,12 @@
 const search = require('../search/near')
 
-module.exports = apiLocations
+module.exports = getNearbyLocations
 
-function apiLocations(req, res) {
+function getNearbyLocations(req, res) {
     if (!req.body) {
         res.json({error: 'Epic Fail!'})
     } else {
-        console.log(req.body)
+        console.log('near: ', req.body)
 
         search(req.body)
             .then(callbackSuccess, callbackError)

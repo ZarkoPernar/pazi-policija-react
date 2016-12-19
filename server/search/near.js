@@ -1,20 +1,30 @@
+var subHours = require('date-fns/sub_hours')
+
 var models = require('../db/models')
 
 module.exports = getNear
 
-function getNear(coords) {
+function getNear(params) {
     return models.locations
         .find({
             pos: {
                 $near: {
                     $geometry: {
                         type: 'Point',
-                        coordinates: [coords.lng, coords.lat]
+                        coordinates: [params.lng, params.lat]
                     },
-                    $maxDistance : coords.rad || 30000,
+                    $maxDistance : params.rad,
                     spherical: true,
                 }
+            },
+            created_at: { 
+                $gte: subHours(new Date(), appropriateHours(params.hours))
             }
+            
         })
 
+}
+
+function appropriateHours(hours) {
+    return !hours ? 12 : ((hours > 24) ? 24 : hours)
 }
