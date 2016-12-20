@@ -7,6 +7,8 @@ import LocationsList from './locationsList/list'
 
 import locationsService from './common/locationsService'
 
+import * as waitForMapClickActionCreators from './actionCreators/waitForMapClick'
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -38,10 +40,19 @@ class App extends Component {
                 <div className="container">
                     <div className="row holder" ref="list">
                         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 p-0 list">
-                            <LocationsList list={this.props.list} lheight={this.state.lheight}/>
+                            <LocationsList 
+                                lheight={this.state.lheight}
+                                list={this.props.list}  
+                                waitForMapClick={this.props.waitForMapClick}
+                                toggleWaitForMapClick={this.props.toggleWaitForMapClick}/>
                         </div>
                         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 p-0">
-                            <Map list={this.props.list} mapParams={this.props.mapParams} />
+                            <Map 
+                                list={this.props.list} 
+                                mapParams={this.props.mapParams} 
+                                waitForMapClick={this.props.waitForMapClick}
+                                selectedAutocompleteItem={this.props.selectedAutocompleteItem}
+                                toggleWaitForMapClick={this.props.toggleWaitForMapClick}/>
                         </div>
                     </div>
                 </div>
@@ -51,15 +62,25 @@ class App extends Component {
     }
 }
 
-const LinkedApp = connect(mapStateToProps)(App)
+const LinkedApp = connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 export default LinkedApp
 
 
-function mapStateToProps({list, mapParams}) {
+function mapStateToProps({list, mapParams, waitForMapClick, selectedAutocompleteItem}) {
     return { 
-        list: list, 
-        mapParams: mapParams,
+        list, 
+        mapParams,
+        waitForMapClick,
+        selectedAutocompleteItem,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        toggleWaitForMapClick: () => {
+            dispatch(waitForMapClickActionCreators.toggle())
+        },
     }
 }

@@ -1,14 +1,16 @@
 import React from 'react'
 import { debounce } from 'lodash'
 
+import AppStore from '../AppStore'
 import distance from '../utils/measureDistance'
 import store from '../common/mapStore'
 import locationsService from '../common/locationsService'
 import places from '../google-places/googlePlacesService'
-import { getRadius, USING_RADIUS } from './getRadius'
-import { getDistance } from './getDistance'
-import { getCorners } from './getCorners'
+import { getRadius, USING_RADIUS } from './utils/getRadius'
+import { getDistance } from './utils/getDistance'
+import { getCorners } from './utils/getCorners'
 
+import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
 const initMap = window.initMap
 
@@ -31,6 +33,17 @@ class Map extends React.Component {
         this._setSearchLocation = this._setSearchLocation.bind(this)
 
         this._unregisterMap = initMap.addListener(this)
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.selectedAutocompleteItem !== prevProps.selectedAutocompleteItem) {
+            if (this._centerLocation) {
+                this._centerLocation.marker.setMap(null)
+                this._centerLocation = null
+            }
+
+            this._setSearchLocation(this.props.selectedAutocompleteItem.geometry.location, this.props.selectedAutocompleteItem)  
+        }                      
     }
 
     componentWillUnmount() {
@@ -80,6 +93,9 @@ class Map extends React.Component {
         })              
 
         this._map.addListener('click', (e) => {
+            if (!this.props.waitForMapClick) {
+                return
+            }
             locationsService.geocode({
                 lat: e.latLng.lat(),
                 lng: e.latLng.lng(),
@@ -88,6 +104,13 @@ class Map extends React.Component {
                 res[0].geometry = {
                     location: e.latLng,
                 }
+
+                AppStore.dispatch(
+                    autocompleteSelectActions.select(
+                        res[0]
+                    )
+                )
+                this.props.toggleWaitForMapClick()
                 store.dispatch('google_map_selected', res[0])
                 store.dispatch('google_autocomplete_selected', res[0])
             })            
@@ -100,14 +123,14 @@ class Map extends React.Component {
         //     // })
         // })
 
-        store.subscribe('google_autocomplete_selected', (place) => {   
-            if (this._centerLocation) {
-                this._centerLocation.marker.setMap(null)
-                this._centerLocation = null
-            }
+        // store.subscribe('google_autocomplete_selected', (place) => {   
+        //     if (this._centerLocation) {
+        //         this._centerLocation.marker.setMap(null)
+        //         this._centerLocation = null
+        //     }
 
-            this._setSearchLocation(place.geometry.location, place)            
-        })
+        //     this._setSearchLocation(place.geometry.location, place)            
+        // })
 
         store.subscribe('list_loaded', this._addMarkers)
     }

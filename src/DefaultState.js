@@ -1,6 +1,7 @@
 export default {
     list: [],
-    selectedItem: null,
+    selectedAutocompleteItem: null,
+    waitForMapClick: false,
     mapParams: {
         zoom: 11,
         rad: 50000,

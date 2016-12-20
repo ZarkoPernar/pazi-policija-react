@@ -29,18 +29,21 @@ class LocationsList extends React.Component {
         }.bind(this)
     }
 
-    render() {
+    render({waitForMapClick, lheight, list, toggleWaitForMapClick}) {
         return (
             <div>
-                <GoogleAutocomplete key="autoComplete" />
-                <ListOptions key="listOptions" />
+                <GoogleAutocomplete key="autoComplete" autocompleteSelect={this.props.autocompleteSelect}/>
+                <ListOptions 
+                    key="listOptions" 
+                    waitForMapClick={waitForMapClick}
+                    toggleWaitForMapClick={toggleWaitForMapClick}/>
                 <div key="list">
                     {/*<Filters key="filters" />*/}
                     <div className="tickets" key="tickets" style={{
-                            height: this.props.lheight
+                            height: lheight
                         }}>
                         {
-                            this.props.list.map(loc => {
+                            list.map(loc => {
                                 return <TicketItem activeStyle={this.state.active._id === loc._id
                                     ? activeStyle
                                     : null} key={loc._id} item={loc} onClick={this.itemSelect(loc)}/>

@@ -43,7 +43,8 @@ module.exports = {
         include: [
           path.resolve('src'),
           path.resolve('node_modules/preact-compat/src')
-        ]
+        ],
+        exclude: ['.spec.']
 
       }, {
         test: /\.scss$/,

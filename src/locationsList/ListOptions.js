@@ -14,10 +14,12 @@ class ListOptions extends React.Component {
         })
     }   
 
-    render() {
+    render({waitForMapClick, toggleWaitForMapClick}) {
         return (
             <div>
-               <button>Add</button>   
+                <button onClick={toggleWaitForMapClick}>
+                    {waitForMapClick ? 'Wait For The Click' : 'Click on the map'}
+                </button>
             </div>
         )
     }

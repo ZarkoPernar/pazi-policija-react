@@ -1,8 +1,12 @@
 import React from 'react'
+
+import AppStore from '../AppStore'
 import service from './googlePlacesService'
 import mapStore from '../common/mapStore'
 import locationService from '../common/locationsService'
 const scss = require('./autocomplete.scss')
+
+import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
 const initMap = window.initMap
 
@@ -48,7 +52,13 @@ class GoogleAutocomplete extends React.Component {
             return
         } 
 
-        mapStore.dispatch('google_autocomplete_selected', this._autocompleteInput.getPlace())
+        AppStore.dispatch(
+            autocompleteSelectActions.select(
+                this._autocompleteInput.getPlace()
+            )
+        )
+
+        // mapStore.dispatch('google_autocomplete_selected', this._autocompleteInput.getPlace())
 
         this.setState({
             selected: this._autocompleteInput.getPlace()

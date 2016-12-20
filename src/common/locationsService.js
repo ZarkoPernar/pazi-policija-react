@@ -4,7 +4,7 @@ import AppStore from '../AppStore'
 export default {
     /**
      * listAll	returns all locations
-     * @return {[location]}
+     * @return {location[]}
      */
     listAll(params) {
         return fetch('/api/v1/locations/near', {
@@ -30,6 +30,7 @@ export default {
             
             return data
         })
+        .catch((err) => err)
     },
     geocode(params) {
         return fetch('/api/v1/locations/geocode', {
