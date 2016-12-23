@@ -1,18 +1,26 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
+import { h, render } from 'preact'
+import { Provider } from 'preact-redux'
 
-import App from './App'
-import AppStore from './AppStore'
-// require('offline-plugin/runtime').install()
+if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'production') {
+	require('offline-plugin/runtime').install()
+}
+
+require('preact/devtools')
 
 const gridCss = require('flexboxgrid')
 const normalizeCss = require('normalize.css')
 const appCss = require('./app.css')
 
-render(
-    <Provider store={AppStore}>    
-        <App />
-    </Provider>, 
-    document.getElementById('app')
-)
+let root
+
+function init() {
+	let App = require('./App').default
+	root = render(<App />, document.body, root)
+}
+
+init()
+
+// in development, set up HMR:
+if (module.hot) {
+	module.hot.accept('./App', () => requestAnimationFrame(init) )
+}

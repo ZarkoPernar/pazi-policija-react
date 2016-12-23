@@ -1,3 +1,13 @@
 {
-  "presets": ["es2015", "stage-3", "react"]
+  "presets": ["es2015", "stage-3", "react"],
+  "plugins": [
+    [
+      "transform-react-jsx", 
+      {
+        "pragma": "h"
+      }
+    ],
+    "lodash",
+    "date-fns"
+  ]
 }

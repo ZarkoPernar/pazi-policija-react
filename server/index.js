@@ -5,10 +5,11 @@ var app = express()
 var bodyParser = require('body-parser')
 const db = require('./db')
 
+const PUBLIC_DIR = 'public'
 const routes = require('./routes')
 const api = require('./api')
 
-app.use(express.static('dist'))
+app.use(express.static(PUBLIC_DIR))
 app.use(bodyParser.json())
 // app.use(checkUserAgent)
 

@@ -36,10 +36,10 @@ function addLocation(req, res) {
         }
     })
 
-    location.save(function (err) {
+    location.save(function (err, loc) {
         if (err) return res.json(err)
         
-        res.json('Success')
+        res.json(loc)
     })
 
     

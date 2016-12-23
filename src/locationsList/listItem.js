@@ -1,5 +1,4 @@
-import service from '../common/locationsService';
-import React from 'react';
+import { h } from 'preact'
 
 const listItem = (props) => {
 	let style = props.activeStyle

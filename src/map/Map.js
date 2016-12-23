@@ -1,11 +1,14 @@
-import React from 'react'
-import { debounce } from 'lodash'
+import { Component, h } from 'preact'
+import debounce from 'lodash/debounce'
 
 import AppStore from '../AppStore'
 import distance from '../utils/measureDistance'
 import store from '../common/mapStore'
 import locationsService from '../common/locationsService'
 import places from '../google-places/googlePlacesService'
+
+import CenterMap from './CenterMap'
+
 import { getRadius, USING_RADIUS } from './utils/getRadius'
 import { getDistance } from './utils/getDistance'
 import { getCorners } from './utils/getCorners'
@@ -18,13 +21,16 @@ let mapStyle = {
     height: '75vh', //window.innerHeight + 'px', //'100vh',
 }
 
-class Map extends React.Component {
+
+
+class Map extends Component {
     constructor() {
         super()
 
         this._centerLocation = null
         this.searchParams = {}
 
+        this.addContainerRef = this.addContainerRef.bind(this)
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
         this.initMap = this.initMap.bind(this)
         this._addMarkers = this._addMarkers.bind(this)
@@ -32,7 +38,7 @@ class Map extends React.Component {
         this.getLocations = this.getLocations.bind(this)
         this._setSearchLocation = this._setSearchLocation.bind(this)
 
-        this._unregisterMap = initMap.addListener(this)
+        this._unregisterMap = initMap.addListener(this.initMap.bind(this))
     }
 
     componentDidUpdate(prevProps) {
@@ -43,7 +49,9 @@ class Map extends React.Component {
             }
 
             this._setSearchLocation(this.props.selectedAutocompleteItem.geometry.location, this.props.selectedAutocompleteItem)  
-        }                      
+        }
+
+                             
     }
 
     componentWillUnmount() {
@@ -58,9 +66,19 @@ class Map extends React.Component {
         })
     }
 
+    addContainerRef(el) {
+        this.mapContainerElement = el
+
+        if (!this._map && window.google && window.google.maps) {
+            this.initMap()
+        }
+    }
+
     initMap() {
+        if (!this.mapContainerElement) return
+        
         let tempCenter
-        this._map = new google.maps.Map(document.getElementById('gmap-container'), {
+        this._map = new google.maps.Map(this.mapContainerElement, {
             zoom: this.props.mapParams.zoom,
             center: this.props.mapParams.center,
         })
@@ -163,9 +181,13 @@ class Map extends React.Component {
         }
     }
 
-    render() {
+    render({mapParams}) {
         return (
-            <div style={mapStyle} className="box" id="gmap-container"></div>
+            <div>
+                <CenterMap key="mapCenter" center={mapParams.center} map={this._map}/>
+                <div key="mapContainer" style={mapStyle} className="box" id="gmap-container" ref={this.addContainerRef}></div>
+            </div>
+            
         )
     }
 }

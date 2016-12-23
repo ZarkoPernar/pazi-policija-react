@@ -4,15 +4,18 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && npm run serve",
+    "start": "node server",
     "test": "mocha -w test/registerBabel.js test/init.js src/**/*.spec.js",
     "serve": "nodemon -w server",
-    "build": "node_modules/.bin/webpack -d -w"
+    "devserver": "webpack-dev-server --hot --inline --open",
+    "build": "SET NODE_ENV=production && webpack -p --progress"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-plugin-date-fns": "^0.1.0",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-plugin-transform-class-properties": "^6.11.5",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -34,7 +37,7 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.0-rc.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "babel-core": "^6.11.4",
@@ -52,8 +55,8 @@
     "normalize.css": "^4.2.0",
     "preact": "^7.1.0",
     "preact-compat": "^3.9.4",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "preact-redux": "^1.2.0",
+    "react-mdl": "^1.9.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "useragent": "^2.1.9",

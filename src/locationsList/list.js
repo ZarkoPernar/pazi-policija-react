@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component, h } from 'preact'
 import TicketItem from './ticket'
 import store from '../common/mapStore'
 
@@ -14,7 +14,7 @@ let activeStyle = {
     // width: '100%',
 }
 
-class LocationsList extends React.Component {
+class LocationsList extends Component {
     constructor(props) {
         super(props)
 
@@ -29,14 +29,12 @@ class LocationsList extends React.Component {
         }.bind(this)
     }
 
-    render({waitForMapClick, lheight, list, toggleWaitForMapClick}) {
+    render({lheight, list}) {
         return (
-            <div>
-                <GoogleAutocomplete key="autoComplete" autocompleteSelect={this.props.autocompleteSelect}/>
+            <div className="left-panel">
+                <GoogleAutocomplete key="autoComplete" selectedAutocompleteItem={this.props.selectedAutocompleteItem} autocompleteSelect={this.props.autocompleteSelect}/>
                 <ListOptions 
-                    key="listOptions" 
-                    waitForMapClick={waitForMapClick}
-                    toggleWaitForMapClick={toggleWaitForMapClick}/>
+                    key="listOptions" />
                 <div key="list">
                     {/*<Filters key="filters" />*/}
                     <div className="tickets" key="tickets" style={{

@@ -1,4 +1,4 @@
-import React from 'react'
+import { h } from 'preact'
 import store from '../dropdown/dropdownStore'
 var css = require('./filters.scss')
 

@@ -2,6 +2,7 @@ export default {
     list: [],
     selectedAutocompleteItem: null,
     waitForMapClick: false,
+    centerOnMe: false,
     mapParams: {
         zoom: 11,
         rad: 50000,

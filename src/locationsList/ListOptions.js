@@ -1,8 +1,13 @@
-import React from 'react'
+import { Component, h } from 'preact'
+import { connect } from 'preact-redux'
+
+import MyButton from '../common/button'
+import AppStore from '../AppStore'
 import mapStore from '../common/mapStore'
+import * as waitForMapClickActionCreators from '../actionCreators/waitForMapClick'
+import * as mapActionCreators from '../actionCreators/map'
 
-
-class ListOptions extends React.Component {
+class ListOptions extends Component {
     constructor(props) {
         super(props)
 
@@ -14,15 +19,65 @@ class ListOptions extends React.Component {
         })
     }   
 
+    centerOnMe() {
+        new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject)
+        }).then((res) => {
+            AppStore.dispatch({
+                type: 'CHANGE',
+                payload: {
+                    center: {
+                        lat: res.coords.latitude,
+                        lng: res.coords.longitude,
+                    }
+                }
+                
+            })
+        })
+    }
+
     render({waitForMapClick, toggleWaitForMapClick}) {
         return (
             <div>
-                <button onClick={toggleWaitForMapClick}>
+                <MyButton 
+                    ripple={true}
+                    customClasses={'mdl-button--raised mdl-button--colored'}
+                    onClick={toggleWaitForMapClick} 
+                    style={{'margin-right': '10px'}}>
+
                     {waitForMapClick ? 'Wait For The Click' : 'Click on the map'}
-                </button>
+                </MyButton>
+
+                <MyButton 
+                    customClasses={'mdl-button--raised mdl-button--colored'}
+                    onClick={this.centerOnMe}
+                    style={{'margin-right': '10px'}}>
+                    Center On Me
+                </MyButton>
+                
             </div>
         )
     }
 }
 
-export default ListOptions
+const LinkedListOptions = connect(mapStateToProps, mapDispatchToProps)(ListOptions)
+
+export default LinkedListOptions
+
+
+function mapStateToProps({waitForMapClick}) {
+    return { 
+        waitForMapClick,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        toggleWaitForMapClick: () => {
+            dispatch(waitForMapClickActionCreators.toggle())
+        },
+        // centerOnMe: () => {
+        //     mapActionCreators.centerOnMe(dispatch)
+        // },
+    }
+}

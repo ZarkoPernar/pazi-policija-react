@@ -1,7 +1,9 @@
-import React from 'react'
-import { distanceInWordsToNow } from 'date-fns'
+import { h } from 'preact'
+import {distanceInWordsToNow} from 'date-fns' // /distanceInWordsToNow
 
-const ticket = (props) => {
+require('./ticket.scss')
+
+const ticket = ({ onClick, activeStyle, item}) => {
     let dots = [
         1,
         2,
@@ -13,16 +15,25 @@ const ticket = (props) => {
     ].map(x => <div className="ticket__dots__dot" key={x}></div>)
 
     return (
-        <div onClick={props.onClick} className="ticket" style={props.activeStyle}>
+        <div onClick={onClick} className="ticket" style={activeStyle}>
             <div className="ticket__left">
-                <h4 key="user" className="ticket__title">{props.item.user}</h4>
-                <p key="description">{props.item.description}</p>
+                <h4 key="user" className="ticket__title">
+                    {item.user}
+
+                    <div key="created_at" className="ticket__title__created_at">
+                        {distanceInWordsToNow(new Date(item.created_at))} ago
+                    </div>
+                </h4>
+                <p key="body" className="ticket__body">
+                    <div key="description">{item.description}</div>                      
+                    <div key="google_address">{item.google_address}</div>                      
+                </p>
             </div>
             <div className="ticket__dots">
                 {dots}
             </div>
             <div className="ticket__right">
-                {distanceInWordsToNow(new Date(props.item.created_at))} ago
+    
             </div>
         </div>
     )

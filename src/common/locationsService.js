@@ -60,6 +60,7 @@ export default {
             }),
             body: JSON.stringify(location)
         })
+        .then(res => res.json())
     },
     updateLocation(location) {
         return fetch('/api/v1/locations/update', {
@@ -69,5 +70,6 @@ export default {
             }),
             body: JSON.stringify(location)
         })
+        .then(res => res.json())        
     },
 }
