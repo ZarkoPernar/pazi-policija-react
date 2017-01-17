@@ -1,4 +1,9 @@
 export default {
+    activeView: 'list',
+    searchParams: {
+        inputValue: '',
+    },
+    newLocationModal: false,
     list: [],
     selectedAutocompleteItem: null,
     waitForMapClick: false,

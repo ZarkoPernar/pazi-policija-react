@@ -7,9 +7,9 @@ if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'production') {
 
 require('preact/devtools')
 
-const gridCss = require('flexboxgrid')
-const normalizeCss = require('normalize.css')
-const appCss = require('./app.css')
+require('flexboxgrid')
+require('normalize.css')
+require('./app.css')
 
 let root
 
@@ -22,5 +22,5 @@ init()
 
 // in development, set up HMR:
 if (module.hot) {
-	module.hot.accept('./App', () => requestAnimationFrame(init) )
+	module.hot.accept(root, () => requestAnimationFrame(init) )
 }

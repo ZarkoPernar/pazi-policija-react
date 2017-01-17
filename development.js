@@ -9,7 +9,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:3000/',
   },
   devServer: {
     port: process.env.PORT || 8080,
@@ -22,7 +21,7 @@ module.exports = {
 
     proxy: {
       '/api': {
-        target: 'http://localhost:3000'
+        target: 'http://localhost:5000'
       }
     }
   },

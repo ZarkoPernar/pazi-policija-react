@@ -1,0 +1,47 @@
+@import './app';
+
+$app-container-header-height: 55px;
+$app-container-navbar-height: 55px;
+
+.app-container {
+    position: relative;
+    overflow: hidden;
+}
+.app-view-container {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    padding: $app-container-header-height 0 $app-container-navbar-height 0;
+    position: relative;
+}
+
+.app-view {
+    width: 100%;
+    // height: calc(100% - #{$app-container-header-height + $app-container-navbar-height});
+    top: $app-container-header-height;
+    bottom: $app-container-navbar-height;
+    left: 0;
+    position: absolute;
+    background-color: $body-background-color;
+    z-index: 0;
+    transform: translate3d(100%,0,0);
+}
+
+@media (max-height: 400px) {
+    .app-view {
+        bottom: 0;
+    }
+}
+
+.app-view.app-view--active {
+    transform: none;
+}
+
+@media (min-width: 48rem) {
+    .app-view {
+        width: 50%;
+        position: relative;
+        transform: none;
+        display: block;
+    }
+}

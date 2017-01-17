@@ -1,0 +1,75 @@
+@import './app';
+@import './container';
+
+$nav-btn-active-color: #2196f3;
+
+.app-view-nav {
+
+    &--horizontal {
+        position: absolute;
+        border-top: 1px solid $bar-border-color;
+        bottom: 0;
+        height: $app-container-navbar-height;
+        width: 100%;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+    }
+
+    
+}
+
+@media (max-height: 400px) {
+    .app-view-nav--horizontal {
+        display: none;
+    }
+}
+
+.app-view-nav__item {
+    &--horizontal {
+        font-size: .8em;
+        border-right: 2px;
+        height: 100%;
+        position: relative;
+        z-index: 0;
+        display: flex;
+        overflow: hidden;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        align-self: center;
+        justify-content: space-around;
+        margin: 0;
+        border-radius: 0;
+        text-align: center;
+        text-decoration: none;
+        background: 0 0;
+        cursor: pointer;
+        user-select: none;       
+
+        svg {
+            height: 45%;
+        }
+    }
+
+    &--central {
+        background-color: $body-dark-background-color;
+        color: #fff;
+        fill: #fff;
+        // border-radius: 3px 3px 0 0;
+        box-shadow: 0 1px 5px rgba(70,70,70,.75);
+        height: 60px;
+    }
+}
+
+
+.app-view-nav__item--active {
+    color: $nav-btn-active-color;
+    background-color: rgba(71, 79, 103, 0.05);
+    fill: $nav-btn-active-color;
+}  
+.app-view-nav__item--central.app-view-nav__item--active {
+    color: #fff;
+    background-color: $bar-dark-background-color;
+    fill: #fff;
+}  

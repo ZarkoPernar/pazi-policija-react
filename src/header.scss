@@ -1,0 +1,21 @@
+@import './app.scss';
+
+.app-header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 55px;
+    padding: 15px;
+    background-color: #fff;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 13px rgba(70,70,70,.13);
+    z-index: 2;
+
+    &__title {
+        font-size: 1.3em;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+}

@@ -31,15 +31,18 @@ class LocationsList extends Component {
 
     render({lheight, list}) {
         return (
-            <div className="left-panel">
-                <GoogleAutocomplete key="autoComplete" selectedAutocompleteItem={this.props.selectedAutocompleteItem} autocompleteSelect={this.props.autocompleteSelect}/>
-                <ListOptions 
-                    key="listOptions" />
-                <div key="list">
+            <div className="location-list">
+                <div className="location-list__add">
+                    <GoogleAutocomplete 
+                        key="autoComplete" 
+                        selectedAutocompleteItem={this.props.selectedAutocompleteItem} 
+                        autocompleteSelect={this.props.autocompleteSelect}/>
+                    <ListOptions 
+                        key="listOptions" />
+                </div>
+                <div key="list" className="tickets-scroll">
                     {/*<Filters key="filters" />*/}
-                    <div className="tickets" key="tickets" style={{
-                            height: lheight
-                        }}>
+                    <div className="tickets" key="tickets">
                         {
                             list.map(loc => {
                                 return <TicketItem activeStyle={this.state.active._id === loc._id

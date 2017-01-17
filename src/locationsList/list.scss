@@ -1,11 +1,16 @@
-.list {
-    overflow-y: auto;
-    overflow-x: hidden;
+.list-holder {
 }
 .location-list {
+	height: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
+
+	&__add {
+		display: none;
+		padding: 15px;
+		padding-top: 0;
+	}
 }
 
 .location-list__item {
@@ -19,9 +24,10 @@
 	}
 }
 
-.left-panel > * {
-    padding: 15px;
-    padding-top: 0;
-}
 
+@media (min-width: 48rem) {
+	.location-list__add {
+		display: block;
+	}
+}
 

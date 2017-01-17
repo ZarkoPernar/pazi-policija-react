@@ -5,8 +5,11 @@ $ticket-bottom-height: 70%;
 $ticket-primary-color: #3f51b5;
 
 
-.tickets {
-
+.tickets-scroll {
+    height: 100%;
+    padding: 10px 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .ticket {
     position: relative;
@@ -31,6 +34,7 @@ $ticket-primary-color: #3f51b5;
 }
 .ticket__right {
     width: 25%;
+    display: none;
     padding: 10px;
     position: relative;
     background-color: #fff;
@@ -54,7 +58,7 @@ $ticket-primary-color: #3f51b5;
 
 .ticket__dots {
     display: block;
-    width: 12px;
+    width: 5px;
     position: relative;
     top: 5px;
     height: 90px;

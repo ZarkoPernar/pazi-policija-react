@@ -1,6 +1,8 @@
 import { Component, h } from 'preact'
 import debounce from 'lodash/debounce'
 
+require('./map.scss')
+
 import AppStore from '../AppStore'
 import distance from '../utils/measureDistance'
 import store from '../common/mapStore'
@@ -17,11 +19,6 @@ import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
 const initMap = window.initMap
 
-let mapStyle = {
-    height: '75vh', //window.innerHeight + 'px', //'100vh',
-}
-
-
 
 class Map extends Component {
     constructor() {
@@ -30,7 +27,7 @@ class Map extends Component {
         this._centerLocation = null
         this.searchParams = {}
 
-        this.addContainerRef = this.addContainerRef.bind(this)
+        this.addMapRef = this.addMapRef.bind(this)
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
         this.initMap = this.initMap.bind(this)
         this._addMarkers = this._addMarkers.bind(this)
@@ -66,8 +63,8 @@ class Map extends Component {
         })
     }
 
-    addContainerRef(el) {
-        this.mapContainerElement = el
+    addMapRef(el) {
+        this.mapElement = el
 
         if (!this._map && window.google && window.google.maps) {
             this.initMap()
@@ -75,10 +72,10 @@ class Map extends Component {
     }
 
     initMap() {
-        if (!this.mapContainerElement) return
+        if (!this.mapElement) return
         
         let tempCenter
-        this._map = new google.maps.Map(this.mapContainerElement, {
+        this._map = new google.maps.Map(this.mapElement, {
             zoom: this.props.mapParams.zoom,
             center: this.props.mapParams.center,
         })
@@ -183,9 +180,9 @@ class Map extends Component {
 
     render({mapParams}) {
         return (
-            <div>
+            <div className="map-container">
                 <CenterMap key="mapCenter" center={mapParams.center} map={this._map}/>
-                <div key="mapContainer" style={mapStyle} className="box" id="gmap-container" ref={this.addContainerRef}></div>
+                <div key="map" className="map-element" ref={this.addMapRef}></div>
             </div>
             
         )
