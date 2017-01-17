@@ -4,6 +4,8 @@ import { connect } from 'preact-redux'
 require('./header.scss')
 
 import { SearchBar } from './search/SearchBar'
+import { CenterIcon } from './icons/center'
+import { centerOnMe } from './actionCreators/map'
 
 class Header extends Component { 
     constructor() {
@@ -14,9 +16,16 @@ class Header extends Component {
         return (
             <div key="header" className="app-header">                          
                 <SearchBar {...props} key="search-bar" />  
+
                 <span className="app-header__title" key="view-title">
                     {props.activeView.charAt(0).toUpperCase() + props.activeView.substring(1).toLowerCase()}
                 </span>
+
+                <div className="header-buttons" key="header-buttons">
+                    <button onClick={centerOnMe} className="header-button">
+                        <CenterIcon />
+                    </button>
+                </div>
             </div>
         )
     }

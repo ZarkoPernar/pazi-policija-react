@@ -4,8 +4,10 @@ import { connect } from 'preact-redux'
 import MyButton from '../common/button'
 import AppStore from '../AppStore'
 import mapStore from '../common/mapStore'
+
 import * as waitForMapClickActionCreators from '../actionCreators/waitForMapClick'
-import * as mapActionCreators from '../actionCreators/map'
+import { centerOnMe } from '../actionCreators/map'
+
 
 class ListOptions extends Component {
     constructor(props) {
@@ -17,23 +19,12 @@ class ListOptions extends Component {
         mapStore.subscribe('google_map_selected', (place) => {
             this.selectedLocation = place
         })
+
+        this.centerOnMe = this.centerOnMe.bind(this)
     }   
 
     centerOnMe() {
-        new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject)
-        }).then((res) => {
-            AppStore.dispatch({
-                type: 'CHANGE',
-                payload: {
-                    center: {
-                        lat: res.coords.latitude,
-                        lng: res.coords.longitude,
-                    }
-                }
-                
-            })
-        })
+        centerOnMe()
     }
 
     render({waitForMapClick, toggleWaitForMapClick}) {
@@ -76,6 +67,12 @@ function mapDispatchToProps(dispatch) {
         toggleWaitForMapClick: () => {
             dispatch(waitForMapClickActionCreators.toggle())
         },
+        // createToast(toast) {
+        //     dispatch({
+        //         type: 'ADD_TOAST',
+        //         payload: toast
+        //     })
+        // }
         // centerOnMe: () => {
         //     mapActionCreators.centerOnMe(dispatch)
         // },

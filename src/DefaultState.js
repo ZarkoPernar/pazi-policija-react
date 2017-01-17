@@ -3,6 +3,7 @@ export default {
     searchParams: {
         inputValue: '',
     },
+    toasts: [],
     newLocationModal: false,
     list: [],
     selectedAutocompleteItem: null,

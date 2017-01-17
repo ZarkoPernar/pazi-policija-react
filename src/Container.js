@@ -7,6 +7,7 @@ import LocationsList from './locationsList/LocationsList'
 import Navigation from './Navigation'
 import Header from './Header'
 import SearchResults from './search/SearchResults'
+import Toaster from './toast/Toaster'
 
 import * as waitForMapClickActionCreators from './actionCreators/waitForMapClick'
 import autocompleteSelectActions from './actionCreators/autocompleteSelect'
@@ -51,6 +52,7 @@ class Container extends Component {
     render() {
         return (
             <div className="app-container">
+                <Toaster />
                 <Header activeView={this.props.activeView} searchParams={this.props.searchParams} onSearchKeydown={this.props.onSearchKeydown} key="header" />
                 <div key="views" className="app-view-container" ref={el => this.listEl = el}>
                     {<div key="list" className={'app-view' + ' ' + (this.props.activeView === 'list' ? 'app-view--active' : '')}>

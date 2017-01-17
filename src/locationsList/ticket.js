@@ -2,17 +2,17 @@ import { h } from 'preact'
 import {distanceInWordsToNow} from 'date-fns' // /distanceInWordsToNow
 
 require('./ticket.scss')
-
+let dots = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+]
 const ticket = ({ onClick, activeStyle, item}) => {
-    let dots = [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
-    ].map(x => <div className="ticket__dots__dot" key={x}></div>)
+    dots.map(x => <div className="ticket__dots__dot" key={x}></div>)
 
     return (
         <div onClick={onClick} className="ticket" style={activeStyle}>
