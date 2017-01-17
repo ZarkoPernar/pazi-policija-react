@@ -1,0 +1,20 @@
+.add-location {
+    padding: 10px;
+
+    .form-group {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    
+    .form-control {
+        padding: 8px 12px;
+        border-radius: 3px;
+        border: 2px solid #ddd;
+        width: 100%;
+    }    
+
+    .form-control:focus {
+        border-color: rgb(63,81,181);
+        outline: 0;
+    }
+}

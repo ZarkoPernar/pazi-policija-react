@@ -29,5 +29,5 @@ function getNear(params) {
 }
 
 function appropriateHours(hours) {
-    return !hours ? 12 : ((hours > 24) ? 24 : hours)
+    return !hours ? 12 : (hours > 24 ? 24 : hours)
 }

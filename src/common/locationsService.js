@@ -61,6 +61,13 @@ export default {
             body: JSON.stringify(location)
         })
         .then(res => res.json())
+        .then((res) => {
+            AppStore.dispatch({
+                type: 'ADD_ITEM',
+                payload: res
+            })
+            return res
+        })
     },
     updateLocation(location) {
         return fetch('/api/v1/locations/update', {

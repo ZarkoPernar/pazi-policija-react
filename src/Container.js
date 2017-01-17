@@ -8,6 +8,7 @@ import Navigation from './Navigation'
 import Header from './Header'
 import SearchResults from './search/SearchResults'
 import Toaster from './toast/Toaster'
+import AddLocation from './addLocation/AddLocation'
 
 import * as waitForMapClickActionCreators from './actionCreators/waitForMapClick'
 import autocompleteSelectActions from './actionCreators/autocompleteSelect'
@@ -74,6 +75,10 @@ class Container extends Component {
 
                     <div key="search" className={'app-view' + ' ' + (this.props.activeView === 'search' ? 'app-view--active' : '')}>
                         <SearchResults />
+                    </div> 
+
+                    <div key="add" className={'app-view' + ' ' + (this.props.activeView === 'add' ? 'app-view--active' : '')}>
+                        <AddLocation />
                     </div>                    
                 </div>
                 <Navigation key="nav" activeView={this.props.activeView} changeView={this.changeView} />

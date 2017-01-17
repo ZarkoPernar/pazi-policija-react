@@ -2,6 +2,7 @@ import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
 
 import { MapPinIcon } from '../icons/mapPin'
+import { centerOnMe } from '../actionCreators/map'
 require('./search-results.scss')
 
 const fakeResults = [
@@ -51,7 +52,7 @@ class SearchResults extends Component {
         super()
     }
 
-    render({ searchParams, nearMe }) {
+    render({ searchParams }) {
         return (
             <div className="search-results">                          
                 <div className="search-results__container">
@@ -70,7 +71,7 @@ class SearchResults extends Component {
                 </div>
 
                 <div className="search-results__near-me" key="near-me">
-                    <button onClick={nearMe}>
+                    <button onClick={centerOnMe}>
                         <MapPinIcon />
                         Search Near Me
                     </button>
@@ -80,7 +81,7 @@ class SearchResults extends Component {
     }
 }
 
-const LinkedSearchResults = connect(mapStateToProps, mapDispatchToProps)(SearchResults)
+const LinkedSearchResults = connect(mapStateToProps)(SearchResults)
 
 export default LinkedSearchResults
 
@@ -90,12 +91,3 @@ function mapStateToProps({searchParams}) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        nearMe() {
-            dispatch({
-                type: 'SEARCH_NEAR_ME',
-            })
-        }
-    }
-}
