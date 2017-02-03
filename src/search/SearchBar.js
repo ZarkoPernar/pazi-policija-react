@@ -1,9 +1,11 @@
 import { h, Component } from 'preact'
+import { debounce } from 'lodash'
 
 import './search-bar.scss'
 
 import { ACTIVE_VIEW_SEARCH } from '../Navigation'
 import { SearchIcon } from '../icons/search'
+
 
 const ENTER_KEY = 13
 export class SearchBar extends Component { 
@@ -13,6 +15,8 @@ export class SearchBar extends Component {
         this.getEl = this.getEl.bind(this)
         this.onKeydown = this.onKeydown.bind(this)
         this.onBlur = this.onBlur.bind(this)
+
+        // this.search = debounce(this.getStuff, 1000).bind(this)
     }
 
     onKeydown(event) {
@@ -24,6 +28,10 @@ export class SearchBar extends Component {
             this.props.onSearchKeydown(event)
         }
     }
+
+    // getStuff() {
+
+    // }
 
     onBlur() {
         this.exited = true

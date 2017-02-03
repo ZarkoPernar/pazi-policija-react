@@ -6,7 +6,7 @@ import mapStore from '../common/mapStore'
 
 const scss = require('./autocomplete.scss')
 
-const initMap = window.initMap
+const initGoogle = window.initGoogle
 
 class GoogleAutocomplete extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class GoogleAutocomplete extends Component {
     } 
 
     componentWillMount() {
-        this._unregisterMap = initMap.addListener(this.initMap.bind(this))
+        this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
     }
 
     componentWillUnmount() {

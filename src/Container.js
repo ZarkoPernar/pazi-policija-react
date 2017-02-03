@@ -9,6 +9,7 @@ import Header from './Header'
 import SearchResults from './search/SearchResults'
 import Toaster from './toast/Toaster'
 import AddLocation from './addLocation/AddLocation'
+import UserProfile from './user/Profile'
 
 import * as waitForMapClickActionCreators from './actionCreators/waitForMapClick'
 import autocompleteSelectActions from './actionCreators/autocompleteSelect'
@@ -79,6 +80,10 @@ class Container extends Component {
 
                     <div key="add" className={'app-view' + ' ' + (this.props.activeView === 'add' ? 'app-view--active' : '')}>
                         <AddLocation />
+                    </div>  
+
+                    <div key="profile" className={'app-view' + ' ' + (this.props.activeView === 'profile' ? 'app-view--active' : '')}>
+                        <UserProfile />
                     </div>                    
                 </div>
                 <Navigation key="nav" activeView={this.props.activeView} changeView={this.changeView} />

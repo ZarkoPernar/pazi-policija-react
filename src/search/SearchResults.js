@@ -7,43 +7,41 @@ require('./search-results.scss')
 
 const fakeResults = [
     {
-        text: 'Zagreb',
+        displayName: 'Zagreb',
     }, {
-        text: 'Pula',
+        displayName: 'Split',
     }, {
-        text: 'Rijeka',
+        displayName: 'Osijek',
     }, {
-        text: 'Split',
+        displayName: 'Zadar',
     }, {
-        text: 'Pula',
+        displayName: 'Slavonski Brod',
     }, {
-        text: 'Rijeka',
+        displayName: 'Pula',
     }, {
-        text: 'Split',
+        displayName: 'Sesvete',
     }, {
-        text: 'Pula',
+        displayName: 'Kastela',
     }, {
-        text: 'Rijeka',
+        displayName: 'Karlovac',
     }, {
-        text: 'Split',
+        displayName: 'Sisak',
     }, {
-        text: 'Pula',
+        displayName: 'Varazdin',
     }, {
-        text: 'Rijeka',
+        displayName: 'Sibenik',
     }, {
-        text: 'Split',
+        displayName: 'Velika Gorica',
     }, {
-        text: 'Pula',
+        displayName: 'Vinkovci',
     }, {
-        text: 'Rijeka',
+        displayName: 'Vukovar',
     }, {
-        text: 'Split',
+        displayName: 'Bjelovar',
     }, {
-        text: 'Pula',
+        displayName: 'Dubrovnik',
     }, {
-        text: 'Rijeka',
-    }, {
-        text: 'Split',
+        displayName: 'Koprivnica',
     },
 ]
 
@@ -57,11 +55,12 @@ class SearchResults extends Component {
             <div className="search-results">                          
                 <div className="search-results__container">
                     <ul className="search-results__list">
+                        <li key="searchParams">{searchParams.inputValue}</li>
                         {
                             fakeResults.map((res, i) => (
                                 <li className="search-results__list__item" key={i}>
-                                    <a href={res.text} className="search-results__list__item__link">
-                                        {res.text}
+                                    <a href={res.displayName} className="search-results__list__item__link">
+                                        {res.displayName}
                                     </a>
                                 </li>
                             ))

@@ -2,35 +2,22 @@ var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var CONFIG = require('./tools/config')
+var CONFIG = require('./config')
+
 
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    './src'
+    CONFIG.APP_PATH + CONFIG.CLIENT_APP_PATH + CONFIG.CLIENT_ENTRY_FILE
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: CONFIG.CLIENT_OUTPUT_PATH,
     filename: 'bundle.js',
   },
-  devServer: {
-    port: process.env.PORT || 8080,
-		host: 'localhost',
-		colors: true,
-		publicPath: 'http://localhost:8080/',
-		contentBase: './dist',
-		historyApiFallback: true,
-		open: true,
-
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000'
-      }
-    }
-  },
+  devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
     new HtmlWebpackPlugin(CONFIG.HtmlWebpackPlugin),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
   module: {
     rules: [
@@ -38,19 +25,25 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel-loader'],
         include: [
-          path.resolve('src'),
-          path.resolve('node_modules/preact-compat/src'),
+          path.resolve('app'),
+          // path.resolve('node_modules/preact-compat/src'),
         ],
         exclude: ['.spec.']
 
       }, {
         test: /\.scss$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader'],
-        include: path.join(__dirname, 'src')
       }, {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader'],
-      }
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      },
     ]
   }
 }

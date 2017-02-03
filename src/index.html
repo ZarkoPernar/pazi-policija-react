@@ -2,31 +2,52 @@
 <html>
     <head>
         <title>Pazi Policija React</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <meta name="google-signin-client_id" content="AIzaSyB2Vxg0KuWymrqutiyBdXcqEIOLm0GZf40.apps.googleusercontent.com">
     </head>
 
     <body>
+        <svg style="position: absolute;" width="0" height="0" x="0px" y="0px" viewBox="0 0 451 451" 
+            xml:space="preserve" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <clipPath id="svgSearchPath">
+                <defs>
+                    <g>
+                        <g>
+                            <path d="M447.05,428l-109.6-109.6c29.4-33.8,47.2-77.9,47.2-126.1C384.65,86.2,298.35,0,192.35,0C86.25,0,0.05,86.3,0.05,192.3s86.3,192.3,192.3,192.3c48.2,0,92.3-17.8,126.1-47.2L428.05,447c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4C452.25,441.8,452.25,433.2,447.05,428z M26.95,192.3c0-91.2,74.2-165.3,165.3-165.3c91.2,0,165.3,74.2,165.3,165.3s-74.1,165.4-165.3,165.4C101.15,357.7,26.95,283.5,26.95,192.3z"/>
+                        </g>
+                    </g>
+                </defs>
+            </clipPath>
+        </svg>
 
         <script>
             (function() {
                 'use strict'
 
-                let listeners = []
+                let listeners = {}
+                let initialized = {}
 
-                let initMap = {
-                    initialized: false,
-                    init() {
-                        this.initialized = true
-
-                        listeners.forEach(listener => listener())
+                let initGoogle = {
+                    initAuth() {
+                        this.init('auth')
+                    },
+                    initMap() {
+                        this.init('map')
+                    },
+                    init(name) {
+                        initialized[name] = true
+                        listeners[name] = listeners[name] || []
+                        listeners[name].forEach(listener => listener())
                     },
                     listeners: [],
-                    addListener(listener) {
-                        if (this.initialized) {
+                    addListener(name, listener) {
+                        if (initialized[name]) {
                             listener()
                             return function() {}
                         }
 
-                        let index = (listeners.push(listener) - 1)
+                        listeners[name] = listeners[name] || []
+                        let index = (listeners[name].push(listener) - 1)
 
                         return function unreg() {
                             listeners.splice(index, 1)
@@ -34,13 +55,15 @@
                     }
                 }
 
-                window.initMap = initMap
+                window.initGoogle = initGoogle
             })();
         </script>
         
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Vxg0KuWymrqutiyBdXcqEIOLm0GZf40&libraries=places&callback=initMap.init" async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Vxg0KuWymrqutiyBdXcqEIOLm0GZf40&libraries=places&callback=initGoogle.initMap" async defer></script>
+        <script src="https://apis.google.com/js/platform.js?onload=initGoogle.initAuth" async defer></script>
 
         <script src="bundle.js"></script>
+        
         
     </body>
 </html>

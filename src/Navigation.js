@@ -20,7 +20,7 @@ const Navigation = ({changeView, activeView, search}) => (
             List
         </a>
         <a onClick={changeView.search} key="search" className={'app-view-nav__item app-view-nav__item--horizontal app-view-nav__item--central ' + (activeView === 'search' ? 'app-view-nav__item--active' : '')}>
-            <SearchIcon />
+            
             Search
         </a>
         <a onClick={changeView.map} key="map" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'map' ? 'app-view-nav__item--active' : '')}>

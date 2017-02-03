@@ -22,7 +22,7 @@ class Header extends Component {
                 </span>
 
                 <div className="header-buttons" key="header-buttons">
-                    <button onClick={centerOnMe} className="header-button">
+                    <button onClick={centerOnMe} className="header-button header-button--special">
                         <CenterIcon />
                     </button>
                 </div>

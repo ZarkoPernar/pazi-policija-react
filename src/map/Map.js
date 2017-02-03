@@ -4,20 +4,17 @@ import debounce from 'lodash/debounce'
 require('./map.scss')
 
 import AppStore from '../AppStore'
-import distance from '../utils/measureDistance'
 import store from '../common/mapStore'
 import locationsService from '../common/locationsService'
 import places from '../google-places/googlePlacesService'
 
 import CenterMap from './CenterMap'
 
-import { getRadius, USING_RADIUS } from './utils/getRadius'
 import { getDistance } from './utils/getDistance'
-import { getCorners } from './utils/getCorners'
 
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
-const initMap = window.initMap
+const initGoogle = window.initGoogle
 
 
 class Map extends Component {
@@ -27,6 +24,8 @@ class Map extends Component {
         this._centerLocation = null
         this.searchParams = {}
 
+        
+
         this.addMapRef = this.addMapRef.bind(this)
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
         this.initMap = this.initMap.bind(this)
@@ -35,7 +34,7 @@ class Map extends Component {
         this.getLocations = this.getLocations.bind(this)
         this._setSearchLocation = this._setSearchLocation.bind(this)
 
-        this._unregisterMap = initMap.addListener(this.initMap.bind(this))
+        this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
     }
 
     componentDidUpdate(prevProps) {
@@ -46,9 +45,7 @@ class Map extends Component {
             }
 
             this._setSearchLocation(this.props.selectedAutocompleteItem.geometry.location, this.props.selectedAutocompleteItem)  
-        }
-
-                             
+        }                        
     }
 
     componentWillUnmount() {
