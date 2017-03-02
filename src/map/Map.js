@@ -93,7 +93,7 @@ class Map extends Component {
 
         places.init(this._map)
 
-        this.getLocationsDebounced = debounce(this.getLocations, 1000)    
+        this.getLocationsDebounced = debounce(this.getLocations, 350)    
 
         this.getLocations()  
 

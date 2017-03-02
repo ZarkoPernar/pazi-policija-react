@@ -6,9 +6,10 @@ $app-container-navbar-height: 55px;
 .app-container {
     position: relative;
     overflow: hidden;
+    height: 100%;
 }
 .app-view-container {
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     display: flex;
     padding: $app-container-header-height 0 $app-container-navbar-height 0;
