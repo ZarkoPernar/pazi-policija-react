@@ -3,11 +3,11 @@ module.exports = {
     SERVER_APP_PATH: './server',
 
     CLIENT_ENTRY_FILE: '/index.js',
-    CLIENT_OUTPUT_PATH: '/public',
+    CLIENT_OUTPUT_PATH: 'public',
 
     HtmlWebpackPlugin: {
         title: 'Pazi, Policija',
-        template: './src/index.html'
+        template: './src/index.html',
     },
 
     WEBPACK_DEV_SERVER_CONFIG: {

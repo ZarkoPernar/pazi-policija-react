@@ -3,7 +3,8 @@ import AppStore from '../AppStore'
 const URL = window.location.protocol === 'file:' ? 'https://pazi-policija.herokuapp.com' : ''
 
 export default {
-    url: URL + '/api/v1/',
+    url: URL + '/api/v1',
+    
     /**
      * listAll	returns all locations
      * @return {location[]}
