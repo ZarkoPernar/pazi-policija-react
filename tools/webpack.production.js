@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var OfflinePlugin = require('offline-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
 
 var CONFIG = require('./config')
 
@@ -17,12 +18,17 @@ module.exports = {
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
+    // new CleanWebpackPlugin(['public'], {
+    //   root: path.resolve(__dirname) + '/../',
+    //   verbose: true, 
+    //   dry: false,
+    // }),
     new ExtractTextPlugin('styles.[chunkhash].css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: 'commons.js',
-      minChunks: 2,
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'commons',
+    //   filename: 'commons.js',
+    //   minChunks: 2,
+    // }),
     new HtmlWebpackPlugin(Object.assign({}, CONFIG.HtmlWebpackPlugin, {
       minify: {
         removeComments: true,
@@ -60,13 +66,13 @@ module.exports = {
       }, {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
+          fallback: 'style-loader',
           loader: 'css-loader!sass-loader'
         })
       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
+          fallback: 'style-loader',
           loader: 'css-loader'
         })
       },

@@ -47,9 +47,10 @@ export class SearchBar extends Component {
     }
 
     componentDidUpdate() {
-        if (!this.exited && this.props.activeView === ACTIVE_VIEW_SEARCH && this.inputEl) {
-            this.inputEl.focus()
-        }
+        // annoying
+        // if (!this.exited && this.props.activeView === ACTIVE_VIEW_SEARCH && this.inputEl) {
+        //     this.inputEl.focus()
+        // }
 
         if (this.props.activeView !== ACTIVE_VIEW_SEARCH) {
             this.exited = false
