@@ -6,10 +6,9 @@ function getNearbyLocations(req, res) {
     if (!req.body) {
         res.json({error: 'Epic Fail!'})
     } else {
-        console.log('near: ', req.body)
-
         search(req.body)
-            .then(callbackSuccess, callbackError)
+            .then(callbackSuccess)
+            .catch(callbackError)
     }
 
     function callbackSuccess(list) {

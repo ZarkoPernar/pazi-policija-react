@@ -25,7 +25,6 @@ function getNear(params) {
             }
             
         })
-
 }
 
 function appropriateHours(hours) {

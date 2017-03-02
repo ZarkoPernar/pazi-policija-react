@@ -1,10 +1,9 @@
 module.exports = {
-    APP_PATH: './app/',
-    CLIENT_APP_PATH: 'client/',
-    SERVER_APP_PATH: 'server/',
+    APP_PATH: './src',
+    SERVER_APP_PATH: './server',
 
-    CLIENT_ENTRY_FILE: 'app.js',
-    CLIENT_OUTPUT_PATH: 'public/',
+    CLIENT_ENTRY_FILE: '/index.js',
+    CLIENT_OUTPUT_PATH: '/public',
 
     HtmlWebpackPlugin: {
         title: 'Pazi, Policija',
@@ -12,17 +11,20 @@ module.exports = {
     },
 
     WEBPACK_DEV_SERVER_CONFIG: {
+        // hot: true,
+        // enable HMR on the server
+
         port: process.env.PORT || 8080,
         host: 'localhost',
-        colors: true,
-        publicPath: 'http://localhost:8080/',
-        contentBase: './public',
+        stats: 'errors-only',
+        publicPath: '/',
+        contentBase: '/public',
         historyApiFallback: true,
-        open: true,
+        open: true,        
 
         proxy: {
             '/api': {
-                target: 'http://localhost:3000'
+                target: 'http://localhost:5000'
             }
         }
     },

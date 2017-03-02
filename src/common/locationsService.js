@@ -1,13 +1,15 @@
-import store from './mapStore'
 import AppStore from '../AppStore'
 
+const URL = window.location.protocol === 'file:' ? 'https://pazi-policija.herokuapp.com' : ''
+
 export default {
+    url: URL + '/api/v1/',
     /**
      * listAll	returns all locations
      * @return {location[]}
      */
     listAll(params) {
-        return fetch('/api/v1/locations/near', {
+        return fetch(this.url + '/locations/near', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -15,13 +17,10 @@ export default {
             body: JSON.stringify(params)
         })
         .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            
+        .then(data => {           
             if (data.code === 2) {
                 return new Error('Damn')
             }
-            store.dispatch('list_loaded', data)
 
             AppStore.dispatch({
                 type: 'ADD_ITEMS',
@@ -33,7 +32,7 @@ export default {
         .catch((err) => err)
     },
     geocode(params) {
-        return fetch('/api/v1/locations/geocode', {
+        return fetch(this.url + '/locations/geocode', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -52,8 +51,7 @@ export default {
         })
     },
     addLocation(location) {
-        console.log(location)
-        return fetch('/api/v1/locations/add', {
+        return fetch(this.url + '/locations/add', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -70,7 +68,7 @@ export default {
         })
     },
     updateLocation(location) {
-        return fetch('/api/v1/locations/update', {
+        return fetch(this.url + '/locations/update', {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

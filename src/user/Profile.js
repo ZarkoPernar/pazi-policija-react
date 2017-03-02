@@ -1,50 +1,54 @@
 import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
 
-const initGoogle = window.initGoogle
+import { authService } from './authService'
 
 class UserProfile extends Component { 
     constructor() {
         super()
-
+        this.init = false
         this._login = this._login.bind(this)
-        this._unregister = initGoogle.addListener('auth', this.initGoogle.bind(this))
+        this._logout = this._logout.bind(this)
+        this.updateSigninStatus = this.updateSigninStatus.bind(this)
+
+        this.state = {
+            isSignedIn: false
+        }
+
     }
 
     componentDidMount() {
-        if (window.gapi) {
-            this.initGoogle()
-        }
+        
     }
 
     initGoogle() {
-        gapi.load('auth2', function() {
-            gapi.auth2.init({
-                client_id: 'AIzaSyB2Vxg0KuWymrqutiyBdXcqEIOLm0GZf40.apps.googleusercontent.com',
-                fetch_basic_profile: false,
-                scope: 'profile'
-            })
-        })
+        if (this.init) return
+        this.init = true
+
+        this.gapiLoadAuth()
     }
 
+    updateSigninStatus(isSignedIn) {
+        this.setState({ isSignedIn })
+    }   
+
     _login() {
-        let auth = gapi.auth2.getAuthInstance()
+        authService.loginWithGoogle()
+    }
 
-        auth.signIn()
-            .then(function(res) {
-                console.log(res)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-
+    _logout() {
+        authService.logout()
     }
 
     render() {
         return (
             <div className="user-profile">   
-                <button onClick={this._login}>
+                <button key="login-google" onClick={this._login}>
                     Login With Google
+                </button>
+
+                <button key="logout-google" onClick={this._logout}>
+                    Logout
                 </button>
             </div>
         )

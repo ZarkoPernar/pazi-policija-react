@@ -21,7 +21,7 @@ const ticket = ({ onClick, activeStyle, item}) => {
                     {item.user}
 
                     <div key="created_at" className="ticket__title__created_at">
-                        {distanceInWordsToNow(new Date(item.created_at))} ago
+                        {distanceInWordsToNow(new Date(item.seen_at || item.created_at))} ago
                     </div>
                 </h4>
                 <p key="body" className="ticket__body">

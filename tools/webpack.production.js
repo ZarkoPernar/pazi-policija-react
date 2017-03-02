@@ -1,24 +1,50 @@
 var path = require('path')
+var webpack = require('webpack')
 var OfflinePlugin = require('offline-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 var CONFIG = require('./config')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: [
-    CONFIG.APP_PATH + CONFIG.CLIENT_APP_PATH + CONFIG.CLIENT_ENTRY_FILE
+    CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE
   ],
   output: {
     path: CONFIG.CLIENT_OUTPUT_PATH,
-    filename: 'bundle-[hash].js',
+    filename: 'bundle-[chunkhash].js',
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
-    new HtmlWebpackPlugin(CONFIG.HtmlWebpackPlugin),
-    new OfflinePlugin({
-      caches: 'all',
-      externals: ['./index.html']
+    new ExtractTextPlugin('styles.[chunkhash].css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'commons.js',
+      minChunks: 2,
     }),
+    new HtmlWebpackPlugin(Object.assign({}, CONFIG.HtmlWebpackPlugin, {
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        // removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+      inject: true,
+    })),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    // new OfflinePlugin({
+    //   caches: 'all',
+    //   externals: ['./index.html']
+    // }),
   ],
   module: {
     rules: [      
@@ -26,23 +52,40 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel-loader'],
         include: [
-          path.resolve('app'),
+          path.resolve('src'),
           // path.resolve('node_modules/preact-compat/src'),
         ],
         exclude: ['.spec.']
 
       }, {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader!sass-loader'
+        })
       }, {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader'
+        })
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(gif|png|jpe?g|svg)$/i,
         loaders: [
-            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              progressive: true,
+              optimizationLevel: 7,
+              interlaced: false,
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              }
+            }
+          }
         ]
       },
     ]

@@ -1,5 +1,4 @@
-import { h } from 'preact'
-import store from '../dropdown/dropdownStore'
+/*import { h } from 'preact'
 var css = require('./filters.scss')
 
 
@@ -68,4 +67,4 @@ function createDispatch(option) {
     }
 }
 
-export default Filters
+export default Filters*/

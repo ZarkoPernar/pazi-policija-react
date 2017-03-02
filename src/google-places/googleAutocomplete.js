@@ -2,7 +2,6 @@ import { Component, h } from 'preact'
 
 import AppStore from '../AppStore'
 import service from './googlePlacesService'
-import mapStore from '../common/mapStore'
 
 const scss = require('./autocomplete.scss')
 
@@ -22,9 +21,10 @@ class GoogleAutocomplete extends Component {
         this._autoSelect = this._autoSelect.bind(this)
         this.componentWillMount = this.componentWillMount.bind(this)
 
-        mapStore.subscribe('google_map_selected', (place) => {   
-            this._inputElement.value = place.formattedAddress            
-        })
+        // mapStore.subscribe('google_map_selected', (place) => {   
+        //     this._inputElement.value = place.formattedAddress            
+        // })
+
     }
 
     addSearchRef(el) {
@@ -34,6 +34,14 @@ class GoogleAutocomplete extends Component {
             this.initMap()
         }
     } 
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.selectedAutocompleteItem) {
+            this._inputElement.value = nextProps.selectedAutocompleteItem.formatted_address || nextProps.selectedAutocompleteItem.formattedAddress
+        } else {
+            this._inputElement.value = ''
+        }
+    }
 
     componentWillMount() {
         this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
@@ -52,7 +60,7 @@ class GoogleAutocomplete extends Component {
         this._autocompleteInput.addListener('place_changed', this._autoSelect)
     }
 
-    _autoSelect() {
+    _autoSelect(e) {
         this._autoSelectPlace = this._autocompleteInput.getPlace()
 
         if (typeof this._autoSelectPlace !== 'object') {
@@ -68,8 +76,8 @@ class GoogleAutocomplete extends Component {
         })
     }
 
-    render() {
-        return <input type="text" className="form-control google-autocomplete-input" ref={this.addSearchRef} />        
+    render(props) {
+        return <input type="text" {...props} className="form-control google-autocomplete-input" ref={this.addSearchRef} />        
     }
 }
 

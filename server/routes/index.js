@@ -5,4 +5,6 @@ module.exports = {
     ADD: PREFIX + '/' + API_VERSION + '/locations/add',
     NEAR: PREFIX + '/' + API_VERSION + '/locations/near',
     GEOCODE: PREFIX + '/' + API_VERSION + '/locations/geocode',
+
+    LOGIN: '/auth/login',
 }

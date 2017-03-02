@@ -1,10 +1,6 @@
 import { Component, h } from 'preact'
-import TicketItem from './ticket'
-import store from '../common/mapStore'
 
-import Filters from './filters'
-import ListOptions from './ListOptions'
-import GoogleAutocomplete from '../google-places/googleAutocomplete'
+import TicketItem from './ticket'
 
 var scss = require('./list.scss')
 let activeStyle = {
@@ -29,19 +25,10 @@ class LocationsList extends Component {
         }.bind(this)
     }
 
-    render({lheight, list}) {
+    render({list}) {
         return (
             <div className="location-list">
-                <div className="location-list__add">
-                    <GoogleAutocomplete 
-                        key="autoComplete" 
-                        selectedAutocompleteItem={this.props.selectedAutocompleteItem} 
-                        autocompleteSelect={this.props.autocompleteSelect}/>
-                    <ListOptions 
-                        key="listOptions" />
-                </div>
                 <div key="list" className="tickets-scroll">
-                    {/*<Filters key="filters" />*/}
                     <div className="tickets" key="tickets">
                         {
                             list.map(loc => {

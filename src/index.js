@@ -5,8 +5,6 @@ if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'production') {
 	require('offline-plugin/runtime').install()
 }
 
-require('preact/devtools')
-
 require('flexboxgrid')
 require('normalize.css')
 require('./app.css')
@@ -18,9 +16,11 @@ function init() {
 	root = render(<App />, document.body, root)
 }
 
-init()
-
 // in development, set up HMR:
 if (module.hot) {
+	require('preact/devtools')
+	module.hot.accept()
 	module.hot.accept(root, () => requestAnimationFrame(init) )
 }
+
+init()

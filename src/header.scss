@@ -10,13 +10,13 @@
     justify-content: center;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 13px rgba(70,70,70,.13);
+    box-shadow: 0 2px 6px rgba(70,70,70,.15);
     z-index: 2;
 
     &__title {
         font-size: 1.3em;
         letter-spacing: 1px;
-        font-weight: 300;
+        font-weight: 400;
     }
 }
 
@@ -24,12 +24,13 @@
     position: absolute;
     right: 0;
     top: 0;
-    padding: 10px;
+    padding: 5px 10px;
 }
 .header-button {
     background-color: transparent;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    padding: 8px;
     border: 0;
     border-radius: 2px;
 

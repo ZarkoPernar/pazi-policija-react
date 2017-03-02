@@ -9,6 +9,7 @@ var location = mongoose.Schema({
     user: String,
     modified: Date,
     created_at: Date,
+    seen_at: Date,
     pos: {
         type: {
             type: String,

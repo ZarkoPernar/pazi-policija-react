@@ -4,7 +4,6 @@ import debounce from 'lodash/debounce'
 require('./map.scss')
 
 import AppStore from '../AppStore'
-import store from '../common/mapStore'
 import locationsService from '../common/locationsService'
 import places from '../google-places/googlePlacesService'
 
@@ -24,8 +23,6 @@ class Map extends Component {
         this._centerLocation = null
         this.searchParams = {}
 
-        
-
         this.addMapRef = this.addMapRef.bind(this)
         this.componentWillUnmount = this.componentWillUnmount.bind(this)
         this.initMap = this.initMap.bind(this)
@@ -44,8 +41,16 @@ class Map extends Component {
                 this._centerLocation = null
             }
 
-            this._setSearchLocation(this.props.selectedAutocompleteItem.geometry.location, this.props.selectedAutocompleteItem)  
-        }                        
+            if (this.props.selectedAutocompleteItem) {
+                this._setSearchLocation(this.props.selectedAutocompleteItem.geometry.location, this.props.selectedAutocompleteItem)
+            }
+        }       
+
+        if (this.props.list !== prevProps.list) {
+            if (this.props.list) {
+                this._addMarkers(this.props.list)
+            }
+        }       
     }
 
     componentWillUnmount() {
@@ -105,14 +110,10 @@ class Map extends Component {
         })              
 
         this._map.addListener('click', (e) => {
-            if (!this.props.waitForMapClick) {
-                return
-            }
             locationsService.geocode({
                 lat: e.latLng.lat(),
                 lng: e.latLng.lng(),
             }).then((res) => {
-                console.log(res)
                 res[0].geometry = {
                     location: e.latLng,
                 }
@@ -122,30 +123,10 @@ class Map extends Component {
                         res[0]
                     )
                 )
-                this.props.toggleWaitForMapClick()
-                store.dispatch('google_map_selected', res[0])
-                store.dispatch('google_autocomplete_selected', res[0])
             })            
         })
-
-        // this._map.addListener('zoom_changed', (e) => {
-        //     // TODO
-        //     // console.log({
-        //     //     radius: getRadius(this._map) + USING_RADIUS,
-        //     // })
-        // })
-
-        // store.subscribe('google_autocomplete_selected', (place) => {   
-        //     if (this._centerLocation) {
-        //         this._centerLocation.marker.setMap(null)
-        //         this._centerLocation = null
-        //     }
-
-        //     this._setSearchLocation(place.geometry.location, place)            
-        // })
-
-        store.subscribe('list_loaded', this._addMarkers)
     }
+
     _addMarkers(data) {
         this._locations = data.map(this._createMarker)
     }

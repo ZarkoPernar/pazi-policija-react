@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
-var db = mongoose.connection
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/pazipolicija')
-// mongoose.connect('mongodb://zarko:Kasmir34@ds145178.mlab.com:45178/pazi-policija')
+const bluebird = require('bluebird')
 
-module.exports = db
+mongoose.Promise = bluebird
+mongoose.set('debug', JSON.parse(process.env.MONGO_DEBUG))
+mongoose.connect(process.env.MONGO_URL)
+
+module.exports = mongoose.connection

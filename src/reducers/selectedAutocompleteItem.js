@@ -4,7 +4,8 @@ export default function selectedAutocompleteItemReducer(state=DEFAULT_STATE.sele
     switch(type) {
         case 'SELECT':
             return payload
-
+        case 'ADD_ITEM':
+            return null
         default:
             return state
     }
