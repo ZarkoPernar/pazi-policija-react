@@ -21,7 +21,8 @@ const EXPRESS_SESSION_CONFIG = {
     saveUninitialized: true
 }
 
-app.set('port', (process.env.NODE_SERVER_PORT || 5000))
+// heroku automatically asssigns the port to .env PORT
+app.set('port', (process.env.PORT || 5000))
 
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
