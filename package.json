@@ -4,7 +4,7 @@
   "description": "0.1.0",
   "main": "server/index.js",
   "scripts": {
-    "start": "SET NODE_ENV=production && node server",
+    "start": "node server",
     "test": "mocha -w test/registerBabel.js test/init.js src/**/*.spec.js",
     "serve": "nodemon -w server",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
