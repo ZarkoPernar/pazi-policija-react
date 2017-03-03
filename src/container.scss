@@ -12,7 +12,7 @@ $app-container-navbar-height: 55px;
     height: 100%;
     overflow: hidden;
     display: flex;
-    padding: $app-container-header-height 0 $app-container-navbar-height 0;
+    padding: $app-container-header-height 0 0 0;
     position: relative;
 }
 
@@ -20,7 +20,8 @@ $app-container-navbar-height: 55px;
     width: 100%;
     // height: calc(100% - #{$app-container-header-height + $app-container-navbar-height});
     top: $app-container-header-height;
-    bottom: $app-container-navbar-height;
+    // bottom: $app-container-navbar-height;
+    bottom: 0; //for alt nav
     left: 0;
     position: absolute;
     background-color: $body-background-color;

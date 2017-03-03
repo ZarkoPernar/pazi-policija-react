@@ -16,6 +16,22 @@ $nav-btn-active-color: #2196f3;
         justify-content: center;
     }
 
+    &--alt {
+        margin: 0 auto 15px;
+        background-color: rgba(255,255,255,.95);
+        border-radius: 4px;
+        width: 180px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 0;
+        box-shadow: 0 1px 4px rgba(70,70,70,.23);
+        height: 45px;
+        svg {
+            height: 70% !important;
+        }
+
+    }
+
     
 }
 
@@ -26,6 +42,8 @@ $nav-btn-active-color: #2196f3;
 }
 
 .app-view-nav__item {
+    border-radius: 4px;
+
     &--horizontal {
         font-size: .8em;
         border-right: 2px;
@@ -84,7 +102,7 @@ $nav-btn-active-color: #2196f3;
 
 .app-view-nav__item--active {
     color: $nav-btn-active-color;
-    background-color: rgba(71, 79, 103, 0.05);
+    background-color: rgba(71, 79, 103, 0.08);
     fill: $nav-btn-active-color;
 }  
 // .app-view-nav__item--central.app-view-nav__item--active {

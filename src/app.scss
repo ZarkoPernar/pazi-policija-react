@@ -1,3 +1,5 @@
+@import './common/button/_button';
+
 $bar-border-color: #e5e5e5;
 $bar-background-color: #e5e5e5;
 
@@ -16,4 +18,5 @@ $body-background-color: #fff;
 
 $toaster-z-index: 9;
 
-$neon-red-color: #E91E63;
+$neon-red-color: rgb(255, 98, 72); //#E91E63;
+$purple: rgb(63,81,181);

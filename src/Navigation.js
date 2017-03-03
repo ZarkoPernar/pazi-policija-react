@@ -34,4 +34,20 @@ const Navigation = ({changeView, activeView, search}) => (
     </div>
 )
 
-export default Navigation
+
+const AltNavigation = ({changeView, activeView, search}) => (
+    <div key="nav" className="app-view-nav app-view-nav--horizontal app-view-nav--alt">
+        <a onClick={changeView.list} key="list" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'list' ? 'app-view-nav__item--active' : '')}>
+            <ListIcon />
+        </a>
+        <a onClick={changeView.map} key="map" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'map' ? 'app-view-nav__item--active' : '')}>
+            <MapPinIcon />
+        </a>
+
+        <a onClick={changeView.search} key="search" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'search' ? 'app-view-nav__item--active' : '')}>
+            <SearchIcon />
+        </a>
+    </div>
+)
+
+export default AltNavigation

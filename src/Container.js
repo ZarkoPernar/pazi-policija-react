@@ -8,6 +8,7 @@ import Navigation from './Navigation'
 import Header from './Header'
 import SearchResults from './search/SearchResults'
 import Toaster from './toast/Toaster'
+import Modal from './modal/Modal'
 import AddLocation from './addLocation/AddLocation'
 import UserProfile from './user/Profile'
 
@@ -29,7 +30,7 @@ class Container extends Component {
         let params = AppStore.getState().mapParams
 
         this.changeView = {
-            add: () => AppStore.dispatch({type: 'CHANGE_APP_VIEW', payload: 'add'}),
+            add: () => AppStore.dispatch({type: 'TOGGLE_NEW_LOCATION_MODAL'}),
             list: () => AppStore.dispatch({type: 'CHANGE_APP_VIEW', payload: 'list'}),
             map: () => AppStore.dispatch({type: 'CHANGE_APP_VIEW', payload: 'map'}),
             profile: () => AppStore.dispatch({type: 'CHANGE_APP_VIEW', payload: 'profile'}),
@@ -54,8 +55,15 @@ class Container extends Component {
     render() {
         return (
             <div className="app-container">
+
                 <Toaster />
+
+                <Modal isOpen={this.props.newLocationModal}>
+                    <AddLocation />
+                </Modal>
+
                 <Header activeView={this.props.activeView} searchParams={this.props.searchParams} onSearchKeydown={this.props.onSearchKeydown} key="header" />
+
                 <div key="views" className="app-view-container" ref={el => this.listEl = el}>
                     {<div key="list" className={'app-view' + ' ' + (this.props.activeView === 'list' ? 'app-view--active' : '')}>
                         <LocationsList 
@@ -78,9 +86,9 @@ class Container extends Component {
                         <SearchResults />
                     </div> 
 
-                    <div key="add" className={'app-view' + ' ' + (this.props.activeView === 'add' ? 'app-view--active' : '')}>
+                    {/*<div key="add" className={'app-view' + ' ' + (this.props.activeView === 'add' ? 'app-view--active' : '')}>
                         <AddLocation />
-                    </div>  
+                    </div>  */}
 
                     <div key="profile" className={'app-view' + ' ' + (this.props.activeView === 'profile' ? 'app-view--active' : '')}>
                         <UserProfile />
@@ -99,7 +107,7 @@ const LinkedContainer = connect(mapStateToProps, mapDispatchToProps)(Container)
 export default LinkedContainer
 
 
-function mapStateToProps({activeView, searchParams, list, mapParams, waitForMapClick, selectedAutocompleteItem}) {
+function mapStateToProps({activeView, searchParams, list, mapParams, waitForMapClick, selectedAutocompleteItem, newLocationModal}) {
     return { 
         activeView,
         searchParams,
@@ -107,6 +115,7 @@ function mapStateToProps({activeView, searchParams, list, mapParams, waitForMapC
         mapParams,
         waitForMapClick,
         selectedAutocompleteItem,
+        newLocationModal
     }
 }
 

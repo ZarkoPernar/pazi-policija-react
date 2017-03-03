@@ -16,32 +16,19 @@
 
 
     &__container {
-        padding: 15px 20px;
+        // padding: 15px 20px;
         position: relative;
-        height: calc(100% - 55px);
+        // height: calc(100% - 55px);
+        height: 100%;
     }
 
     &__list {
         list-style: none;
         margin: 0;
         padding: 0;
-        // box-shadow: 0 2px 9px 0px rgba(70,70,70,.123);
         overflow-y: scroll;
         overflow-x: hidden;
         height: 100%;
-        border-radius: 2px;
-        border: 1px solid #eaeaea;
-
-        &__item {
-            
-            &__link {
-                display: block;
-                width: 100%;
-                padding: 8px 16px;
-                background-color: #fff;
-                border-bottom: 1px solid #eaeaea;
-            }
-        }
     }
 }
 
@@ -78,6 +65,35 @@
         margin-right: 10px;
         height: 16px;
         margin-bottom: -2px;
+    }
+}
+
+.search-result {
+    &__item {
+        background-color: #fff;
+        border-bottom: 1px solid #eaeaea;
+            
+        &__title {
+            font-weight: 600;
+            display: block;
+            width: 100%;
+            margin: 0;
+            padding: 14px 20px;
+            
+        }
+    }
+
+    &__link {
+        display: block;
+        color: #212121;
+        text-decoration: none;
+        
+        &:active {
+            background-color: #ddd;
+        }
+        &:focus {
+            background-color: #ddd;
+        }
     }
 }
 

@@ -1,9 +1,10 @@
+import { URL } from '../common/urlService'
 
 export const authService = {
     loginWithGoogle() {
-        fetch('/auth/google')
+        fetch(URL + '/auth/google')
     },
     logout() {
-        fetch('/auth/logout')
+        fetch(URL + '/auth/logout')
     }
 }

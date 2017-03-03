@@ -11,9 +11,10 @@ let dots = [
     5,
     6,
     7
-]
+].map(x => <div className="ticket__dots__dot" key={x}></div>)
+
 const ticket = ({ onClick, activeStyle, item}) => {
-    dots.map(x => <div className="ticket__dots__dot" key={x}></div>)
+    
 
     return (
         <div onClick={onClick} className="ticket" style={activeStyle}>
@@ -30,12 +31,12 @@ const ticket = ({ onClick, activeStyle, item}) => {
                     <div key="google_address">{item.google_address}</div>                      
                 </p>
             </div>
-            <div className="ticket__dots">
+            {/*<div className="ticket__dots">
                 {dots}
             </div>
             <div className="ticket__right">
     
-            </div>
+            </div>*/}
         </div>
     )
 }

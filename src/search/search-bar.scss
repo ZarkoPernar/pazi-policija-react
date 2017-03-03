@@ -6,6 +6,7 @@
     height: 100%;
     transform: translate3d(0, -100% ,0);
     opacity: 0;
+    z-index: 3;
     transition: .3s ease-in opacity;
 }
 
@@ -43,10 +44,11 @@
     font-weight: 300;
     border: 0;
     position: absolute;
-    top: 5px;
-    left: 50px;
-    height: calc(100% - 10px);
-    width: calc(100% - 55px);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding-left: 50px;
     transform: translate3d(+50px, 0 ,0);
     opacity: 0;
     transition: .3s ease-in opacity, .6s ease transform;

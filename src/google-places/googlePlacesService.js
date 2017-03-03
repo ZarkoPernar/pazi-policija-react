@@ -23,6 +23,7 @@ const service = {
     auto({ input }) {
         return new Promise(function(resolve, reject) {
             autoService.getPlacePredictions({
+                componentRestrictions: {country: 'hr'},
                 input
             }, function(predictions, status) {
                 if (status != google.maps.places.PlacesServiceStatus.OK) {

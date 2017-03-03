@@ -6,6 +6,10 @@ export function searchParamsReducer(state=DefaultState.searchParams, {type, payl
             return {
                 inputValue: payload.inputValue
             }
+        case 'LOAD_SEARCH_RESULTS':
+            return {
+                results: payload.res
+            }
         default:
             return state
     }

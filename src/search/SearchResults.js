@@ -4,77 +4,96 @@ import { connect } from 'preact-redux'
 import { MapPinIcon } from '../icons/mapPin'
 import { centerOnMe } from '../actionCreators/map'
 require('./search-results.scss')
+import { SearchResultItem } from './SearchResultItem'
+
 
 const fakeResults = [
     {
-        displayName: 'Zagreb',
+        description: 'Zagreb',
+        id: 'Zagreb',
     }, {
-        displayName: 'Split',
+        description: 'Split',
+        id: 'Split',
     }, {
-        displayName: 'Osijek',
+        description: 'Osijek',
+        id: 'Osijek',
     }, {
-        displayName: 'Zadar',
+        description: 'Zadar',
+        id: 'Zadar',
     }, {
-        displayName: 'Slavonski Brod',
+        description: 'Slavonski Brod',
+        id: 'Slavonski Brod',
     }, {
-        displayName: 'Pula',
+        description: 'Pula',
+        id: 'Pula',
     }, {
-        displayName: 'Sesvete',
+        description: 'Sesvete',
+        id: 'Sesvete',
     }, {
-        displayName: 'Kastela',
+        description: 'Kastela',
+        id: 'Kastela',
     }, {
-        displayName: 'Karlovac',
+        description: 'Karlovac',
+        id: 'Karlovac',
     }, {
-        displayName: 'Sisak',
+        description: 'Sisak',
+        id: 'Sisak',
     }, {
-        displayName: 'Varazdin',
+        description: 'Varazdin',
+        id: 'Varazdin',
     }, {
-        displayName: 'Sibenik',
+        description: 'Sibenik',
+        id: 'Sibenik',
     }, {
-        displayName: 'Velika Gorica',
+        description: 'Velika Gorica',
+        id: 'Velika Gorica',
     }, {
-        displayName: 'Vinkovci',
+        description: 'Vinkovci',
+        id: 'Vinkovci',
     }, {
-        displayName: 'Vukovar',
+        description: 'Vukovar',
+        id: 'Vukovar',
     }, {
-        displayName: 'Bjelovar',
+        description: 'Bjelovar',
+        id: 'Bjelovar',
     }, {
-        displayName: 'Dubrovnik',
+        description: 'Dubrovnik',
+        id: 'Dubrovnik',
     }, {
-        displayName: 'Koprivnica',
+        description: 'Koprivnica',
+        id: 'Koprivnica',
     },
 ]
+
 
 class SearchResults extends Component { 
     constructor() {
         super()
+
+        this.presetResults = fakeResults.map(res => <SearchResultItem res={res} click={this.linkClick} />)
+        this.linkClick = this.linkClick.bind(this)
+    }
+
+    linkClick(event) {
+
     }
 
     render({ searchParams }) {
+        let results = Array.isArray(searchParams.results) ? searchParams.results.map(res => <SearchResultItem res={res} click={this.linkClick} />) : null
         return (
             <div className="search-results">                          
                 <div className="search-results__container">
                     <ul className="search-results__list">
-                        <li key="searchParams">{searchParams.inputValue}</li>
-                        {
-                            fakeResults.map((res, i) => (
-                                <li className="search-results__list__item" key={i}>
-                                    <a href={res.displayName} className="search-results__list__item__link">
-                                        {res.displayName}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                                
+                        { results || this.presetResults }
                     </ul>
                 </div>
 
-                <div className="search-results__near-me" key="near-me">
+                {/*<div className="search-results__near-me" key="near-me">
                     <button onClick={centerOnMe}>
                         <MapPinIcon />
                         Search Near Me
                     </button>
-                </div>
+                </div>*/}
             </div>
         )
     }
@@ -89,4 +108,5 @@ function mapStateToProps({searchParams}) {
         searchParams,
     }
 }
+
 

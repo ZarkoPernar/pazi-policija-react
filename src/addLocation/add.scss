@@ -1,20 +1,64 @@
+@import '../app';
+
 .add-location {
     padding: 10px;
 
     .form-group {
         position: relative;
-        margin-bottom: 15px;
+        margin-bottom: 20px;        
     }
     
     .form-control {
-        padding: 8px 12px;
-        border-radius: 3px;
-        border: 2px solid #ddd;
+        color: $purple;
+        padding: 8px 0;
+        border: 0;
+        border-bottom: 1px solid lighten($purple, 45);
         width: 100%;
-    }    
+    }  
+
+    .form-control--helper {
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        height: 2px;
+        margin-top: -1px;
+        background-color: $purple;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: .3s ease transform;
+    }
+
+    .form-control:focus + .form-control--helper {
+        transform: scaleX(1);
+    }
 
     .form-control:focus {
-        border-color: rgb(63,81,181);
+        // border-color: $purple;
         outline: 0;
     }
+
+    label {
+        font-size: .9em;
+        font-weight: 500;
+        color: darken($purple, 15);
+        margin-bottom: 3px;
+        display: block;
+    }
+}
+
+.add-location .form-control::placeholder {
+    color: lighten($purple, 39);
+}
+.add-location .form-control::-webkit-input-placeholder {
+    color: lighten($purple, 39);
+}
+.add-location .form-control::-moz-placeholder { /* Firefox 19+ */
+  color: lighten($purple, 39);
+}
+.add-location .form-control:-ms-input-placeholder { /* IE 10+ */
+  color: lighten($purple, 39);
+}
+.add-location .form-control:-moz-placeholder { /* Firefox 18- */
+  color: lighten($purple, 39);
 }

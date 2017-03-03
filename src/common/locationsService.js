@@ -1,6 +1,5 @@
 import AppStore from '../AppStore'
-
-const URL = window.location.protocol === 'file:' ? 'https://pazi-policija.herokuapp.com' : ''
+import { URL } from './urlService'
 
 export default {
     url: URL + '/api/v1',

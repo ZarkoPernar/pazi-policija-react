@@ -12,7 +12,7 @@ class Toaster extends Component {
 
     render({ toasts, dismissToast }) {
         return (
-            <div key="toaster" className="toaster">                          
+            <div key="toaster" className="toaster" hidden={!toasts.length}>                          
                 <ul className="toast-list">
                     { toasts.map((data) => <Toast toastData={data} dismiss={dismissToast} />) }
                 </ul>

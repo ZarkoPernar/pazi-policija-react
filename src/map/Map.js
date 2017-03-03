@@ -80,6 +80,8 @@ class Map extends Component {
         this._map = new google.maps.Map(this.mapElement, {
             zoom: this.props.mapParams.zoom,
             center: this.props.mapParams.center,
+            disableDefaultUI: true,
+
         })
 
         this.icon = {
@@ -128,6 +130,9 @@ class Map extends Component {
     }
 
     _addMarkers(data) {
+        if (Array.isArray(this._locations)) {
+            this._locations.forEach(loc => loc.marker.setMap(null))
+        }
         this._locations = data.map(this._createMarker)
     }
 
@@ -137,6 +142,7 @@ class Map extends Component {
             marker: new google.maps.Marker({
                 position: getPosition(location),
                 map: this._map,
+                // animation: google.maps.Animation.DROP,
                 title: location.google_address,
             })
         }
@@ -149,7 +155,7 @@ class Map extends Component {
         this._centerLocation = {
             marker: new google.maps.Marker({
                 position: location,
-                animation: google.maps.Animation.DROP,
+                // animation: google.maps.Animation.BOUNCE,
                 map: this._map,
                 icon: this.icon,
             })

@@ -1,5 +1,5 @@
 export default {
-    activeView: 'list',
+    activeView: 'map',
     searchParams: {
         inputValue: '',
     },

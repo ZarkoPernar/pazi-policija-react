@@ -17,7 +17,6 @@ export class SearchBar extends Component {
     }
 
     onKeydown(event) {
-        console.log(event)
         if (event.keyCode === ENTER_KEY) {
             this.inputEl.blur()
             this.props.onSearchEnter(event)
@@ -29,12 +28,17 @@ export class SearchBar extends Component {
 
     autoSearch() {
         let input = this.inputEl.value
-        if (input.length < 2) return
+        if (!input) return
 
         googleService.auto({
             input
-        }).then(res => {
+        })
+        .then((res) => {
             console.log(res)
+            this.props.onSearchResults(res)
+        })
+        .catch((err) => {
+            console.log(err)
         })
     }
 

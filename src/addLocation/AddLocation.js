@@ -3,6 +3,7 @@ import { connect } from 'preact-redux'
 import { subHours, subMinutes } from 'date-fns'
 
 require('./add.scss')
+import AppStore from '../AppStore'
 import GoogleAutocomplete from '../google-places/googleAutocomplete'
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 import locationService from '../common/locationsService'
@@ -19,13 +20,24 @@ class AddLocation extends Component {
     constructor() {
         super()
 
+        this.state = {
+            showMore: false
+        }
+
         this.handleSubmit = this.handleSubmit.bind(this)
         this._fuckingAdd = this._fuckingAdd.bind(this)
+        this.toggleMore = this.toggleMore.bind(this)
     }
 
     handleSubmit(event) {
         event.preventDefault()
         // this._fuckingAdd()
+    }
+
+    toggleMore() {
+        this.setState((state) => ({
+            showMore: !state.showMore
+        }))
     }
 
     _fuckingAdd() {
@@ -42,11 +54,15 @@ class AddLocation extends Component {
             lng: this.props.selectedAutocompleteItem.geometry.location.lng(),
             seen_at: seenAt,
         })
+        .then((res) => {
+            AppStore.dispatch({type: 'TOGGLE_NEW_LOCATION_MODAL'})
+        })
         
     }
     
 
     render({ selectedAutocompleteItem, autocompleteSelect }) {
+        let rotation = this.state.showMore ? 'translateX(1px) rotate(-90deg)' : 'translateX(-1px) rotate(90deg)'
         return (
             <div className="add-location">   
                 <div className="google-autocomplete" key="autoComplete" >
@@ -58,12 +74,14 @@ class AddLocation extends Component {
                             placeholder="Trazite ulicu, grad, mjesto..."
                             selectedAutocompleteItem={selectedAutocompleteItem} 
                             autocompleteSelect={autocompleteSelect}/>
+                        <div className="form-control--helper"></div>   
                     </div>                
                 </div>
                 
-                <div className="form-group" key="description">
+                <div className="form-group" key="description" hidden={!this.state.showMore}>
                     <label htmlFor="add-location-form-description">Sto ste vidjeli</label>
-                    <input type="text" id="add-location-form-description" className="form-control" ref={el => this.descriptionEl = el} />
+                    <input placeholder="Snimanje brzine, kamere..." type="text" id="add-location-form-description" className="form-control" ref={el => this.descriptionEl = el} />
+                    <div className="form-control--helper"></div>
                 </div>
 
                 <div className="row" key="seen-at">
@@ -78,6 +96,7 @@ class AddLocation extends Component {
                                 className="form-control"
                                 value="0" 
                                 ref={el => this.seenAtAmountEl = el} />
+                            <div className="form-control--helper"></div>                            
                         </div>
                     </div>
                     <div key="col-2" className="col-xs-6">
@@ -91,8 +110,14 @@ class AddLocation extends Component {
                 </div>
 
                 <div key="add-btn">
-                    <button type="submit" className="add-btn mdl-button mdl-button--raised mdl-button--colored" onClick={this._fuckingAdd}>
-                        Add
+                    {/*style={{marginTop: '25px'}}*/}
+                    <button style={{width: '45px', minWidth: 0}} type="submit" className="add-btn mdl-button mdl-button--raised mdl-button--colored" onClick={this.toggleMore}>                        
+                        <span style={{transform: rotation, position: 'relative', display: 'block'}}>
+                            &#x276F;
+                        </span>
+                    </button>
+                    <button style={{width: '70%', float: 'right'}} type="submit" className="add-btn mdl-button mdl-button--raised mdl-button--colored" onClick={this._fuckingAdd}>
+                        Dodaj Lokaciju
                     </button>
                 </div>                
             </div>
