@@ -42,16 +42,11 @@ export class SearchBar extends Component {
         })
     }
 
-    // getStuff() {
-
-    // }
-
     onBlur() {
         this.exited = true
     }
 
     componentDidUpdate() {
-        // annoying
         // if (!this.exited && this.props.activeView === ACTIVE_VIEW_SEARCH && this.inputEl) {
         //     this.inputEl.focus()
         // }
@@ -64,16 +59,16 @@ export class SearchBar extends Component {
     getEl(el) {
         this.inputEl = el
         if (!this.firstRender && this.props.activeView === ACTIVE_VIEW_SEARCH) {
-            this.inputEl.focus()
+            // this.inputEl.focus()
             this.firstRender = true
         }
     }
 
     render({ activeView }) {
         let inputEl
-        if (activeView === ACTIVE_VIEW_SEARCH && inputEl) {
-            inputEl.focus()
-        }
+        // if (activeView === ACTIVE_VIEW_SEARCH && inputEl) {
+        //     inputEl.focus()
+        // }
 
         return (        
             <div id="search-bar" key="search" className={activeView === 'search' ? 'search-bar--visible' : ''}>
