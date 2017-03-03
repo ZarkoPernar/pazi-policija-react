@@ -62,7 +62,11 @@ class Container extends Component {
                     <AddLocation />
                 </Modal>
 
-                <Header activeView={this.props.activeView} searchParams={this.props.searchParams} onSearchKeydown={this.props.onSearchKeydown} key="header" />
+                <Header 
+                    newLocationModal={this.props.newLocationModal}
+                    activeView={this.props.activeView} 
+                    searchParams={this.props.searchParams} 
+                    onSearchKeydown={this.props.onSearchKeydown} key="header" />
 
                 <div key="views" className="app-view-container" ref={el => this.listEl = el}>
                     {<div key="list" className={'app-view' + ' ' + (this.props.activeView === 'list' ? 'app-view--active' : '')}>

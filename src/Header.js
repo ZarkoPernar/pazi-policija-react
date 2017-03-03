@@ -5,7 +5,7 @@ require('./header.scss')
 
 import { SearchBar } from './search/SearchBar'
 import { CenterIcon } from './icons/center'
-import { PlusIcon } from './icons/plus'
+import { AddIcon } from './icons/add'
 import { centerOnMe } from './actionCreators/map'
 import { Logo } from './logo'
 import AppStore from './AppStore'
@@ -26,9 +26,9 @@ class Header extends Component {
             <div key="header" className="app-header">                          
                 <SearchBar {...props} key="search-bar" />  
 
-                <div className="header-buttons header-buttons--left" key="header-buttons">
-                    <button onClick={this.addLocation} className="header-button header-button--special">
-                        <PlusIcon />
+                <div className="header-buttons header-buttons--left" key="header-buttons--left">
+                    <button onClick={this.addLocation} id="header-add-btn" className={'header-button header-button--special ' + (props.newLocationModal ? ' active ' : '')}>
+                        <AddIcon />
                     </button>
                 </div>
 
@@ -37,7 +37,7 @@ class Header extends Component {
                     <Logo />
                 </span>
 
-                <div className="header-buttons header-buttons--right" key="header-buttons">
+                <div className="header-buttons header-buttons--right" key="header-buttons--right">
                     <button onClick={centerOnMe} className="header-button header-button--special">
                         <CenterIcon />
                     </button>

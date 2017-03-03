@@ -19,6 +19,20 @@
     }
 }
 
+#header-add-btn {
+    svg {
+        position: relative;
+        transform: rotate(0deg);
+        transition: transform .3s ease;
+    }
+
+    &.active {
+        svg {
+            transform: rotate(225deg);
+        }
+    }
+}
+
 .header-buttons {
     position: absolute;
     right: 0;
