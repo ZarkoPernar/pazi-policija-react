@@ -5,7 +5,7 @@ import { MapPinIcon } from '../icons/mapPin'
 import { centerOnMe } from '../actionCreators/map'
 require('./search-results.scss')
 import { SearchResultItem } from './SearchResultItem'
-
+import googleService from '../google-places/googlePlacesService'
 
 const fakeResults = [
     {
@@ -75,7 +75,11 @@ class SearchResults extends Component {
     }
 
     linkClick(event) {
-
+        googleService.auto({
+            input: 'a',
+            types: '(cities)' 
+        })
+        .then(console.log)
     }
 
     render({ searchParams }) {

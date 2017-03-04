@@ -3,12 +3,12 @@ import { connect } from 'preact-redux'
 
 require('./header.scss')
 
-import { SearchBar } from './search/SearchBar'
-import { CenterIcon } from './icons/center'
-import { AddIcon } from './icons/add'
-import { centerOnMe } from './actionCreators/map'
+import { SearchBar } from '../search/SearchBar'
+import { CenterIcon } from '../icons/center'
+import { AddIcon } from '../icons/add'
+import { centerOnMe } from '../actionCreators/map'
 import { Logo } from './logo'
-import AppStore from './AppStore'
+import AppStore from '../AppStore'
 
 class Header extends Component { 
     constructor() {

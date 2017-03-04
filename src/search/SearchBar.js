@@ -28,7 +28,7 @@ export class SearchBar extends Component {
 
     autoSearch() {
         let input = this.inputEl.value
-        if (!input) return
+        if (!input) return this.props.onSearchResults(null)
 
         googleService.auto({
             input

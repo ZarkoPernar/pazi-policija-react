@@ -36,7 +36,8 @@ const Navigation = ({changeView, activeView, search}) => (
 
 
 const AltNavigation = ({changeView, activeView, search}) => (
-    <div key="nav" className="app-view-nav app-view-nav--horizontal app-view-nav--alt">
+    <div key="nav" className={'app-view-nav app-view-nav--horizontal app-view-nav--alt ' + ('app-view-nav--active-view-' + activeView)}>
+        <span className="app-view-nav__slider"></span>
         <a onClick={changeView.list} key="list" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'list' ? 'app-view-nav__item--active' : '')}>
             <ListIcon />
         </a>

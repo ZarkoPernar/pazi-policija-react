@@ -56,7 +56,7 @@ module.exports = {
     rules: [      
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         include: [
           path.resolve('src'),
           // path.resolve('node_modules/preact-compat/src'),
@@ -78,7 +78,7 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
-        loaders: [
+        use: [
           'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
           {
             loader: 'image-webpack-loader',

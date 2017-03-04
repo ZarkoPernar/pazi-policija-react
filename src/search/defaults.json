@@ -1,0 +1,193 @@
+[{
+        "description": "Zagreb, Croatia",
+        "id": "53e061a5c030485579152d114629a4c3c8996eb4",
+        "matched_substrings": [{
+            "length": 5,
+            "offset": 0
+        }],
+        "place_id": "ChIJOcwCyZLWZUcRisL7KJYkRTo",
+        "reference": "CjQnAAAA7WRyB42gJqnOe-H1Wl0x28qCDPgX_43mnqiXMMQqPS5ccwqhy5hE6bLbHxCSQsYyEhCGWRo3GTeSd-DAemkJUJQtGhTI7D-4IJT7H0WIMcgIoUaGmmmjVQ",
+        "structured_formatting": {
+            "main_text": "Zagreb",
+            "main_text_matched_substrings": [{
+                "length": 5,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Zagreb"
+            },
+            {
+                "offset": 8,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    },
+    {
+        "description": "Split, Croatia",
+        "id": "3dccc0f408faa14caf3eb2344016273e7237c57c",
+        "matched_substrings": [{
+            "length": 4,
+            "offset": 0
+        }],
+        "place_id": "ChIJF_W8a_xdNRMRmJ-0MfaPeaE",
+        "reference": "CjQmAAAA2tKleQYFtVmyubJ3JJarI_BIfL5A98NOAwVAm4T5oWtwMSD1MAlX49c7g8OorHLTEhCCnsIL3WQ2qU3egYs1mie7GhSI91PwN0271yVyjlv6MGT9lx5bpg",
+        "structured_formatting": {
+            "main_text": "Split",
+            "main_text_matched_substrings": [{
+                "length": 4,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Split"
+            },
+            {
+                "offset": 7,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    },
+    {
+        "description": "Osijek, Croatia",
+        "id": "1cddab5a9a363bdc7616d36d9f726c628d6bb941",
+        "matched_substrings": [{
+            "length": 3,
+            "offset": 0
+        }],
+        "place_id": "ChIJdYByaajnXEcRlRGkIVZyjFs",
+        "reference": "CjQnAAAA3XQ7n_aiWkT8IesldcMLa0R9ngZyqXxblNMYzSonkA9tBoiFAHp3mzgE2UkrQzDCEhBMANx1DYV5ZPaYpVFXY9viGhQbmyXh42lUGw4vhoECqxH13d53Rg",
+        "structured_formatting": {
+            "main_text": "Osijek",
+            "main_text_matched_substrings": [{
+                "length": 3,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Osijek"
+            },
+            {
+                "offset": 8,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    },
+    {
+        "description": "Zadar, Croatia",
+        "id": "fc273cd30baa343536e8bd9ce303e39e16a437e1",
+        "matched_substrings": [{
+            "length": 4,
+            "offset": 0
+        }],
+        "place_id": "ChIJj7jA0mL6YUcRhAf0Exw-MhI",
+        "reference": "CjQmAAAAEUxjNoitvfrqWsrU9k25VTKDFszC_yu4ZVH8WDKIoOQ9Y_9e9IHjqkaScH6UwVctEhBR8FXWn4r-HQ7xEDe9DUIQGhT6kwBFrGfHIdt5RhKbgGBbLxBSSQ",
+        "structured_formatting": {
+            "main_text": "Zadar",
+            "main_text_matched_substrings": [{
+                "length": 4,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Zadar"
+            },
+            {
+                "offset": 7,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    },
+    {
+        "description": "Slavonski Brod, Croatia",
+        "id": "1c94c82e247b200ae77feb8dc2b4c5b9bb63187f",
+        "matched_substrings": [{
+            "length": 6,
+            "offset": 0
+        }],
+        "place_id": "ChIJV8zmJQG6XUcR1QoGG0C0nKk",
+        "reference": "CjQvAAAAzuo7Syj7-Z7X7wEFZVe4kmyXwe-lbk5U3j1nyE0EDA-5ifGODnqG_32Cb66fcgWAEhAUPSDQN_IM34tAq2IFRctXGhQ3SZmJpQgMEHeg7QiX4jVj11NCBg",
+        "structured_formatting": {
+            "main_text": "Slavonski Brod",
+            "main_text_matched_substrings": [{
+                "length": 6,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Slavonski Brod"
+            },
+            {
+                "offset": 16,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    },
+    {
+        "description": "Pula, Croatia",
+        "id": "42fec60e9daebb0df28ffc7f93ba6dc8d0bf8f03",
+        "matched_substrings": [{
+            "length": 3,
+            "offset": 0
+        }],
+        "place_id": "ChIJbXszCd7SfEcRDVhOezpKMnI",
+        "reference": "CjQlAAAAwXyYQh69yaehGlvlukJ1g3yY-sGmMuEXi4ELP1SCbpjU7eIpkap7vl1c9S4ohhsmEhDZ2AwkpLpnxh8O-6eC_w9nGhSfmbhR9behXAduQB-1rLPATSw6nQ",
+        "structured_formatting": {
+            "main_text": "Pula",
+            "main_text_matched_substrings": [{
+                "length": 3,
+                "offset": 0
+            }],
+            "secondary_text": "Croatia"
+        },
+        "terms": [{
+                "offset": 0,
+                "value": "Pula"
+            },
+            {
+                "offset": 6,
+                "value": "Croatia"
+            }
+        ],
+        "types": [
+            "locality",
+            "political",
+            "geocode"
+        ]
+    }
+]

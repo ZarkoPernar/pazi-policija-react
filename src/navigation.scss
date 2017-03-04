@@ -4,6 +4,8 @@
 $nav-btn-active-color: #2196f3;
 
 .app-view-nav {
+    user-select: none;
+    z-index: 1;
 
     &--horizontal {
         position: absolute;
@@ -32,7 +34,27 @@ $nav-btn-active-color: #2196f3;
 
     }
 
-    
+    &__slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        border-radius: 4px;
+        z-index: 0;
+        transition: .3s ease transform;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            bottom: 2px;
+            right: 2px;
+            background-color: $purple;
+            border-radius: 4px;
+        }
+    }    
 }
 
 @media (max-height: 400px) {
@@ -43,6 +65,8 @@ $nav-btn-active-color: #2196f3;
 
 .app-view-nav__item {
     border-radius: 4px;
+    transition: .3s ease fill;
+    z-index: 1;
 
     &--horizontal {
         font-size: .8em;
@@ -101,12 +125,23 @@ $nav-btn-active-color: #2196f3;
 
 
 .app-view-nav__item--active {
-    color: $nav-btn-active-color;
-    background-color: rgba(71, 79, 103, 0.08);
-    fill: $nav-btn-active-color;
+    // color: $nav-btn-active-color;
+    // background-color: rgba(71, 79, 103, 0.08);
+    // fill: $nav-btn-active-color;
+    fill: #fff;
 }  
 // .app-view-nav__item--central.app-view-nav__item--active {
 //     color: #fff;
 //     background-color: $bar-dark-background-color;
 //     fill: #fff;
 // }  
+
+.app-view-nav--active-view-list .app-view-nav__slider {
+    transform: translate3d(0, 0, 0);
+}
+.app-view-nav--active-view-map .app-view-nav__slider {
+    transform: translate3d(100%, 0, 0);
+}
+.app-view-nav--active-view-search .app-view-nav__slider {
+    transform: translate3d(200%, 0, 0);
+}

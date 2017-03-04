@@ -13,30 +13,32 @@
             (function() {
                 'use strict'
 
-                let listeners = {}
-                let initialized = {}
+                var listeners = {}
+                var initialized = {}
 
-                let initGoogle = {
-                    initAuth() {
+                var initGoogle = {
+                    initAuth: function() {
                         this.init('auth')
                     },
-                    initMap() {
+                    initMap: function() {
                         this.init('map')
                     },
-                    init(name) {
+                    init: function(name) {
                         initialized[name] = true
                         listeners[name] = listeners[name] || []
-                        listeners[name].forEach(listener => listener())
+                        listeners[name].forEach(function(listener) {
+                            listener()
+                        })
                     },
                     listeners: [],
-                    addListener(name, listener) {
+                    addListener: function(name, listener) {
                         if (initialized[name]) {
                             listener()
                             return function() {}
                         }
 
                         listeners[name] = listeners[name] || []
-                        let index = (listeners[name].push(listener) - 1)
+                        var index = (listeners[name].push(listener) - 1)
 
                         return function unreg() {
                             listeners.splice(index, 1)

@@ -5,7 +5,7 @@ import AppStore from './AppStore'
 import Map from './map/Map'
 import LocationsList from './locationsList/LocationsList'
 import Navigation from './Navigation'
-import Header from './Header'
+import Header from './header/Header'
 import SearchResults from './search/SearchResults'
 import Toaster from './toast/Toaster'
 import Modal from './modal/Modal'
@@ -55,7 +55,6 @@ class Container extends Component {
     render() {
         return (
             <div className="app-container">
-
                 <Toaster />
 
                 <Modal isOpen={this.props.newLocationModal}>
