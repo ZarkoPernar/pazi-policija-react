@@ -16,7 +16,7 @@
     [
       "transform-react-jsx", 
       {
-        "pragma": "h"
+        "pragma": "createElement"
       }
     ],
     "lodash",

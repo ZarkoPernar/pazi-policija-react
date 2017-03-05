@@ -1,5 +1,5 @@
-import { h } from 'preact'
-import { PureComponent } from 'preact-compat'
+import { createElement, Component } from 'react'
+import { PureComponent } from 'react'
 
 import { getGeolocationFromLocalstorage } from './common/geoLocation'
 
@@ -12,5 +12,9 @@ export default class GeoLocation extends PureComponent {
         if (localGeo) {
             this.props.centerOn(localGeo)
         }
+    }
+
+    render() {
+        return null
     }
 }

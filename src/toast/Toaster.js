@@ -1,5 +1,6 @@
-import { h, Component } from 'preact'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+import { connect } from 'react-redux'
+
 
 require('./toast.scss')
 
@@ -10,11 +11,11 @@ class Toaster extends Component {
         super()
     }
 
-    render({ toasts, dismissToast }) {
+    render() {
         return (
-            <div key="toaster" className="toaster" hidden={!toasts.length}>                          
+            <div key="toaster" className="toaster" hidden={!this.props.toasts.length}>                          
                 <ul className="toast-list">
-                    { toasts.map((data) => <Toast toastData={data} dismiss={dismissToast} />) }
+                    { this.props.toasts.map((data) => <Toast key={data.id | Math.random()} toastData={data} dismiss={this.props.dismissToast} />) }
                 </ul>
             </div>
         )

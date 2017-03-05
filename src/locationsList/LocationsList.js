@@ -1,4 +1,5 @@
-import { Component, h } from 'preact'
+import { createElement, Component } from 'react'
+
 
 import TicketItem from './ticket'
 
@@ -18,17 +19,17 @@ class LocationsList extends Component {
 
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         console.log('destroy list')
     }
 
-    render({ list }) {
+    render() {
         return (
             <div className="location-list">
                 <div key="list" className="tickets-scroll">
                     <div className="tickets" key="tickets">
                         {
-                            list.map(loc => {
+                            this.props.list.map(loc => {
                                 return <TicketItem key={loc._id} item={loc} onClick={this.createItemSelect(loc)}/>
                             })
                         }

@@ -1,6 +1,6 @@
-import { h } from 'preact'
-import { PureComponent } from 'preact-compat'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+import { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import AppView from './AppView'
 import LocationsList from './locationsList/LocationsList'
@@ -16,29 +16,22 @@ class AppViews extends PureComponent {
         super()
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         console.log('destroy app views')
     }
 
-    render({
-        activeView,
-        selectedAutocompleteItem,
-        list,
-        mapParams,
-        autocompleteSelect,
-        addItems
-    }) {
+    render() {
         return (
             <div className="app-view-container">
-                <AppView key="list" viewName="list" activeView={activeView}>
-                    <LocationsList autocompleteSelect={autocompleteSelect} selectedAutocompleteItem={selectedAutocompleteItem} list={list}/>
+                <AppView key="list" viewName="list" activeView={this.props.activeView}>
+                    <LocationsList autocompleteSelect={this.props.autocompleteSelect} selectedAutocompleteItem={this.props.selectedAutocompleteItem} list={this.props.list}/>
                 </AppView>
 
-                <AppView key="map" viewName="map" activeView={activeView}>
-                    <Map list={list} mapParams={mapParams} selectedAutocompleteItem={selectedAutocompleteItem} addItems={addItems} />
+                <AppView key="map" viewName="map" activeView={this.props.activeView}>
+                    <Map list={this.props.list} mapParams={this.props.mapParams} selectedAutocompleteItem={this.props.selectedAutocompleteItem} addItems={this.props.addItems} />
                 </AppView>
 
-                <AppView key="search" viewName="search" activeView={activeView}>   
+                <AppView key="search" viewName="search" activeView={this.props.activeView}>   
                     <SearchResults />
                 </AppView> 
             </div>

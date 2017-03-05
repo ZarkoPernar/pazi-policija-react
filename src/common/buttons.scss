@@ -25,11 +25,11 @@
         cursor: not-allowed;
     }
 
-    &[tooltip] {
+    &[data-tooltip] {
         position: relative;
     }
-    &[tooltip]:after {
-        content: attr(tooltip);
+    &[data-tooltip]:after {
+        content: attr(data-tooltip);
         text-transform: none;
         font-weight: 400;
         background-color: rgba(70,70,70,.8);
@@ -46,7 +46,7 @@
         transition: .2s ease all;
     }
 
-    &[tooltip]:hover:after {
+    &[data-tooltip]:hover:after {
         opacity: 1;
         transform: scale(1) translateX(-50%);
     }

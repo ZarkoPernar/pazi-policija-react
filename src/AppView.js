@@ -1,11 +1,15 @@
-import { h } from 'preact'
-import { PureComponent } from 'preact-compat'
+import { createElement, Component } from 'react'
+import { PureComponent } from 'react'
 
 export default class AppView extends PureComponent {
-    render({ viewName, activeView, children }) {
+    constructor() {
+        super()
+    }
+
+    render() {
         return (
-            <div className={'app-view' + ' ' + (activeView === viewName ? 'app-view--active' : '')}>
-                {children}
+            <div className={'app-view' + ' ' + (this.props.activeView === this.props.viewName ? 'app-view--active' : '')}>
+                {this.props.children}
             </div>
         )
     }

@@ -1,5 +1,6 @@
-import { h, Component } from 'preact'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+
+import { connect } from 'react-redux'
 import { subHours, subMinutes } from 'date-fns'
 
 import './add.scss'
@@ -60,9 +61,11 @@ class AddLocation extends Component {
         })
         
     }
-    
 
-    render({ selectedAutocompleteItem, autocompleteSelect }) {
+    changeInc = () => {}
+    changeAmount = () => {}    
+
+    render() {
         let rotation = this.state.showMore ? 'translateX(1px) rotate(-90deg)' : 'translateX(-1px) rotate(90deg)'
         return (
             <div className="add-location">   
@@ -73,8 +76,8 @@ class AddLocation extends Component {
                             required="required"
                             id="add-location-form-street"
                             placeholder="Trazite ulicu, grad, mjesto..."
-                            selectedAutocompleteItem={selectedAutocompleteItem} 
-                            autocompleteSelect={autocompleteSelect}/>
+                            selectedAutocompleteItem={this.props.selectedAutocompleteItem} 
+                            autocompleteSelect={this.props.autocompleteSelect}/>
                         <div className="form-control--helper"></div>   
                     </div>                
                 </div>
@@ -96,13 +99,14 @@ class AddLocation extends Component {
                                 placeholder="h,m" id="add-location-form-seen-at-amount" 
                                 className="form-control"
                                 value="0" 
+                                onChange={this.changeAmount}
                                 ref={el => this.seenAtAmountEl = el} />
                             <div className="form-control--helper"></div>                            
                         </div>
                     </div>
                     <div key="col-2" className="col-xs-6">
                         <div className="form-group" key="seen-at">
-                            <select key="input" id="add-location-form-seen-at-inc" className="form-control" value="minutes" ref={el => this.seenAtIncEl = el}>
+                            <select key="input" id="add-location-form-seen-at-inc" className="form-control" onChange={this.changeInc} value="minutes" ref={el => this.seenAtIncEl = el}>
                                 <option value="minutes">Minuta</option>
                                 <option value="hours">Sati</option>
                             </select>
@@ -122,8 +126,8 @@ class AddLocation extends Component {
                         type="submit" 
                         className="add-btn btn btn--raised btn--colored" 
                         onClick={this._fuckingAdd} 
-                        disabled={!selectedAutocompleteItem}
-                        tooltip={!selectedAutocompleteItem ? 'Lokacija mora imati adresu' : ''}>
+                        disabled={!this.props.selectedAutocompleteItem}
+                        data-tooltip={!this.props.selectedAutocompleteItem ? 'Lokacija mora imati adresu' : ''}>
                         Dodaj Lokaciju
                     </button>
                 </div>                

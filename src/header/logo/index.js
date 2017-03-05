@@ -1,4 +1,5 @@
-import { h, Component } from 'preact'
+import { createElement, Component } from 'react'
+
 
 export class Logo extends Component {
     constructor() {

@@ -1,5 +1,6 @@
-import { Component, h } from 'preact'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+import { connect } from 'react-redux'
+
 
 import Navigation from './Navigation'
 import Header from './header/Header'
@@ -26,30 +27,27 @@ class Container extends Component {
         }
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         console.log('destroy container')
     }
     
-    render({ 
-        centerOn, 
-        newLocationModal, 
-        activeView
-    }) {
+    render() {
         return (
             <div className="app-container">
+                   
                 <Toaster key="toaster" />
 
-                <Modal key="modal" isOpen={newLocationModal}>
+                <Modal key="modal" isOpen={this.props.newLocationModal}>
                     <AddLocation />
                 </Modal>
 
-                <GeoLocation key="geo" centerOn={centerOn} />
+                <GeoLocation key="geo" centerOn={this.props.centerOn} />
 
                 <Header key="header" />
 
                 <AppViews key="views" />                
 
-                <Navigation key="nav" activeView={activeView} changeView={this.changeView} />
+                <Navigation key="nav" activeView={this.props.activeView} changeView={this.changeView} />
             </div>
         )
     }

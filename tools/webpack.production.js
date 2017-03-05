@@ -9,9 +9,10 @@ var CONFIG = require('./config')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: [
-    CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE
-  ],
+  entry: {
+    app: CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE,
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'reselect', 'date-fns'],
+  },
   output: {
     path: CONFIG.CLIENT_OUTPUT_PATH,
     filename: 'bundle-[chunkhash].js',
@@ -25,7 +26,7 @@ module.exports = {
     // }),
     new ExtractTextPlugin('styles.[chunkhash].css'),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
+      name: 'vendor',
       filename: 'commons-[chunkhash].js',
       minChunks: 2,
     }),

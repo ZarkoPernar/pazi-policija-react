@@ -1,5 +1,6 @@
-import { h, Component } from 'preact'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+
+import { connect } from 'react-redux'
 
 import AppStore from '../AppStore'
 import { stripDataFromGeoposition } from '../common/geoLocation'
@@ -18,7 +19,7 @@ class SearchResults extends Component {
         this.linkClick = this.linkClick.bind(this)
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         console.log('destroy search')
     }
 
@@ -34,8 +35,8 @@ class SearchResults extends Component {
         }
     }
 
-    render({ searchParams }) {
-        let results = Array.isArray(searchParams.results) ? searchParams.results.map(res => <SearchResultItem res={res} click={this.linkClick(res)} />) : null
+    render() {
+        let results = Array.isArray(this.props.searchParams.results) ? this.props.searchParams.results.map(res => <SearchResultItem res={res} click={this.linkClick(res)} />) : null
         return (
             <div className="search-results">                          
                 <div className="search-results__container">

@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { createElement, Component } from 'react'
 import {distanceInWordsToNow} from 'date-fns' // /distanceInWordsToNow
 import hrLocale from 'date-fns/locale/hr'
 
@@ -26,10 +26,10 @@ const ticket = ({ onClick, activeStyle, item}) => {
                         {distanceInWordsToNow(new Date(item.seen_at || item.created_at), {locale: hrLocale})}
                     </div>
                 </h4>
-                <p key="body" className="ticket__body">
-                    <div key="description">{item.description}</div>                      
-                    <div key="google_address">{item.google_address}</div>                      
-                </p>
+                <div key="body" className="ticket__body">
+                    <p key="description">{item.description}</p>                      
+                    <p key="google_address">{item.google_address}</p>                      
+                </div>
             </div>
             {/*<div className="ticket__dots">
                 {dots}

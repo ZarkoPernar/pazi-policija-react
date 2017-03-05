@@ -1,4 +1,5 @@
-import { h, Component } from 'preact'
+import { createElement, Component } from 'react'
+
 
 export class Toast extends Component {
     constructor() {
@@ -32,10 +33,10 @@ export class Toast extends Component {
         })
     }
 
-    render({ toastData }, { closed }) {
+    render() {
         return (
-            <li onClick={this._dismiss} className={'toast ' + (toastData.closed || closed ? 'toast--closed' : '')}>
-                {toastData.description}
+            <li onClick={this._dismiss} className={'toast ' + (this.props.toastData.closed || this.state.closed ? 'toast--closed' : '')}>
+                {this.props.toastData.description}
             </li>
         )
     }

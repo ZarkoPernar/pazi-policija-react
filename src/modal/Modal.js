@@ -1,4 +1,4 @@
-import {h, Component } from 'preact'
+import { createElement, Component } from 'react'
 import './modal.scss'
 
 export default ({isOpen, children}) => (

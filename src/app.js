@@ -1,5 +1,7 @@
-import { Component, h } from 'preact'
-import { Provider } from 'preact-redux'
+import { createElement, Component } from 'react'
+
+
+import { Provider } from 'react-redux'
 import AppStore from './AppStore'
 import Container from './Container'
 

@@ -19,7 +19,7 @@
   },
   "settings": {
     "react": {
-      "pragma": "h"
+      "pragma": "createElement"
     }
   },
   "rules": {

@@ -1,4 +1,5 @@
-import { Component, h } from 'preact'
+import { createElement, Component } from 'react'
+
 
 export default class CenterMap extends Component {
     constructor() {

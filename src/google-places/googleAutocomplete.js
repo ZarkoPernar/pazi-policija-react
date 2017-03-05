@@ -1,4 +1,5 @@
-import { Component, h } from 'preact'
+import { createElement, Component } from 'react'
+
 
 import AppStore from '../AppStore'
 import service from './googlePlacesService'
@@ -76,7 +77,8 @@ class GoogleAutocomplete extends Component {
         })
     }
 
-    render(props) {
+    render() {
+        let {selectedAutocompleteItem, autocompleteSelect, ...props} = this.props
         return <input type="text" {...props} className="form-control google-autocomplete-input" ref={this.addSearchRef} />        
     }
 }

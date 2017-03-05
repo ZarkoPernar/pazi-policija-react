@@ -1,5 +1,5 @@
-import { h, Component } from 'preact'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+import { connect } from 'react-redux'
 
 import { authService } from './authService'
 

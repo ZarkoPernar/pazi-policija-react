@@ -1,7 +1,7 @@
-import { h } from 'preact'
-import { PureComponent } from 'preact-compat'
-import { connect } from 'preact-redux'
-import { createSelector } from 'reselect'
+import { createElement, Component } from 'react'
+import { PureComponent } from 'react'
+import { connect } from 'react-redux'
+
 import { SearchBar } from '../search/SearchBar'
 import { AddIcon } from '../icons/add'
 import { Logo } from './logo'
@@ -13,7 +13,7 @@ class Header extends PureComponent {
         super()
     }
 
-    componentDidUnmount() {
+    componentWillUnmount() {
         console.log('destroy header')
     }
 
@@ -21,7 +21,7 @@ class Header extends PureComponent {
         console.log('update header')
     }
 
-    render({ toggleNewLocationModal, newLocationModal }) {
+    render() {
         return (
             <div className="app-header">                          
                 <SearchBar key="search-bar" />  
@@ -29,8 +29,8 @@ class Header extends PureComponent {
                 <Logo key="logo"/>
 
                 <div key="header-buttons--right" className="header-buttons header-buttons--right">
-                    <button onClick={toggleNewLocationModal} id="header-add-btn" 
-                        className={'header-button header-button--special ' + (newLocationModal ? ' active ' : '')}>
+                    <button onClick={this.props.toggleNewLocationModal} id="header-add-btn" 
+                        className={'header-button header-button--special ' + (this.props.newLocationModal ? ' active ' : '')}>
                         <AddIcon />
                     </button>                    
                 </div>
@@ -43,11 +43,9 @@ const LinkedHeader = connect(mapStateToProps, mapDispatchToProps)(Header)
 
 export default LinkedHeader
 
-const nelSec = state => state.newLocationModal
-
 function mapStateToProps({newLocationModal}) {
     return { 
-        newLocationModal: nelSec
+        newLocationModal
     }
 }
 

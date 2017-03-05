@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { createElement, Component } from 'react'
 
 export let SearchResultItem = ({res, click}) => (
     <li className="search-result__item">

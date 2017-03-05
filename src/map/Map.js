@@ -1,4 +1,5 @@
-import { Component, h } from 'preact'
+import { createElement, Component } from 'react'
+
 import debounce from 'lodash/debounce'
 
 require('./map.scss')
@@ -66,7 +67,7 @@ class Map extends Component {
             lng: this.searchParams.lng || this.props.mapParams.center.lng,
             rad: this.searchParams.rad || this.props.mapParams.rad,
         }).then((data) => {
-            // this.props.addItems(data)
+            this.props.addItems(data)
         })
     }
 
@@ -163,10 +164,10 @@ class Map extends Component {
         }
     }
 
-    render({mapParams}) {
+    render() {
         return (
             <div className="map-container">
-                <CenterMap key="mapCenter" center={mapParams.center} map={this._map}/>
+                <CenterMap key="mapCenter" center={this.props.mapParams.center} map={this._map}/>
                 <div key="map" className="map-element" ref={this.addMapRef}></div>
             </div>
             

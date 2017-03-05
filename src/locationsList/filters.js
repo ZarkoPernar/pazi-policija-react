@@ -1,4 +1,4 @@
-/*import { h } from 'preact'
+/*import { createElement, Component } from 'react'
 var css = require('./filters.scss')
 
 

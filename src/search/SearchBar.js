@@ -1,6 +1,6 @@
-import { h } from 'preact'
-import { PureComponent } from 'preact-compat'
-import { connect } from 'preact-redux'
+import { createElement, Component } from 'react'
+import { PureComponent } from 'react'
+import { connect } from 'react-redux'
 
 import './search-bar.scss'
 
@@ -55,9 +55,9 @@ export class SearchBar extends PureComponent {
         }
     }
 
-    render({ activeView }) {
+    render() {
         return (        
-            <div id="search-bar" className={activeView === 'search' ? 'search-bar--visible' : ''}>
+            <div id="search-bar" className={this.props.activeView === 'search' ? 'search-bar--visible' : ''}>
                 <div className="search-bar__container">
                     <SearchIcon key="search-icon" className="search-bar__icon" />
                     <input key="search-input" placeholder="Search"  className="search-bar__input" onKeyDown={this.onKeydown} ref={this.getEl}/>

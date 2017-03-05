@@ -19,10 +19,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
-    alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat',
-    },
+    // alias: {
+    //   'react': 'preact-compat',
+    //   'react-dom': 'preact-compat',
+    // },
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [

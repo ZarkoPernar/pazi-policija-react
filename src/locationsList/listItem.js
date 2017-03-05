@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import { createElement, Component } from 'react'
 
 const listItem = (props) => {
 	let style = props.activeStyle
