@@ -1,89 +1,41 @@
 import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
 
-import { MapPinIcon } from '../icons/mapPin'
-import { centerOnMe } from '../actionCreators/map'
-require('./search-results.scss')
+import AppStore from '../AppStore'
+import { stripDataFromGeoposition } from '../common/geoLocation'
+import { getCenterFromGeoposition } from '../actionCreators/map'
 import { SearchResultItem } from './SearchResultItem'
 import googleService from '../google-places/googlePlacesService'
+import defaultResults from './defaults.json'
 
-const fakeResults = [
-    {
-        description: 'Zagreb',
-        id: 'Zagreb',
-    }, {
-        description: 'Split',
-        id: 'Split',
-    }, {
-        description: 'Osijek',
-        id: 'Osijek',
-    }, {
-        description: 'Zadar',
-        id: 'Zadar',
-    }, {
-        description: 'Slavonski Brod',
-        id: 'Slavonski Brod',
-    }, {
-        description: 'Pula',
-        id: 'Pula',
-    }, {
-        description: 'Sesvete',
-        id: 'Sesvete',
-    }, {
-        description: 'Kastela',
-        id: 'Kastela',
-    }, {
-        description: 'Karlovac',
-        id: 'Karlovac',
-    }, {
-        description: 'Sisak',
-        id: 'Sisak',
-    }, {
-        description: 'Varazdin',
-        id: 'Varazdin',
-    }, {
-        description: 'Sibenik',
-        id: 'Sibenik',
-    }, {
-        description: 'Velika Gorica',
-        id: 'Velika Gorica',
-    }, {
-        description: 'Vinkovci',
-        id: 'Vinkovci',
-    }, {
-        description: 'Vukovar',
-        id: 'Vukovar',
-    }, {
-        description: 'Bjelovar',
-        id: 'Bjelovar',
-    }, {
-        description: 'Dubrovnik',
-        id: 'Dubrovnik',
-    }, {
-        description: 'Koprivnica',
-        id: 'Koprivnica',
-    },
-]
-
+import './search-results.scss'
 
 class SearchResults extends Component { 
     constructor() {
         super()
 
-        this.presetResults = fakeResults.map(res => <SearchResultItem res={res} click={this.linkClick} />)
+        this.presetResults = defaultResults.map(res => <SearchResultItem key={res.id} res={res} click={this.linkClick(res)} />)
         this.linkClick = this.linkClick.bind(this)
     }
 
-    linkClick(event) {
-        googleService.auto({
-            input: 'a',
-            types: '(cities)' 
-        })
-        .then(console.log)
+    componentDidUnmount() {
+        console.log('destroy search')
+    }
+
+    linkClick(item) {
+        
+        return () => {
+            googleService.getDetails(item)
+                .then(res => {
+                    AppStore.dispatch(
+                        getCenterFromGeoposition(stripDataFromGeoposition(res))
+                    )
+                })
+        }
     }
 
     render({ searchParams }) {
-        let results = Array.isArray(searchParams.results) ? searchParams.results.map(res => <SearchResultItem res={res} click={this.linkClick} />) : null
+        let results = Array.isArray(searchParams.results) ? searchParams.results.map(res => <SearchResultItem res={res} click={this.linkClick(res)} />) : null
         return (
             <div className="search-results">                          
                 <div className="search-results__container">
@@ -91,13 +43,6 @@ class SearchResults extends Component {
                         { results || this.presetResults }
                     </ul>
                 </div>
-
-                {/*<div className="search-results__near-me" key="near-me">
-                    <button onClick={centerOnMe}>
-                        <MapPinIcon />
-                        Search Near Me
-                    </button>
-                </div>*/}
             </div>
         )
     }

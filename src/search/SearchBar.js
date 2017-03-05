@@ -1,4 +1,6 @@
-import { h, Component } from 'preact'
+import { h } from 'preact'
+import { PureComponent } from 'preact-compat'
+import { connect } from 'preact-redux'
 
 import './search-bar.scss'
 
@@ -7,13 +9,19 @@ import { SearchIcon } from '../icons/search'
 import googleService from '../google-places/googlePlacesService'
 
 const ENTER_KEY = 13
-export class SearchBar extends Component { 
+
+export class SearchBar extends PureComponent { 
     constructor() {
         super()
 
         this.getEl = this.getEl.bind(this)
         this.onKeydown = this.onKeydown.bind(this)
-        this.onBlur = this.onBlur.bind(this)
+    }
+
+    componentDidUpdate() {
+        if (this.props.activeView !== ACTIVE_VIEW_SEARCH) {
+            this.exited = false
+        }
     }
 
     onKeydown(event) {
@@ -31,52 +39,69 @@ export class SearchBar extends Component {
         if (!input) return this.props.onSearchResults(null)
 
         googleService.auto({
-            input
+            input,
+            types: 'geocode'
         })
         .then((res) => {
-            console.log(res)
             this.props.onSearchResults(res)
         })
-        .catch((err) => {
-            console.log(err)
-        })
-    }
-
-    onBlur() {
-        this.exited = true
-    }
-
-    componentDidUpdate() {
-        // if (!this.exited && this.props.activeView === ACTIVE_VIEW_SEARCH && this.inputEl) {
-        //     this.inputEl.focus()
-        // }
-
-        if (this.props.activeView !== ACTIVE_VIEW_SEARCH) {
-            this.exited = false
-        }
+        .catch((err) => { })
     }
 
     getEl(el) {
         this.inputEl = el
         if (!this.firstRender && this.props.activeView === ACTIVE_VIEW_SEARCH) {
-            // this.inputEl.focus()
             this.firstRender = true
         }
     }
 
     render({ activeView }) {
-        let inputEl
-        // if (activeView === ACTIVE_VIEW_SEARCH && inputEl) {
-        //     inputEl.focus()
-        // }
-
         return (        
-            <div id="search-bar" key="search" className={activeView === 'search' ? 'search-bar--visible' : ''}>
+            <div id="search-bar" className={activeView === 'search' ? 'search-bar--visible' : ''}>
                 <div className="search-bar__container">
                     <SearchIcon key="search-icon" className="search-bar__icon" />
-                    <input placeholder="Search" key="search-input" className="search-bar__input" onBlur={this.onBlur} onKeyDown={this.onKeydown} ref={this.getEl}/>
+                    <input key="search-input" placeholder="Search"  className="search-bar__input" onKeyDown={this.onKeydown} ref={this.getEl}/>
                 </div>
             </div>
         )
+    }
+}
+
+const LinkedSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar)
+
+export default LinkedSearchBar
+
+function mapStateToProps({ activeView }) {
+    return { 
+        activeView,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onSearchKeydown: (event) => {
+            dispatch({
+                type: 'SEARCH_KEYDOWN',
+                payload: {
+                    inputValue: event.target.value
+                }
+            })
+        },
+        onSearchResults: (res) => {
+            dispatch({
+                type: 'LOAD_SEARCH_RESULTS',
+                payload: {
+                    res
+                }
+            })
+        },
+        onSearchEnter: (event) => {
+            dispatch({
+                type: 'SEARCH_ENTER',
+                payload: {
+                    inputValue: event.target.value
+                }
+            })
+        },
     }
 }

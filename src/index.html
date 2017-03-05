@@ -41,7 +41,7 @@
                         var index = (listeners[name].push(listener) - 1)
 
                         return function unreg() {
-                            listeners.splice(index, 1)
+                            listeners[name].splice(index, 1)
                         }
                     }
                 }

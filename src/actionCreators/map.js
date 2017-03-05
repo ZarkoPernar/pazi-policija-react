@@ -1,5 +1,7 @@
 import types from '../types/map'
 import AppStore from '../AppStore'
+import { getGeoLocation } from '../common/geoLocation'
+import { GEO_LOCALSTORAGE_KEY } from '../common/constants'
 
 const USER_DENIED_GEO_CODE = 1
 let lastLocation = {
@@ -7,7 +9,7 @@ let lastLocation = {
     res: null,
 }
 
-export function center(res) {
+export function getCenterFromGeoposition(res) {
     return {
         type: types.CENTER_ON_ME,
         payload: {
@@ -21,14 +23,22 @@ export function center(res) {
 }
 
 export function centerOnMe() {
+    // if in memory and recent enough use that data
     if (within(lastLocation.last)) {
-        AppStore.dispatch(center(lastLocation.res))
+        AppStore.dispatch(getCenterFromGeoposition(lastLocation.res))
     }
 
-    new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-    }).then((res) => {
-        AppStore.dispatch(center(res))
+    // else get fresh location data
+    getGeoLocation().then((res) => {
+        // save { coords: {} } to local storage
+        window.localStorage.setItem(GEO_LOCALSTORAGE_KEY, JSON.stringify({
+            coords: {
+                latitude: res.coords.latitude, 
+                longitude: res.coords.longitude
+            }
+        }))
+        // then dispatch
+        AppStore.dispatch(getCenterFromGeoposition(res))
         return res
     }).catch((err) => {
         let msg = err.code === USER_DENIED_GEO_CODE ? 'You must enable location sharing' : 'Unable to get location'
@@ -50,3 +60,4 @@ export function centerOnMe() {
 function within(last) {
     return Date.now() - last <= 60000
 }
+

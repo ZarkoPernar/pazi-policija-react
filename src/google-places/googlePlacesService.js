@@ -20,6 +20,16 @@ const service = {
         })
     },
 
+    getDetails(item) {
+        return new Promise(function(resolve, reject) {
+            places.getDetails({
+                reference: item.reference
+            }, function(res) {
+                resolve(res)
+            })
+        })
+    },
+
     auto({ input }) {
         return new Promise(function(resolve, reject) {
             autoService.getPlacePredictions({

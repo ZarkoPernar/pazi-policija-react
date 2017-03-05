@@ -20,16 +20,10 @@ export default {
         .then(data => {           
             if (data.code === 2) {
                 return new Error('Damn')
-            }
-
-            AppStore.dispatch({
-                type: 'ADD_ITEMS',
-                payload: data,
-            })
-            
+            }            
             return data
         })
-        .catch((err) => err)
+        .catch((err) => { throw err })
     },
     geocode(params) {
         return fetch(this.url + '/locations/geocode', {

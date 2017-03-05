@@ -28,10 +28,19 @@ $nav-btn-active-color: #2196f3;
         border: 0;
         box-shadow: 0 1px 4px rgba(70,70,70,.23);
         height: 45px;
+
         svg {
             height: 70% !important;
         }
 
+        .app-view-nav__item {
+            transition: .3s ease fill;
+            transition-delay: .1s;
+            
+            &--active {
+                fill: #fff;
+            }
+        }
     }
 
     &__slider {
@@ -65,7 +74,6 @@ $nav-btn-active-color: #2196f3;
 
 .app-view-nav__item {
     border-radius: 4px;
-    transition: .3s ease fill;
     z-index: 1;
 
     &--horizontal {
@@ -92,6 +100,17 @@ $nav-btn-active-color: #2196f3;
         svg {
             height: 45%;
         }
+    }
+
+    &--fab {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        box-shadow: 0 1px 4px rgba(70,70,70,.23);
+        background-color: #fff;
+        border-radius: 4px;
+        width: 60px;
+        margin-left: 5px; 
     }
 
     // &--central {
@@ -125,16 +144,13 @@ $nav-btn-active-color: #2196f3;
 
 
 .app-view-nav__item--active {
-    // color: $nav-btn-active-color;
-    // background-color: rgba(71, 79, 103, 0.08);
-    // fill: $nav-btn-active-color;
-    fill: #fff;
+    color: $nav-btn-active-color;
+    background-color: rgba(71, 79, 103, 0.08);
+    fill: $nav-btn-active-color;
 }  
-// .app-view-nav__item--central.app-view-nav__item--active {
-//     color: #fff;
-//     background-color: $bar-dark-background-color;
-//     fill: #fff;
-// }  
+
+
+
 
 .app-view-nav--active-view-list .app-view-nav__slider {
     transform: translate3d(0, 0, 0);
@@ -144,4 +160,15 @@ $nav-btn-active-color: #2196f3;
 }
 .app-view-nav--active-view-search .app-view-nav__slider {
     transform: translate3d(200%, 0, 0);
+}
+
+@media (min-width: 375px) {
+    .app-view-nav__item--fab {
+        margin-left: 30px;
+    }
+}
+@media (min-width: 412px) {
+    .app-view-nav__item--fab {
+        margin-left: 45px;
+    }
 }

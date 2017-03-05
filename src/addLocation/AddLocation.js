@@ -2,7 +2,8 @@ import { h, Component } from 'preact'
 import { connect } from 'preact-redux'
 import { subHours, subMinutes } from 'date-fns'
 
-require('./add.scss')
+import './add.scss'
+
 import AppStore from '../AppStore'
 import GoogleAutocomplete from '../google-places/googleAutocomplete'
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
@@ -111,12 +112,18 @@ class AddLocation extends Component {
 
                 <div key="add-btn">
                     {/*style={{marginTop: '25px'}}*/}
-                    <button style={{width: '45px', minWidth: 0}} type="submit" className="add-btn mdl-button mdl-button--raised mdl-button--colored" onClick={this.toggleMore}>                        
+                    <button style={{width: '45px', minWidth: 0}} type="submit" className="add-btn btn btn--raised btn--colored" onClick={this.toggleMore}>                        
                         <span style={{transform: rotation, position: 'relative', display: 'block'}}>
                             &#x276F;
                         </span>
                     </button>
-                    <button style={{width: '70%', float: 'right'}} type="submit" className="add-btn mdl-button mdl-button--raised mdl-button--colored" onClick={this._fuckingAdd}>
+                    <button 
+                        style={{width: '70%', float: 'right'}}  
+                        type="submit" 
+                        className="add-btn btn btn--raised btn--colored" 
+                        onClick={this._fuckingAdd} 
+                        disabled={!selectedAutocompleteItem}
+                        tooltip={!selectedAutocompleteItem ? 'Lokacija mora imati adresu' : ''}>
                         Dodaj Lokaciju
                     </button>
                 </div>                

@@ -2,13 +2,7 @@ import { Component, h } from 'preact'
 
 import TicketItem from './ticket'
 
-var scss = require('./list.scss')
-let activeStyle = {
-    // position: 'absolute',
-    // top: 0,
-    // left: 0,
-    // width: '100%',
-}
+import './list.scss'
 
 class LocationsList extends Component {
     constructor(props) {
@@ -17,24 +11,25 @@ class LocationsList extends Component {
         this.state = {
             active: {},
         }
-        this.itemSelect = this.itemSelect.bind(this)
-    }
-    itemSelect(location) {
-        return function() {
-            this.setState({active: location})
-        }.bind(this)
+        this.createItemSelect = this.createItemSelect.bind(this)
     }
 
-    render({list}) {
+    createItemSelect(location) {
+
+    }
+
+    componentDidUnmount() {
+        console.log('destroy list')
+    }
+
+    render({ list }) {
         return (
             <div className="location-list">
                 <div key="list" className="tickets-scroll">
                     <div className="tickets" key="tickets">
                         {
                             list.map(loc => {
-                                return <TicketItem activeStyle={this.state.active._id === loc._id
-                                    ? activeStyle
-                                    : null} key={loc._id} item={loc} onClick={this.itemSelect(loc)}/>
+                                return <TicketItem key={loc._id} item={loc} onClick={this.createItemSelect(loc)}/>
                             })
                         }
                     </div>

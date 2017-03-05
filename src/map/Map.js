@@ -13,6 +13,7 @@ import { getDistance } from './utils/getDistance'
 
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
+
 const initGoogle = window.initGoogle
 
 
@@ -29,6 +30,7 @@ class Map extends Component {
         this._addMarkers = this._addMarkers.bind(this)
         this._createMarker = this._createMarker.bind(this)
         this.getLocations = this.getLocations.bind(this)
+        this.getLocationsDebounced = debounce(this.getLocations, 350)
         this._setSearchLocation = this._setSearchLocation.bind(this)
 
         this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
@@ -54,6 +56,7 @@ class Map extends Component {
     }
 
     componentWillUnmount() {
+        console.log('destroy map')
         this._unregisterMap()
     }
 
@@ -62,6 +65,8 @@ class Map extends Component {
             lat: this.searchParams.lat || this.props.mapParams.center.lat,
             lng: this.searchParams.lng || this.props.mapParams.center.lng,
             rad: this.searchParams.rad || this.props.mapParams.rad,
+        }).then((data) => {
+            // this.props.addItems(data)
         })
     }
 
@@ -93,11 +98,7 @@ class Map extends Component {
             scale: 1
         }
 
-        places.init(this._map)
-
-        this.getLocationsDebounced = debounce(this.getLocations, 350)    
-
-        this.getLocations()  
+        places.init(this._map)    
 
         this._map.addListener('bounds_changed', () => {
             this._bounds = this._map.getBounds()

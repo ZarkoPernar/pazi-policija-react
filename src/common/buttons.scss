@@ -1,0 +1,53 @@
+@import '../app';
+
+.btn {
+    display: inline-block;
+    border: 0;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: .9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    border-radius: 2px;    
+
+    &--raised {
+        box-shadow: 0 1px 3px rgba(70,70,70,.3);
+    }
+    
+    &--colored {
+        background-color: $purple;
+        color: #fff;
+    }
+
+    &[disabled] {
+        background-color: lighten($purple, 30);
+        cursor: not-allowed;
+    }
+
+    &[tooltip] {
+        position: relative;
+    }
+    &[tooltip]:after {
+        content: attr(tooltip);
+        text-transform: none;
+        font-weight: 400;
+        background-color: rgba(70,70,70,.8);
+        border-radius: 2px;
+        padding: 4px 8px;
+        position: absolute;
+        display: inline-block;
+        bottom: 100%;
+        left: 50%;
+        margin-bottom: 5px;
+        transform: scale(.5) translateX(-50%);
+        opacity: 0;
+        transform-origin: bottom center;
+        transition: .2s ease all;
+    }
+
+    &[tooltip]:hover:after {
+        opacity: 1;
+        transform: scale(1) translateX(-50%);
+    }
+}

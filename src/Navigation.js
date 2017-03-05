@@ -6,6 +6,8 @@ import { MapPinIcon } from './icons/mapPin'
 import { AvatarIcon } from './icons/avatar'
 import { SearchIcon } from './icons/search'
 import { PlusIcon } from './icons/plus'
+import { CenterIcon } from './icons/center'
+import { centerOnMe } from './actionCreators/map'
 
 export const ACTIVE_VIEW_SEARCH = 'search'
 
@@ -47,6 +49,10 @@ const AltNavigation = ({changeView, activeView, search}) => (
 
         <a onClick={changeView.search} key="search" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'search' ? 'app-view-nav__item--active' : '')}>
             <SearchIcon />
+        </a>
+
+        <a onClick={centerOnMe} className="app-view-nav__item app-view-nav__item--horizontal app-view-nav__item--fab">
+            <CenterIcon />
         </a>
     </div>
 )

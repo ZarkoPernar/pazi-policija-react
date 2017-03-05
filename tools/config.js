@@ -11,9 +11,6 @@ module.exports = {
     },
 
     WEBPACK_DEV_SERVER_CONFIG: {
-        // hot: true,
-        // enable HMR on the server
-
         port: process.env.PORT || 8080,
         host: 'localhost',
         stats: 'errors-only',

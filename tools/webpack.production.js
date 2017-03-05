@@ -24,11 +24,11 @@ module.exports = {
     //   dry: false,
     // }),
     new ExtractTextPlugin('styles.[chunkhash].css'),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'commons',
-    //   filename: 'commons.js',
-    //   minChunks: 2,
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'commons-[chunkhash].js',
+      minChunks: 2,
+    }),
     new HtmlWebpackPlugin(Object.assign({}, CONFIG.HtmlWebpackPlugin, {
       minify: {
         removeComments: true,
@@ -59,7 +59,7 @@ module.exports = {
         use: ['babel-loader'],
         include: [
           path.resolve('src'),
-          // path.resolve('node_modules/preact-compat/src'),
+          path.resolve('node_modules/preact-compat/src'),
         ],
         exclude: ['.spec.']
 
