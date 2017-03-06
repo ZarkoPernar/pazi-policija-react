@@ -1,4 +1,4 @@
-import { GEO_LOCALSTORAGE_KEY } from './constants'
+export const GEO_LOCALSTORAGE_KEY = 'geolocation'
 
 export function getGeolocationFromLocalstorage() {
     return JSON.parse(window.localStorage.getItem(GEO_LOCALSTORAGE_KEY))

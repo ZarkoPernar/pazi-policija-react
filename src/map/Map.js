@@ -192,6 +192,12 @@ function mapDispatchToProps(dispatch) {
         addItems(data) {
             dispatch(locationActionCreators.addItems(data))
         },        
+        setLocationListLoading(payload) {
+            dispatch({
+                type: 'SET_LOCATION_LIST_LOADING',
+                payload
+            })
+        }
     }
 }
 

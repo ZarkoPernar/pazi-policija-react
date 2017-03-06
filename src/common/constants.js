@@ -1,1 +1,0 @@
-export const GEO_LOCALSTORAGE_KEY = 'geolocation'

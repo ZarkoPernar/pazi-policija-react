@@ -9,7 +9,7 @@
     "serve": "nodemon -w server",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server",
     "dev": "rimraf ./public && npm-run-all --parallel serve devserver",
-    "build": "SET NODE_ENV=production && webpack -p --progress --colors --profile"
+    "build": "rimraf ./public && SET NODE_ENV=production && webpack -p --progress --colors --profile"
   },
   "keywords": [],
   "author": "",
@@ -80,7 +80,7 @@
     "preact": "7.2.0",
     "preact-compat": "3.13.1",
     "preact-redux": "2.0.0",
-    "react": "^15.4.2",
+    "react": "^16.0.0-alpha.3",
     "react-dom": "^15.4.2",
     "react-redux": "5.0.3",
     "recompose": "^0.22.0",
