@@ -102,6 +102,7 @@ $nav-item-width: 60px;
 .app-view-nav__item {
     border-radius: 4px;
     z-index: 1;
+    -webkit-tap-highlight-color: #fff;
 
     &--horizontal {
         font-size: .8em;
@@ -117,7 +118,6 @@ $nav-item-width: 60px;
         align-self: center;
         justify-content: space-around;
         margin: 0;
-        border-radius: 0;
         text-align: center;
         text-decoration: none;
         background: 0 0;
