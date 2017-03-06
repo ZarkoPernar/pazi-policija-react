@@ -11,7 +11,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     app: CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE,
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'reselect', 'date-fns'],
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'date-fns'], // reselect, recompose, others...
   },
   output: {
     path: CONFIG.CLIENT_OUTPUT_PATH,

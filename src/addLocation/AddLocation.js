@@ -96,7 +96,7 @@ class AddLocation extends Component {
                         <div className="form-group">
                             <input key="input" 
                                 type="tel"
-                                placeholder="h,m" id="add-location-form-seen-at-amount" 
+                                placeholder="createElement,m" id="add-location-form-seen-at-amount" 
                                 className="form-control"
                                 value="0" 
                                 onChange={this.changeAmount}

@@ -8,7 +8,7 @@ export default class AppView extends PureComponent {
 
     render() {
         return (
-            <div className={'app-view' + ' ' + (this.props.activeView === this.props.viewName ? 'app-view--active' : '')}>
+            <div className={'app-view' + ' ' + (this.props.activeView === this.props.viewName ? 'app-view--active' : '')} data-view-name={this.props.viewName}>
                 {this.props.children}
             </div>
         )

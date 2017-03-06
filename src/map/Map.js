@@ -1,5 +1,5 @@
 import { createElement, Component } from 'react'
-
+import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 
 require('./map.scss')
@@ -13,7 +13,7 @@ import CenterMap from './CenterMap'
 import { getDistance } from './utils/getDistance'
 
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
-
+import * as locationActionCreators from '../actionCreators/locations'
 
 const initGoogle = window.initGoogle
 
@@ -175,7 +175,25 @@ class Map extends Component {
     }
 }
 
-export default Map
+const LinkedMap = connect(mapStateToProps, mapDispatchToProps)(Map)
+
+export default LinkedMap
+
+function mapStateToProps({ list, mapParams, selectedAutocompleteItem }) {
+    return {
+        list,
+        mapParams,
+        selectedAutocompleteItem,
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addItems(data) {
+            dispatch(locationActionCreators.addItems(data))
+        },        
+    }
+}
 
 function getPosition(pos) {
     if (pos instanceof google.maps.LatLng) {

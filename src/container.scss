@@ -39,11 +39,26 @@ $app-container-navbar-height: 55px;
     transform: none;
 }
 
-// @media (min-width: 48rem) {
-//     .app-view {
-//         width: 50%;
-//         position: relative;
-//         transform: none;
-//         display: block;
-//     }
-// }
+@media (min-width: 48rem) {
+    .app-view {
+        top: 0;
+        position: relative;
+        transform: none;
+        display: block;
+
+        &[data-view-name="list"] {
+            width: 35%;
+        }
+
+        &[data-view-name="map"] {
+            width: 65%;
+        }
+
+        &[data-view-name="search"] {
+            width: 35%;
+            position: absolute;
+            left: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+    }
+}

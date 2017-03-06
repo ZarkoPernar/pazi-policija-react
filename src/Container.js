@@ -1,7 +1,7 @@
 import { createElement, Component } from 'react'
 import { connect } from 'react-redux'
 
-
+// import Perf from './perf'
 import Navigation from './Navigation'
 import Header from './header/Header'
 import Toaster from './toast/Toaster'
@@ -34,7 +34,8 @@ class Container extends Component {
     render() {
         return (
             <div className="app-container">
-                   
+                {/*<Perf key="perf" />*/}
+
                 <Toaster key="toaster" />
 
                 <Modal key="modal" isOpen={this.props.newLocationModal}>

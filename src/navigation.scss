@@ -2,6 +2,7 @@
 @import './container';
 
 $nav-btn-active-color: #2196f3;
+$nav-item-width: 60px;
 
 .app-view-nav {
     user-select: none;
@@ -14,7 +15,11 @@ $nav-btn-active-color: #2196f3;
         height: $app-container-navbar-height;
         width: 100%;
         background-color: #fff;
+    }
+
+    &__links {
         display: flex;
+        height: 100%;
         justify-content: center;
     }
 
@@ -33,12 +38,11 @@ $nav-btn-active-color: #2196f3;
             height: 70% !important;
         }
 
-        .app-view-nav__item {
-            transition: .3s ease fill;
-            transition-delay: .1s;
-            
+        .app-view-nav__item {  
+            background-color: #fff;
+                      
             &--active {
-                fill: #fff;
+                fill: #333;
             }
         }
     }
@@ -48,10 +52,32 @@ $nav-btn-active-color: #2196f3;
         top: 0;
         left: 0;
         bottom: 0;
-        width: 60px;
+        width: $nav-item-width;
         border-radius: 4px;
-        z-index: 0;
-        transition: .3s ease transform;
+        z-index: 2;
+        overflow: hidden;
+        transition: .25s ease transform;
+
+        &__container {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            height: 100%;
+            width: 180px;
+            transition: .25s ease transform;
+        }
+
+        &__item {
+            min-width: $nav-item-width;
+            width: $nav-item-width;
+            fill: #fff;
+            display: inline-flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
 
         &:after {
             content: '';
@@ -60,6 +86,7 @@ $nav-btn-active-color: #2196f3;
             left: 2px;
             bottom: 2px;
             right: 2px;
+            z-index: -1;
             background-color: $purple;
             border-radius: 4px;
         }
@@ -109,7 +136,7 @@ $nav-btn-active-color: #2196f3;
         box-shadow: 0 1px 4px rgba(70,70,70,.23);
         background-color: #fff;
         border-radius: 4px;
-        width: 60px;
+        width: $nav-item-width;
         margin-left: 5px; 
     }
 
@@ -119,7 +146,7 @@ $nav-btn-active-color: #2196f3;
     //     fill: #fff;
     //     // border-radius: 3px 3px 0 0;
     //     box-shadow: 0 1px 5px rgba(70,70,70,.75);
-    //     height: 60px;
+    //     height: $nav-item-width;
     // }
     &--central {
         background: transparent;
@@ -156,10 +183,19 @@ $nav-btn-active-color: #2196f3;
     transform: translate3d(0, 0, 0);
 }
 .app-view-nav--active-view-map .app-view-nav__slider {
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d($nav-item-width, 0, 0);
 }
 .app-view-nav--active-view-search .app-view-nav__slider {
-    transform: translate3d(200%, 0, 0);
+    transform: translate3d(#{$nav-item-width * 2}, 0, 0);
+}
+.app-view-nav--active-view-list .app-view-nav__slider__container {
+    transform: translate3d(0, 0, 0);
+}
+.app-view-nav--active-view-map .app-view-nav__slider__container {
+    transform: translate3d(-$nav-item-width, 0, 0);
+}
+.app-view-nav--active-view-search .app-view-nav__slider__container {
+    transform: translate3d(-#{$nav-item-width * 2}, 0, 0);
 }
 
 @media (min-width: 375px) {
@@ -170,5 +206,16 @@ $nav-btn-active-color: #2196f3;
 @media (min-width: 412px) {
     .app-view-nav__item--fab {
         margin-left: 45px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .app-view-nav {
+        top: 5px;
+        left: 15px;
+        margin: 0;
+        box-shadow: none;
+        transform: none;
+        z-index: 3;
     }
 }

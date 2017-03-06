@@ -19,10 +19,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js'],
-    // alias: {
-    //   'react': 'preact-compat',
-    //   'react-dom': 'preact-compat',
-    // },
+    alias: {
+      // 'react': 'preact',
+      // 'react-redux': 'preact-redux',
+    },
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
@@ -47,10 +47,7 @@ module.exports = {
 
       }, {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          loader: 'css-loader!sass-loader'
-        })
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({

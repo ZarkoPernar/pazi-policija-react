@@ -23,3 +23,11 @@
 .modal--is-open .modal__body {
     opacity: 1;
 }
+
+@media (min-width: 1200px) {
+    .modal {
+        width: auto;
+        left: 35%;
+        right: 0;
+    }
+}

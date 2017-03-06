@@ -17,10 +17,13 @@ $ticket-primary-color: #3f51b5;
     height: 100px;
     margin-bottom: 20px;
 
-    &__body {
-        margin: 0;
+    &__body {        
         padding: 10px 15px;
         height: $ticket-bottom-height;
+
+        p {
+            margin: 0;
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 import { createElement, Component } from 'react'
-import { PureComponent } from 'react'
+import { pure } from 'recompose'
 require('./navigation.scss')
 
 import { ListIcon } from './icons/list'
@@ -38,19 +38,35 @@ const Navigation = ({changeView, activeView, search}) => (
 )
 
 
-class AltNavigation extends PureComponent {
-    render() {
-        return (
-            <div key="nav" className={'app-view-nav app-view-nav--horizontal app-view-nav--alt ' + ('app-view-nav--active-view-' + this.props.activeView)}>
-                <span className="app-view-nav__slider"></span>
-                <a onClick={this.props.changeView.list} key="list" className={'app-view-nav__item app-view-nav__item--horizontal ' + (this.props.activeView === 'list' ? 'app-view-nav__item--active' : '')}>
+const AltNavigation = ({ activeView, changeView }) => {
+    return (
+        <div className={'app-view-nav app-view-nav--horizontal app-view-nav--alt ' + ('app-view-nav--active-view-' + activeView)}>
+            <div key="slider" className="app-view-nav__slider">
+                <div className="app-view-nav__slider__container">
+                    <div key="list" className="app-view-nav__slider__item">
+                        <ListIcon />
+                    </div>
+
+                    <div key="map" className="app-view-nav__slider__item">
+                        <MapPinIcon />
+                    </div>
+
+                    <div key="search" className="app-view-nav__slider__item">
+                        <SearchIcon />
+                    </div>
+                </div>
+            </div>
+
+            <div key="links" className="app-view-nav__links">
+                <a onClick={changeView.list} key="list" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'list' ? 'app-view-nav__item--active' : '')}>
                     <ListIcon />
                 </a>
-                <a onClick={this.props.changeView.map} key="map" className={'app-view-nav__item app-view-nav__item--horizontal ' + (this.props.activeView === 'map' ? 'app-view-nav__item--active' : '')}>
+
+                <a onClick={changeView.map} key="map" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'map' ? 'app-view-nav__item--active' : '')}>
                     <MapPinIcon />
                 </a>
 
-                <a onClick={this.props.changeView.search} key="search" className={'app-view-nav__item app-view-nav__item--horizontal ' + (this.props.activeView === 'search' ? 'app-view-nav__item--active' : '')}>
+                <a onClick={changeView.search} key="search" className={'app-view-nav__item app-view-nav__item--horizontal ' + (activeView === 'search' ? 'app-view-nav__item--active' : '')}>
                     <SearchIcon />
                 </a>
 
@@ -58,8 +74,9 @@ class AltNavigation extends PureComponent {
                     <CenterIcon />
                 </a>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
-export default AltNavigation
+
+export default pure(AltNavigation)

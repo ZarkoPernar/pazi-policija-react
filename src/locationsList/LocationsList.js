@@ -1,5 +1,7 @@
 import { createElement, Component } from 'react'
+import { connect } from 'react-redux'
 
+import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
 import TicketItem from './ticket'
 
@@ -40,4 +42,20 @@ class LocationsList extends Component {
     }
 }
 
-export default LocationsList
+const LinkedLocationsList = connect(mapStateToProps, mapDispatchToProps)(LocationsList)
+
+function mapStateToProps({ selectedAutocompleteItem, list }) {
+    return {
+        selectedAutocompleteItem,
+        list,
+    }
+}
+function mapDispatchToProps(dispatch) {
+    return {
+        autocompleteSelect(item) {
+            dispatch(autocompleteSelectActions.select(item))
+        }
+    }
+}
+
+export default LinkedLocationsList

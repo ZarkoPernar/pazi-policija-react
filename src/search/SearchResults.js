@@ -1,5 +1,4 @@
 import { createElement, Component } from 'react'
-
 import { connect } from 'react-redux'
 
 import AppStore from '../AppStore'
