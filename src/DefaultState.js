@@ -10,7 +10,7 @@ export default {
     waitForMapClick: false,
     centerOnMe: false,
     mapParams: {
-        zoom: 11,
+        zoom: 12,
         rad: 50000,
         center: {
             lat: 45.815399,

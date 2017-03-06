@@ -31,6 +31,8 @@ export class Toast extends Component {
         this.setState({
             closed: true
         })
+
+        this.props.removeMe()
     }
 
     render() {

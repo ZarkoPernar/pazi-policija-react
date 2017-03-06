@@ -11,11 +11,17 @@ class Toaster extends Component {
         super()
     }
 
+    remove = (toast) => {
+        return () => {
+            this.props.removeToast(toast)
+        }
+    }
+
     render() {
         return (
             <div key="toaster" className="toaster" hidden={!this.props.toasts.length}>                          
                 <ul className="toast-list">
-                    { this.props.toasts.map((data) => <Toast key={data.id | Math.random()} toastData={data} dismiss={this.props.dismissToast} />) }
+                    { this.props.toasts.map((data) => <Toast key={data.id | Math.random()} removeMe={this.remove(data)} toastData={data} dismiss={this.props.dismissToast} />) }
                 </ul>
             </div>
         )
@@ -34,6 +40,12 @@ function mapStateToProps({toasts}) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        removeToast(toast) {
+            dispatch({
+                type: 'REMOVE_TOAST',
+                payload: toast
+            })
+        },
         dismissToast(toast) {
             dispatch({
                 type: 'DISMISS_TOAST',

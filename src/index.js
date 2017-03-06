@@ -19,10 +19,11 @@ function init() {
 	root = render(<App />, document.getElementById('app'), root)
 }
 
+init()
+
 // in development, set up HMR:
 if (module.hot) {
 	module.hot.accept()
 	module.hot.accept(root, () => requestAnimationFrame(init) )
 }
 
-init()

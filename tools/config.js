@@ -14,10 +14,8 @@ module.exports = {
         port: process.env.PORT || 8080,
         host: 'localhost',
         stats: 'errors-only',
-        publicPath: '/',
-        contentBase: '/public',
         historyApiFallback: true,
-        open: true,        
+        hot: true,    
 
         proxy: {
             '/api': {

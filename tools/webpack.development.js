@@ -9,13 +9,16 @@ var CONFIG = require('./config')
 module.exports = {
   devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client',
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
     CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE
   ],
+  target: 'web',
   output: {
     path: '/' + CONFIG.CLIENT_OUTPUT_PATH,
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: 'http://localhost:8080/',
   },
   resolve: {
     extensions: ['.js'],
@@ -28,7 +31,13 @@ module.exports = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin(CONFIG.HtmlWebpackPlugin),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+        "process.env": {
+            "BUILD_TARGET": JSON.stringify("src")
+        }
+    }),
     new ExtractTextPlugin('styles.css'),
   ],
   performance: {
