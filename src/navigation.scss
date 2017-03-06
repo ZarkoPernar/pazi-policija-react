@@ -102,7 +102,9 @@ $nav-item-width: 60px;
 .app-view-nav__item {
     border-radius: 4px;
     z-index: 1;
-    -webkit-tap-highlight-color: #fff;
+    -webkit-tap-highlight-color: #000;
+    -webkit-tap-highlight-color: transparent;
+
 
     &--horizontal {
         font-size: .8em;
