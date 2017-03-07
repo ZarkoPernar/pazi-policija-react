@@ -2,8 +2,7 @@ import { createElement, Component } from 'react'
 import { connect } from 'react-redux'
 
 import AppStore from '../AppStore'
-import { stripDataFromGeoposition } from '../common/geoLocation'
-import { getCenterFromGeoposition } from '../actionCreators/map'
+import { getCenterFromGooglePlace } from '../actionCreators/map'
 import { SearchResultItem } from './SearchResultItem'
 import googleService from '../google-places/googlePlacesService'
 import defaultResults from './defaults.json'
@@ -28,7 +27,7 @@ class SearchResults extends Component {
             googleService.getDetails(item)
                 .then(res => {
                     AppStore.dispatch(
-                        getCenterFromGeoposition(stripDataFromGeoposition(res))
+                        getCenterFromGooglePlace(res)
                     )
                 })
         }

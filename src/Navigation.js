@@ -1,6 +1,6 @@
 import { createElement, Component } from 'react'
-import { pure } from 'recompose'
-require('./navigation.scss')
+
+import './navigation.scss'
 
 import { ListIcon } from './icons/list'
 import { MapPinIcon } from './icons/mapPin'
@@ -79,4 +79,4 @@ const AltNavigation = ({ activeView, changeView }) => {
 }
 
 
-export default pure(AltNavigation)
+export default AltNavigation

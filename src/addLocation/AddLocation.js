@@ -66,7 +66,7 @@ class AddLocation extends Component {
     changeAmount = () => {}    
 
     render() {
-        let rotation = this.state.showMore ? 'translateX(1px) rotate(-90deg)' : 'translateX(-1px) rotate(90deg)'
+        let rotation = this.state.showMore ? 'translateY(-4px) rotate(0)' : 'translate(3px, -1px) rotate(90deg)'
         return (
             <div className="add-location">   
                 <div className="google-autocomplete" key="autoComplete" >
@@ -78,17 +78,17 @@ class AddLocation extends Component {
                             placeholder="Trazite ulicu, grad, mjesto..."
                             selectedAutocompleteItem={this.props.selectedAutocompleteItem} 
                             autocompleteSelect={this.props.autocompleteSelect}/>
-                        <div className="form-control--helper"></div>   
+                        <div className="form-control--helper" />
                     </div>                
                 </div>
                 
                 <div className="form-group" key="description" hidden={!this.state.showMore}>
                     <label htmlFor="add-location-form-description">Sto ste vidjeli</label>
                     <input placeholder="Snimanje brzine, kamere..." type="text" id="add-location-form-description" className="form-control" ref={el => this.descriptionEl = el} />
-                    <div className="form-control--helper"></div>
+                    <div className="form-control--helper" />
                 </div>
 
-                <div className="row" key="seen-at">
+                <div className="row" key="seen-at" hidden={!this.state.showMore}>
                     <div className="col-xs-12">
                         <label key="label" htmlFor="add-location-form-seen-at-amount">Prije koliko vremena</label>
                     </div>
@@ -98,15 +98,13 @@ class AddLocation extends Component {
                                 type="tel"
                                 placeholder="createElement,m" id="add-location-form-seen-at-amount" 
                                 className="form-control"
-                                value="0" 
-                                onChange={this.changeAmount}
-                                ref={el => this.seenAtAmountEl = el} />
-                            <div className="form-control--helper"></div>                            
+                                ref={el => {this.seenAtAmountEl = el; el.value = 0}} />
+                            <div className="form-control--helper" />                        
                         </div>
                     </div>
                     <div key="col-2" className="col-xs-6">
                         <div className="form-group" key="seen-at">
-                            <select key="input" id="add-location-form-seen-at-inc" className="form-control" onChange={this.changeInc} value="minutes" ref={el => this.seenAtIncEl = el}>
+                            <select key="input" id="add-location-form-seen-at-inc" className="form-control" ref={el => {this.seenAtIncEl = el; el.value = 'minutes'}}>
                                 <option value="minutes">Minuta</option>
                                 <option value="hours">Sati</option>
                             </select>
@@ -118,7 +116,7 @@ class AddLocation extends Component {
                     {/*style={{marginTop: '25px'}}*/}
                     <button style={{width: '45px', minWidth: 0}} type="submit" className="add-btn btn btn--raised btn--colored" onClick={this.toggleMore}>                        
                         <span style={{transform: rotation, position: 'relative', display: 'block'}}>
-                            &#x276F;
+                            ...
                         </span>
                     </button>
                     <button 

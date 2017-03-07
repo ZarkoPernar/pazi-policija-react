@@ -22,6 +22,19 @@ export function getCenterFromGeoposition(res) {
     }
 }
 
+export function getCenterFromGooglePlace(res) {
+    return {
+        type: types.CENTER_ON_ME,
+        payload: {
+            center: {
+                lat: res.geometry.location.lat(),
+                lng: res.geometry.location.lng(),
+            }
+        }
+        
+    }
+}
+
 export function centerOnMe() {
     // if in memory and recent enough use that data
     if (within(lastLocation.last)) {

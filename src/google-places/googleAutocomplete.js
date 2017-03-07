@@ -17,26 +17,13 @@ class GoogleAutocomplete extends Component {
             results: [],
         }
         this._autoSelectPlace = null
-        
-        this.addSearchRef = this.addSearchRef.bind(this)        
-        this._autoSelect = this._autoSelect.bind(this)
-        this.componentWillMount = this.componentWillMount.bind(this)
-
-        // mapStore.subscribe('google_map_selected', (place) => {   
-        //     this._inputElement.value = place.formattedAddress            
-        // })
-
     }
 
-    addSearchRef(el) {
-        this._inputElement = el
+    componentWillMount = () => {
+        this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
+    }
 
-        if (!this._autocompleteInput && window.google && window.google.maps) {
-            this.initMap()
-        }
-    } 
-
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps = (nextProps) => {
         if (nextProps.selectedAutocompleteItem) {
             this._inputElement.value = nextProps.selectedAutocompleteItem.formatted_address || nextProps.selectedAutocompleteItem.formattedAddress
         } else {
@@ -44,24 +31,31 @@ class GoogleAutocomplete extends Component {
         }
     }
 
-    componentWillMount() {
-        this._unregisterMap = initGoogle.addListener('map', this.initMap.bind(this))
-    }
+    componentWillUnmount = () => this._unregisterMap()
+    
 
-    componentWillUnmount() {
-        this._unregisterMap()
-    }
+    addSearchRef = (el) => {
+        this._inputElement = el
+
+        if (!this._autocompleteInput && window.google && window.google.maps) {
+            this.initMap()
+        }
+    } 
 
     initMap() {
         if (!this._inputElement) return
         
         this._autocompleteInput = new window.google.maps.places.Autocomplete(this._inputElement, {
-            types: ['address']
+            types: ['address'],
+            componentRestrictions: {
+                country: 'hr'
+            }
         })
+
         this._autocompleteInput.addListener('place_changed', this._autoSelect)
     }
 
-    _autoSelect(e) {
+    _autoSelect = (e) => {
         this._autoSelectPlace = this._autocompleteInput.getPlace()
 
         if (typeof this._autoSelectPlace !== 'object') {

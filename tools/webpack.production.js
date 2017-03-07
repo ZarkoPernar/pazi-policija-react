@@ -1,9 +1,8 @@
 let path = require('path')
 let webpack = require('webpack')
-let OfflinePlugin = require('offline-plugin')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
-let CleanWebpackPlugin = require('clean-webpack-plugin')
+let SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 let CONFIG = require('./config')
 
@@ -27,11 +26,6 @@ module.exports = {
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
-    // new CleanWebpackPlugin(['public'], {
-    //   root: path.resolve(__dirname) + '/../',
-    //   verbose: true, 
-    //   dry: false,
-    // }),
     new ExtractTextPlugin('styles.[chunkhash].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -56,10 +50,19 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    // new OfflinePlugin({
-    //   caches: 'all',
-    //   externals: ['./index.html']
-    // }),
+    new SWPrecacheWebpackPlugin({
+        cacheId: 'pazi-policija-v1',
+        filename: 'service-worker.js',
+        maximumFileSizeToCacheInBytes: 4194304,
+        minify: true,
+        staticFileGlobs: [
+          'public/**/*.css',
+          'public/**/*.js',
+          'public/**/*.html',
+        ],
+        stripPrefix: 'public/',
+
+    }),
   ],
   module: {
     rules: [      
