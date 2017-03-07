@@ -1,3 +1,5 @@
+import fetch from 'unfetch'
+
 import AppStore from '../AppStore'
 import { URL } from './urlService'
 

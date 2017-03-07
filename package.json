@@ -8,7 +8,7 @@
     "test": "mocha -w test/registerBabel.js test/init.js src/**/*.spec.js",
     "serve": "nodemon -w server",
     "devserver": "cross-env NODE_ENV=development webpack-dev-server",
-    "dev": "rimraf ./public && npm-run-all --parallel serve devserver",
+    "dev": "npm-run-all --parallel serve devserver",
     "build": "rimraf ./public && SET NODE_ENV=production && webpack -p --progress --colors --profile"
   },
   "keywords": [],
@@ -89,6 +89,7 @@
     "recompose": "^0.22.0",
     "redux": "3.6.0",
     "reselect": "^2.5.4",
+    "unfetch": "^2.1.2",
     "useragent": "2.1.12",
     "whatwg-fetch": "2.0.3"
   }

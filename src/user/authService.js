@@ -1,3 +1,5 @@
+import fetch from 'unfetch'
+
 import { URL } from '../common/urlService'
 
 export const authService = {
