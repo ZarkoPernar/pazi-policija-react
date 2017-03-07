@@ -9,8 +9,10 @@ import waitForMapClickReducer from './reducers/waitForMapClick'
 
 import { searchParamsReducer } from './search/reducer'
 import { toastsReducer } from './toast/reducer'
+import geolocationReducer from './ducks/geolocation'
 
 export default combineReducers({
+    geolocation: geolocationReducer,
     activeView: activeViewReducer,
     searchParams: searchParamsReducer,
     toasts: toastsReducer,

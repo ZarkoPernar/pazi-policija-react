@@ -10,6 +10,7 @@ export default class GeoLocation extends PureComponent {
         let localGeo = getGeolocationFromLocalstorage()
 
         if (localGeo) {
+            this.props.setGeolocation(localGeo)
             this.props.centerOn(localGeo)
         }
     }

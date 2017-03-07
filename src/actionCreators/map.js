@@ -1,7 +1,7 @@
 import types from '../types/map'
 import AppStore from '../AppStore'
-import { getGeoLocation } from '../common/geoLocation'
-import { GEO_LOCALSTORAGE_KEY } from '../common/constants'
+import { getGeoLocation, stripDataFromGeoposition } from '../common/geoLocation'
+import { setLocation } from '../ducks/geolocation'
 
 const USER_DENIED_GEO_CODE = 1
 let lastLocation = {
@@ -26,19 +26,18 @@ export function centerOnMe() {
     // if in memory and recent enough use that data
     if (within(lastLocation.last)) {
         AppStore.dispatch(getCenterFromGeoposition(lastLocation.res))
+        AppStore.dispatch(setLocation(stripDataFromGeoposition(lastLocation.res)))
     }
 
     // else get fresh location data
     getGeoLocation().then((res) => {
-        // save { coords: {} } to local storage
-        window.localStorage.setItem(GEO_LOCALSTORAGE_KEY, JSON.stringify({
-            coords: {
-                latitude: res.coords.latitude, 
-                longitude: res.coords.longitude
-            }
-        }))
-        // then dispatch
+        lastLocation = {
+            last: Date.now(),
+            res: res,
+        }
+
         AppStore.dispatch(getCenterFromGeoposition(res))
+        AppStore.dispatch(setLocation(stripDataFromGeoposition(res)))
         return res
     }).catch((err) => {
         let msg = err.code === USER_DENIED_GEO_CODE ? 'You must enable location sharing' : 'Unable to get location'

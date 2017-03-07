@@ -1,9 +1,9 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+let path = require('path')
+let webpack = require('webpack')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var CONFIG = require('./config')
+let CONFIG = require('./config')
 
 
 module.exports = {
@@ -23,9 +23,10 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      // 'react': 'preact',
-      // 'react-redux': 'preact-redux',
-    },
+      'react': 'inferno-compat',
+      'react-dom': 'inferno-compat',
+      'react-redux': 'inferno-redux',
+    }
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
@@ -47,7 +48,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
+        use: ['babel-loader'],
         include: [
           path.resolve('src'),
           // path.resolve('node_modules/preact-compat/src'),
@@ -56,7 +57,7 @@ module.exports = {
 
       }, {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -66,7 +67,7 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loaders: [
+        use: [
             'file-loader',
             'image-webpack-loader'
         ]

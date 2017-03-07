@@ -1,21 +1,29 @@
-var path = require('path')
-var webpack = require('webpack')
-var OfflinePlugin = require('offline-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
+let path = require('path')
+let webpack = require('webpack')
+let OfflinePlugin = require('offline-plugin')
+let HtmlWebpackPlugin = require('html-webpack-plugin')
+let ExtractTextPlugin = require('extract-text-webpack-plugin')
+let CleanWebpackPlugin = require('clean-webpack-plugin')
 
-var CONFIG = require('./config')
+let CONFIG = require('./config')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     app: CONFIG.APP_PATH + CONFIG.CLIENT_ENTRY_FILE,
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'date-fns'], // reselect, recompose, others...
+    vendor: ['inferno', 'inferno-compat', 'redux', 'inferno-redux', 'date-fns'], // reselect, recompose, others...
   },
   output: {
     path: CONFIG.CLIENT_OUTPUT_PATH,
     filename: 'bundle-[chunkhash].js',
+  },
+  resolve: {
+    extensions: ['.js'],
+    alias: {
+      'react': 'inferno-compat',
+      'react-dom': 'inferno-compat',
+      'react-redux': 'inferno-redux',
+    }
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [

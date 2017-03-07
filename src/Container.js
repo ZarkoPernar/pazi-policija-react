@@ -10,6 +10,8 @@ import AddLocation from './addLocation/AddLocation'
 import AppViews from './AppViews'
 import GeoLocation from './GeoLocation'
 
+import { stripDataFromGeoposition } from './common/geoLocation'
+import { setLocation } from './ducks/geolocation'
 import { getCenterFromGeoposition } from './actionCreators/map'
 import * as appViewActionCreators from './actionCreators/appView'
 
@@ -42,7 +44,7 @@ class Container extends Component {
                     <AddLocation />
                 </Modal>
 
-                <GeoLocation key="geo" centerOn={this.props.centerOn} />
+                <GeoLocation key="geo" centerOn={this.props.centerOn} setGeolocation={this.props.setGeolocation} />
 
                 <Header key="header" />
 
@@ -74,6 +76,9 @@ function mapDispatchToProps(dispatch) {
         },
         centerOn(res) {
             dispatch(getCenterFromGeoposition(res))
+        },
+        setGeolocation(res) {
+            dispatch(setLocation(stripDataFromGeoposition(res)))
         }
     }
 }
