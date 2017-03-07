@@ -3,6 +3,7 @@ let webpack = require('webpack')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
 let SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+let CopyWebpackPlugin = require('copy-webpack-plugin')
 
 let CONFIG = require('./config')
 
@@ -61,8 +62,21 @@ module.exports = {
           'public/**/*.html',
         ],
         stripPrefix: 'public/',
-
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/manifest.json',
+        to: '',
+      },
+      {
+        from: 'resources/favicon.ico',
+        to: '',
+      }, 
+      {
+        from: 'resources/logo.png',
+        to: '',
+      },
+    ])
   ],
   module: {
     rules: [      
