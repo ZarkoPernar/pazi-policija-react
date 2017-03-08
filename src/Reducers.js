@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import { activeViewReducer, newLocationModalReducer } from './reducers/appView'
+import { activeViewReducer, modalsReducer } from './reducers/appView'
 import listReducer from './reducers/list'
 import mapParamsReducer from './reducers/mapParams'
 import selectedAutocompleteItemReducer from './reducers/selectedAutocompleteItem'
@@ -16,7 +16,7 @@ export default combineReducers({
     activeView: activeViewReducer,
     searchParams: searchParamsReducer,
     toasts: toastsReducer,
-    newLocationModal: newLocationModalReducer,
+    modals: modalsReducer,
     list: listReducer,
     mapParams: mapParamsReducer,
     waitForMapClick: waitForMapClickReducer,

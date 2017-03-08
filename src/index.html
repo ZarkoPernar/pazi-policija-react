@@ -11,10 +11,33 @@
         <link rel="manifest" href="manifest.json">
         <meta name="theme-color" content="#f5f5f5">
         <!--<script src="cordova.js"></script>-->
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+            .temp-header {
+                background-color: #fff;
+                height: 55px;
+                box-shadow: 0 1px 2px rgba(70,70,70,.15);
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                z-index: 2;
+            }
+        </style>
     </head>
 
     <body>
-        <div id="app"></div>
+        <div id="app">
+            <div class="temp-header">                          
+                <div class="temp-logo">
+                    <img src="logo-64.png" alt="Logo">
+                </div>
+            </div>
+        </div>
+
         <script>
             (function() {
                 'use strict'

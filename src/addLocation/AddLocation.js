@@ -57,7 +57,7 @@ class AddLocation extends Component {
             seen_at: seenAt,
         })
         .then((res) => {
-            AppStore.dispatch({type: 'TOGGLE_NEW_LOCATION_MODAL'})
+            AppStore.dispatch({type: 'SET_MODAL', payload: {value: false, name: 'newLocation'}})
         })
         
     }
@@ -124,8 +124,7 @@ class AddLocation extends Component {
                         type="submit" 
                         className="add-btn btn btn--raised btn--colored" 
                         onClick={this._fuckingAdd} 
-                        disabled={!this.props.selectedAutocompleteItem}
-                        data-tooltip={!this.props.selectedAutocompleteItem ? 'Lokacija mora imati adresu' : ''}>
+                        disabled={!this.props.selectedAutocompleteItem}>
                         Dodaj Lokaciju
                     </button>
                 </div>                

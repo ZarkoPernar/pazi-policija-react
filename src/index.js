@@ -8,9 +8,9 @@ if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'development') {
 	// require('react-dom/devtools')
 }
 
-require('flexboxgrid')
-require('normalize.css')
-require('./app.css')
+import 'flexboxgrid'
+import 'normalize.css'
+import './app.css'
 
 let root
 

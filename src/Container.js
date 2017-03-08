@@ -9,6 +9,7 @@ import Modal from './modal/Modal'
 import AddLocation from './addLocation/AddLocation'
 import AppViews from './AppViews'
 import GeoLocation from './GeoLocation'
+import UserProfile from './user/Profile'
 
 import { stripDataFromGeoposition } from './common/geoLocation'
 import { setLocation } from './ducks/geolocation'
@@ -40,7 +41,11 @@ class Container extends Component {
 
                 <Toaster key="toaster" />
 
-                <Modal key="modal" isOpen={this.props.newLocationModal}>
+                <Modal key="profile-modal" isOpen={this.props.modals.profile}>
+                    <UserProfile />
+                </Modal> 
+
+                <Modal key="location-modal" isOpen={this.props.modals.newLocation}>
                     <AddLocation />
                 </Modal>
 
@@ -60,10 +65,10 @@ const LinkedContainer = connect(mapStateToProps, mapDispatchToProps)(Container)
 
 export default LinkedContainer
 
-function mapStateToProps({activeView, newLocationModal}) {
+function mapStateToProps({activeView, modals}) {
     return { 
         activeView,
-        newLocationModal
+        modals
     }
 }
 

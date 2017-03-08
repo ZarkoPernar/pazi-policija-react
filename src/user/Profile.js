@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { authService } from './authService'
 
+import './profile.scss'
+
 class UserProfile extends Component { 
     constructor() {
         super()

@@ -18,15 +18,8 @@ export class SearchBar extends PureComponent {
         this.onKeydown = this.onKeydown.bind(this)
     }
 
-    componentDidUpdate() {
-        if (this.props.activeView !== ACTIVE_VIEW_SEARCH) {
-            this.exited = false
-        }
-    }
-
     onKeydown(event) {
         if (event.keyCode === ENTER_KEY) {
-            this.inputEl.blur()
             this.props.onSearchEnter(event)
         } else {
             this.autoSearch()
@@ -50,9 +43,6 @@ export class SearchBar extends PureComponent {
 
     getEl(el) {
         this.inputEl = el
-        if (!this.firstRender && this.props.activeView === ACTIVE_VIEW_SEARCH) {
-            this.firstRender = true
-        }
     }
 
     render() {

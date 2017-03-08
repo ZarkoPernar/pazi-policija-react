@@ -4,7 +4,7 @@ export default {
         inputValue: '',
     },
     toasts: [],
-    newLocationModal: false,
+    modals: {},
     list: [],
     selectedAutocompleteItem: null,
     waitForMapClick: false,

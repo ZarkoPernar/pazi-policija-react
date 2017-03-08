@@ -17,13 +17,20 @@ export function activeViewReducer(state=DEFAULT_STATE.activeView, {type, payload
     }
 }
 
-export function newLocationModalReducer(state=DEFAULT_STATE.newLocationModal, {type, payload}) {
+export function modalsReducer(state=DEFAULT_STATE.modals, {type, payload}) {
     switch(type) {
-        case 'TOGGLE_NEW_LOCATION_MODAL':
-            return !state
+        case 'TOGGLE_MODAL':
+            let prevVal = state[payload]
+            return {
+                ...state,
+                [payload]: !prevVal
+            }
 
-        case 'SET_NEW_LOCATION_MODAL':
-            return payload
+        case 'SET_MODAL':
+            return {
+                ...state,
+                [payload.name]: payload.value
+            }
 
         default:
             return state
