@@ -24,13 +24,27 @@ const EXPRESS_SESSION_CONFIG = {
 // heroku automatically asssigns the port to .env PORT
 app.set('port', (process.env.PORT || 5000))
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Allow-Origin', req.headers.origin)
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept')
+
+    if ('OPTIONS' == req.method) {
+        res.send(200)
+    } else {
+        next()
+    }
+})
+
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/auth/google/callback'
+        callbackURL: 'https://pazi-policija.herokuapp.com/auth/google/callback'
     },
     function (token, tokenSecret, profile, done) {
-        return done(profile)
+        console.log(token, tokenSecret, profile, done)
+        return done(null, profile)
         // User.findOrCreate({ googleId: profile.id }, function (err, user) {
         //   return done(err, user)
         // })
@@ -65,6 +79,7 @@ app.get('/auth/google/callback',
         failureRedirect: '/login'
     }),
     function(req, res) {
+        console.log(req.body)
         res.json(req.body)
     }
 )

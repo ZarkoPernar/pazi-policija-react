@@ -1,17 +1,16 @@
-import fetch from 'unfetch'
-
+import http from '../common/http'
 import AppStore from '../AppStore'
-import { URL } from './urlService'
 
 export default {
-    url: URL + '/api/v1',
+    url: '/api/v1',
     
     /**
      * listAll	returns all locations
      * @return {location[]}
      */
     listAll(params) {
-        return fetch(this.url + '/locations/near', {
+        return http(this.url + '/locations/near', {
+            credentials: 'include',
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -28,7 +27,8 @@ export default {
         .catch((err) => { throw err })
     },
     geocode(params) {
-        return fetch(this.url + '/locations/geocode', {
+        return http(this.url + '/locations/geocode', {
+            credentials: 'include',            
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -47,7 +47,8 @@ export default {
         })
     },
     addLocation(location) {
-        return fetch(this.url + '/locations/add', {
+        return http(this.url + '/locations/add', {
+            credentials: 'include',            
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -64,7 +65,8 @@ export default {
         })
     },
     updateLocation(location) {
-        return fetch(this.url + '/locations/update', {
+        return http(this.url + '/locations/update', {
+            credentials: 'include',            
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

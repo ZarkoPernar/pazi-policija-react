@@ -1,12 +1,14 @@
-import fetch from 'unfetch'
-
-import { URL } from '../common/urlService'
+import http from '../common/http'
 
 export const authService = {
     loginWithGoogle() {
-        fetch(URL + '/auth/google')
+        http('/auth/google', {
+            credentials: 'include'
+        })
     },
     logout() {
-        fetch(URL + '/auth/logout')
+        http('/auth/logout', {
+            credentials: 'include'
+        })
     }
 }
