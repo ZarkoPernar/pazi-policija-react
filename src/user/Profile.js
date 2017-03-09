@@ -45,9 +45,9 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="user-profile">   
-                <button key="login-google" onClick={this._login}>
+                <a key="login-google" target="_self" href="/auth/google">
                     Login With Google
-                </button>
+                </a>
 
                 <button key="logout-google" onClick={this._logout}>
                     Logout
