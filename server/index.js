@@ -21,6 +21,8 @@ const EXPRESS_SESSION_CONFIG = {
     saveUninitialized: true
 }
 
+const googleStrategy = 
+
 // heroku automatically asssigns the port to .env PORT
 app.set('port', (process.env.PORT || 5000))
 
@@ -37,26 +39,20 @@ app.use(function(req, res, next) {
     }
 })
 
-passport.use(new GoogleStrategy({
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'https://pazi-policija.herokuapp.com/auth/google/callback'
-    },
-    function (token, tokenSecret, profile, done) {
-        console.log(token, tokenSecret, profile, done)
-        return done(null, profile)
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //   return done(err, user)
-        // })
-    }
-))
-
 app.use(express.static(PUBLIC_DIR))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(expressSession(EXPRESS_SESSION_CONFIG))
 app.use(passport.initialize())
 app.use(passport.session())
+
+passport.serializeUser(function(user, done) {
+  done(null, user)
+})
+
+passport.deserializeUser(function(user, done) {
+  done(null, user)
+})
 
 // app.use(checkUserAgent)
 
