@@ -16,22 +16,22 @@ const defaultRequestParams = Object.assign({}, defaultState.mapParams.center, {
 describe('waitForMapClickReducer', function() {
 
   describe('reducer', function() {    
-    it('should exist', function() {
+    test('should exist', function() {
       should.exist(reducer)
     })
 
-    it('default should return false', function() {
+    test('default should return false', function() {
         reducer(undefined, {}).should.equal(false)
     })
 
-    it('toggle should return opposite boolean', function() {
+    test('toggle should return opposite boolean', function() {
         let prevState = AppStore.getState().waitForMapClick
         let nextState = reducer(prevState, toggle())
         
         expect(nextState).to.equal(!prevState)
     })
 
-    it('setValue should return value sent', function() {
+    test('setValue should return value sent', function() {
         let prevState = AppStore.getState().waitForMapClick
         let sentValue = true
         let nextState = reducer(prevState, setValue(sentValue))

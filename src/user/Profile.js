@@ -49,9 +49,9 @@ class UserProfile extends Component {
                     Login With Google
                 </a>
 
-                <button key="logout-google" onClick={this._logout}>
+                <a key="logout-google" target="_self" href="/auth/logout">
                     Logout
-                </button>
+                </a>
             </div>
         )
     }

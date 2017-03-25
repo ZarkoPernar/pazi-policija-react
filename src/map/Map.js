@@ -68,6 +68,8 @@ class Map extends Component {
             rad: this.searchParams.rad || this.props.mapParams.rad,
         }).then((data) => {
             this.props.addItems(data)
+        }).catch((err) => {
+            console.log(err)
         })
     }
 

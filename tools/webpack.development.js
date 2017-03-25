@@ -2,6 +2,7 @@ let path = require('path')
 let webpack = require('webpack')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let ExtractTextPlugin = require('extract-text-webpack-plugin')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 
 let CONFIG = require('./config')
 
@@ -30,6 +31,7 @@ module.exports = {
   },
   devServer: CONFIG.WEBPACK_DEV_SERVER_CONFIG,
   plugins: [
+    new DashboardPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin(CONFIG.HtmlWebpackPlugin),
     new webpack.HotModuleReplacementPlugin(),

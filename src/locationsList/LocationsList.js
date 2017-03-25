@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import autocompleteSelectActions from '../actionCreators/autocompleteSelect'
 
 import Loader from '../common/loader'
-import TicketItem from './ticket'
+import Ticket from './Ticket'
 
 import './list.scss'
 
@@ -33,7 +33,7 @@ class LocationsList extends Component {
                     <div className="tickets" key="tickets">
                         {
                             this.props.list.map(loc => {
-                                return <TicketItem key={loc._id} item={loc} onClick={this.createItemSelect(loc)}/>
+                                return <Ticket key={loc._id} item={loc} onClick={this.createItemSelect(loc)}/>
                             })
                         }
                     </div>

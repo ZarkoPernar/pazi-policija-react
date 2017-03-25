@@ -9,14 +9,7 @@ export default {
      * @return {location[]}
      */
     listAll(params) {
-        return http(this.url + '/locations/near', {
-            credentials: 'include',
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-            body: JSON.stringify(params)
-        })
+        return http.post(this.url + '/locations/near', params)
         .then(res => res.json())
         .then(data => {           
             if (data.code === 2) {
@@ -27,8 +20,7 @@ export default {
         .catch((err) => { throw err })
     },
     geocode(params) {
-        return http(this.url + '/locations/geocode', {
-            credentials: 'include',            
+        return http(this.url + '/locations/geocode', {                        
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -47,8 +39,7 @@ export default {
         })
     },
     addLocation(location) {
-        return http(this.url + '/locations/add', {
-            credentials: 'include',            
+        return http(this.url + '/locations/add', {                        
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -65,8 +56,7 @@ export default {
         })
     },
     updateLocation(location) {
-        return http(this.url + '/locations/update', {
-            credentials: 'include',            
+        return http(this.url + '/locations/update', {                        
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json',

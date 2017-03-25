@@ -10,7 +10,7 @@ import googleService from '../google-places/googlePlacesService'
 
 const ENTER_KEY = 13
 
-export class SearchBar extends PureComponent { 
+export class SearchBar extends PureComponent {
     constructor() {
         super()
 
@@ -46,11 +46,12 @@ export class SearchBar extends PureComponent {
     }
 
     render() {
-        return (        
+        return (
             <div id="search-bar" className={this.props.activeView === 'search' ? 'search-bar--visible' : ''}>
                 <div className="search-bar__container">
                     <SearchIcon key="search-icon" className="search-bar__icon" />
-                    <input key="search-input" placeholder="Search"  className="search-bar__input" onKeyDown={this.onKeydown} ref={this.getEl}/>
+                    <input key="search-input" id="search-bar-input" placeholder="Search"  className="search-bar__input" onKeyDown={this.onKeydown} ref={this.getEl} />
+                    <label htmlFor="search-bar-input" hidden>Search</label>
                 </div>
             </div>
         )
@@ -62,7 +63,7 @@ const LinkedSearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBar)
 export default LinkedSearchBar
 
 function mapStateToProps({ activeView }) {
-    return { 
+    return {
         activeView,
     }
 }

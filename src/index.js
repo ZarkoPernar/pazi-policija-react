@@ -10,12 +10,12 @@ if (process.env.NODE_ENV && process.env.NODE_ENV.trim() === 'development') {
 
 import 'flexboxgrid'
 import 'normalize.css'
-import './app.css'
+import './critical.css' // inline'd
 
 let root
 
 function init() {
-	let App = require('./App').default	
+	let App = require('./App').default
 	root = render(<App />, document.getElementById('app'), root)
 }
 
